@@ -1,0 +1,58 @@
+## 編譯alsa-lib
+
+### 1.生成makefile
+
+```
+sudo ./configure --host=arm-linux-gnueabihf --prefix=/home/milo/Downloads/alsaout --enable-shared --disable-python --with-configdir=/usr/local/share/alsa --with-plugindir=/usr/local/lib/alsa_lib CC=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc  ld=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-ld
+```
+
+
+
+1. 生成makefile
+  sudo ./configure --host=arm-linux-gnueabihf --prefix=/home/milo/Downloads/alsaout --enable-shared --disable-python --with-configdir=/usr/local/share/alsa --with-plugindir=/usr/local/lib/alsa_lib CC=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc  ld=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-ld
+
+×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+milo@milo-OptiPlex-7040:~/Downloads/alsaout/bin$ adb shell
+root@zipp_mini:/ # aserver                                                     
+/system/bin/sh: aserver: No such file or directory
+1|root@zipp_mini:/ #                 
+×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+
+
+修改LDFLAGS
+sudo ./configure --host=arm-linux-gnueabihf --prefix=/home/milo/Downloads/alsaout --enable-shared --disable-python --with-configdir=/system/lib/gnulib/alsa --with-plugindir=/system/lib/gnulib CC=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc  LD=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-ld CFLAGS="-Wl,-rpath,/system/lib/gnulib" LDFLAGS="-Wl,-dynamic-linker=/system/lib/gnulib/ld-linux-armhf.so.3"
+
+2. sudo make
+3. sudo make install
+
+
+
+編譯alsa-util
+./configure --host=arm-linux-gnueabihf --prefix=/home/milo/Downloads/alsautilout CFLAGS="-I/home/milo/Downloads/alsaout/include -Wl,-rpath,/system/lib/gnulib" LDFLAGS="-L/home/milo/Downloads/alsaout/lib -lasound -Wl,-dynamic-linker=/system/lib/gnulib/ld-linux-armhf.so.3" --disable-alsamixer --disable-xmlto --with-alsa-inc-prefix=/home/milo/Downloads/alsaout/include --with-alsa-prefix=/home/milo/Downloads/alsaout/lib CC=arm-linux-gnueabihf-gcc CXX=arm-linux-gnueabihf-g++ LD=arm-linux-gnueabihf-ld
+
+
+
+參考資料
+aplay arecord 使用
+https://www.cnblogs.com/cslunatic/p/3227655.html
+
+http://blog.sina.com.cn/s/blog_753b6c170102uyo3.html
+
+cmake
+http://blog.csdn.net/dbzhang800/article/details/6314073
+
+http://blog.sina.com.cn/s/blog_602f87700102vdji.html
+
+alsa 官網
+http://www.alsa-project.org/main/index.php/Download
+
+C++ 用libcurl库进行http通讯网络编程
+https://www.cnblogs.com/moodlxs/archive/2012/10/15/2724318.html
+
+
+pc环境
+
+sudo ./configure --prefix=/home/milo/Downloads/alsaoutpc --enable-shared --disable-python --with-configdir=/system/lib/gnulib/alsa --with-plugindir=/system/lib/gnulib 
+
+
+./configure  --prefix=/home/milo/Downloads/alsautiloutpc --disable-alsamixer --disable-xmlto --with-alsa-inc-prefix=/home/milo/Downloads/alsaoutpc/include --with-alsa-prefix=/home/milo/Downloads/alsaoutpc/lib

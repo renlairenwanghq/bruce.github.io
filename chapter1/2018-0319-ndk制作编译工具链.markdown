@@ -1,0 +1,206 @@
+### 简介
+
+Android NDK 是在SDK前面又加上了“原生”二字，即Native Development Kit，因此又被Google称为“NDK”。
+
+众所周知，Android程序运行在Dalvik虚拟机中，NDK允许用户使用类似C / C++之类的原生代码语言执行部分程序。[NDK百度百科](https://baike.baidu.com/item/NDK/5967464?fr=aladdin)
+
+* 使用安卓NDK编译程序
+* 根据NDK制作编译工具链，并使用该工具链编译程序
+
+###一.使用NDK编译
+
+####1.下載NDK
+
+https://developer.android.google.cn/ndk/downloads/older_releases.html
+
+android-ndk-r10e-linux-x86_64.zip 爲例
+
+unzip android-ndk-r10e-linux-x86_64.zip
+
+cd android-ndk-r10e
+
+#### 2.使用ndk編譯
+
+##### 修改build/core/default-application.mk 文件
+
+添加配置（参考资料 [NDK C++库的支持](https://developer.android.com/ndk/guides/cpp-support.html) ) ：
+
+```
+APP_STL := c++_shared
+APP_PLATFORM := android-21
+```
+
+修改之后的文件内容如下：
+
+```
+milo@milo-OptiPlex-7040:~/Downloads/android-ndk-r10e/build/core$ cat default-application.mk
+# Copyright (C) 2010 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# This is the default Application.mk that is being used for applications
+# that don't provide $PROJECT_PATH/jni/Application.mk
+#
+APP_PROJECT_PATH := $(NDK_PROJECT_PATH)
+
+APP_STL := c++_shared
+#APP_STL := c++_static
+#APP_STL := stlport_static
+APP_PLATFORM := android-21
+# We expect the build script to be located here
+ifndef APP_BUILD_SCRIPT
+  ifeq (null,$(NDK_PROJECT_PATH))
+    $(call __ndk_info,NDK_PROJECT_PATH==null.  Please explicitly set APP_BUILD_SCRIPT.)
+    $(call __ndk_error,Aborting.)
+  endif
+  APP_BUILD_SCRIPT := $(APP_PROJECT_PATH)/jni/Android.mk
+endif
+```
+
+##### 创建jni文件夹，添加mk文件
+
+```
+$ mkdir jni
+$ cd jni
+$ vi Android.mk
+```
+
+添加Android.mk文件，文件内容如下：
+
+```
+LOCAL_PATH:= $(call my-dir)
+
+##########################execute##################################
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:=                   \
+	d.cpp
+
+ifeq ($(strip $(TARGET_PRODUCT)),delta)
+LOCAL_C_INCLUDES := \
+	$(call include-path-for, audio-utils)
+else
+LOCAL_C_INCLUDES := \
+	$(call include-path-for, audio-utils)
+	
+endif
+
+LOCAL_SHARED_LIBRARIES := \
+
+LOCAL_MODULE := d.out 
+
+LOCAL_MODULE_TAGS := optional
+#include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_EXECUTABLE)
+```
+
+##### 保存Android.mk文件，執行ndk-build,即可生成文件到指定的路径。
+
+```
+milo@milo-OptiPlex-7040:~/Downloads/toolchains/ndk/android-ndk-r10e$ ./ndk-build
+[armeabi] Compile++ thumb: d.out <= d.cpp
+[armeabi] Executable     : d.out
+[armeabi] Install        : d.out => libs/armeabi/d.out
+[armeabi] Install        : libc++_shared.so => libs/armeabi/libc++_shared.so
+
+milo@milo-OptiPlex-7040:~/Downloads/toolchains/ndk/android-ndk-r10e$ ls libs/armeabi/
+a.out  d.out  libc++_shared.so
+```
+
+
+
+### 二.使用编译工具链编译
+
+#### 1.制作編譯工具鏈(参考资料3 [HOWTO Cross compiling on Android](https://gist.github.com/Tydus/11109634))
+
+```
+$ cd android-ndk-r10e
+$ build/tools/make-standalone-toolchain.sh --toolchain=arm-linux-androideabi-4.8 --platform=android-21 --stl=libc++ --install-dir=../mytoolchain
+Copying prebuilt binaries...
+Copying sysroot headers and libraries...
+Copying c++ runtime headers and libraries (with libc++abi)...
+Copying files to: ../toolchain110
+Cleaning up...
+Done.
+```
+
+参数解释:
+
+--stl : 設置運行時,参考使用NDK编译时设置的APP_STL
+
+#### 2.使用编译工具链編譯測試文件
+
+進入到生成的編譯工具鏈目錄
+cd toolchain
+
+./bin/arm-linux-androideabi-g++ a.cpp -o a.out -march=armv7-a -latomic -fPIE -pie -std=c++11
+
+参数解释:
+
+參數解釋：
+
+Compile error : undefined reference to‘__atomic_fetch_add_4’　（-march=armv7-a -latomic）
+https://stackoverflow.com/questions/35884832/compile-error-undefined-reference-to-atomic-fetch-add-4
+
+android PIE error: only position independent executables (PIE) are supported解决方法　（-fPIE -pie）
+http://blog.csdn.net/jiang605533373/article/details/51205779
+
+### 三.注意
+
+####使用默认运行时带来的问题
+
+根據ｎｄｋ生成工具鏈的時候，使用默認的運行時會存在一些問題
+
+1.  不支持std::to_string的调用
+2.  不支持std::snprintf的调用（可通过包含c风格头文件解决）
+3.  不支持std::future，std::promise等C++11风格的代码
+4.  找不到ifaddrs.h头文件
+
+所以設置APP_STL　爲c++_static 或者　ｃ++_shared可以避免上述問題。
+運行時的设置请参考: [运行时特性](https://developer.android.com/ndk/guides/cpp-support.html#cs)
+
+#### 找不到ifaddrs.h
+
+找不到ifaddrs.h的问题是由于版本问题。 （因为时间有点久了，所以不太确认）
+
+#### Bionic c引入的问题
+
+雖然可以使用ndk直接編譯c/c++，但是因爲安卓使用的是bionic　c庫，所以仍然會存在一些問題。例如
+
+bionic中不存在pthread_cancel接口
+
+如下是几个解决该接口不存在问题的办法：
+
+http://blog.csdn.net/yzx41099296/article/details/7692484
+
+https://stackoverflow.com/questions/34200302/errorundefined-reference-to-pthread-testcancel-when-compile-with-ndk
+
+https://stackoverflow.com/questions/4610086/pthread-cancel-alternatives-in-android-ndk
+
+### 四.遇见的问题及解决方式
+
+unused DT entry: type 0x1d arg
+https://stackoverflow.com/questions/33206409/unused-dt-entry-type-0x1d-arg
+
+### 参考资料:
+
+(1) [NDK C++库的支持](https://developer.android.com/ndk/guides/cpp-support.html) （需要翻墙才能访问）
+
+(2) [bionic](https://en.wikipedia.org/wiki/Bionic_(software))
+
+(3) [HOWTO Cross compiling on Android](https://gist.github.com/Tydus/11109634)
+
+(4) [api level 与 安卓版本对照表](https://en.wikipedia.org/wiki/Android_version_history) 
+
+

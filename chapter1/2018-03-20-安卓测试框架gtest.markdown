@@ -1,0 +1,294 @@
+## 安卓测试框架gtest
+
+### 1.简介
+
+​	我们的开发是在安卓的源码上面裁剪出来的系统，类似安卓的原生开发。在安卓的哦原生代码中提供了gtest单元测试框架。
+
+### 2.使用gtest
+
+#### 2.1 编译gtest的库
+
+```
+$ cd external/gtest
+$ mm
+```
+
+此时执行很可能会出错，报错说有一些依赖的库不存在，所以要在源码中找到对应的代码编译为库。
+
+我编译的顺序是：
+
+```
+$ cd external/libunwind
+$ mm
+$ cd external/libcxxabi
+$ mm
+$ cd external/libcxx
+$ mm
+$ cd external/gtest
+$ mm
+```
+
+如果仍然报错说有依赖库不存在，可以在 external/compiler-rt 目录下执行一下命令 mm。
+
+#### 2.2 简单测试 TEST宏
+
+TEST宏的作用是创建一个简单测试，它定义了一个测试函数，在这个函数里可以使用任何C++代码并使用上面提供的断言来进行检查。
+
+TEST的第一个 参数是测试用例名，第二个 参数是测试用例中某项测试的名称。一个测试用例可以包含任意数量的独立测试。这两个参数组成了一个测试的全称
+
+
+
+```
+$ mkdir mygtest
+$ cd mygetst
+```
+
+建立测试文件gtest1.cpp,文件内容如下:
+
+```
+#include <gtest/gtest.h>  
+int Factorial( int n )  
+{  
+    if(n==2) return 100; //故意出个错，嘻嘻  
+    return n<=0? 1 : n*Factorial(n - 1);  
+}  
+
+//用TEST做简单测试  
+TEST(TestFactorial, ZeroInput) //第一个参数是测试用例名，第二个参数是测试名：随后的测试结果将以"测试用例名.测试名"的形式给出  
+{  
+	EXPECT_EQ(1, Factorial(0));  //EXPECT_EQ稍候再说，现在只要知道它是测试两个数据是否相等的就行了。  
+}  
+
+TEST(TestFactorial, OtherInput)  
+{  
+    EXPECT_EQ(1, Factorial(1));  
+    EXPECT_EQ(2, Factorial(2));  
+    EXPECT_EQ(6, Factorial(3));  
+    EXPECT_EQ(40320, Factorial(8));  
+}   	
+
+int main(int argc, char* argv[])  
+{  
+    testing::InitGoogleTest(&argc,argv); //用来处理Test相关的命令行开关，如果不关注也可不加  
+    RUN_ALL_TESTS();  //看函数名就知道干啥了  
+    std::cin.get();   //只是让它暂停而已，不然一闪就没了  
+    return 0;  
+}
+```
+
+编写Android.mk, 文件内容如下:
+
+```
+LOCAL_PATH:= $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= \
+    gtest1.cpp
+
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/include               \
+	$(TOP)/external/gtest/include \
+    $(call include-path-for, audio-utils)
+
+LOCAL_STATIC_LIBRARIES:= libgtest
+
+LOCAL_SHARED_LIBRARIES := \
+
+LOCAL_MODULE := gtest1
+
+LOCAL_MODULE_TAGS := optional
+include external/stlport/libstlport.mk
+include $(BUILD_EXECUTABLE)
+```
+
+编译,并将可执行文件push到板子上执行：
+
+```
+root@zipp_mini:/ # gtest1                                                      
+[==========] Running 2 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 2 tests from TestFactorial
+[ RUN      ] TestFactorial.ZeroInput
+[       OK ] TestFactorial.ZeroInput (0 ms)
+[ RUN      ] TestFactorial.OtherInput
+vendor/libratone/sdk/mygtest/gtest1.cpp:17: Failure
+Value of: Factorial(2)
+  Actual: 100
+Expected: 2
+vendor/libratone/sdk/mygtest/gtest1.cpp:18: Failure
+Value of: Factorial(3)
+  Actual: 300
+Expected: 6
+vendor/libratone/sdk/mygtest/gtest1.cpp:19: Failure
+Value of: Factorial(8)
+  Actual: 2016000
+Expected: 40320
+[  FAILED  ] TestFactorial.OtherInput (1 ms)
+[----------] 2 tests from TestFactorial (2 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test case ran. (3 ms total)
+[  PASSED  ] 1 test.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] TestFactorial.OtherInput
+
+ 1 FAILED TEST
+```
+
+和预期相同，有一项PASSED。
+
+####2.3 TEST_F做同配置的系列测试
+
+TEST_F宏用于在多个测试中使用同样的数据配置,所以它又叫：测试夹具（Test Fixtures）
+
+如果我们的多个测试要使用相同的数据(如前例中，我们的Test_GFN和Test_GP都使用程序自身的完整文件名来测试)，就可以采用一个测试夹具。
+
+要创建测试固件，只需：
+
+创建一个类继承自testing::Test。将其中的成员声明为protected:或是public:，因为我们想要从子类中存取夹具成员。
+在该类中声明测试中所要使用到的数据。
+如果需要，编写一个默认构造函数或者SetUp()函数来为每个测试准备对象。
+如果需要，编写一个析构函数或者TearDown()函数来释放你在SetUp()函数中申请的资源。
+如果需要，定义你的测试所需要共享的子程序。
+当我们要使用固件时，使用TEST_F()替换掉TEST()，它允许我们存取测试固件中的对象和子程序
+
+#####测试流程:
+
+当被调用时，RUN_ALL_TESTS()宏会：
+
+保存所有的Google Test标志。
+为一个测试创建测试夹具对象。
+调用SetUp()初始化它。
+在固件对象上运行测试。
+调用TearDown()清理夹具。
+删除固件。
+恢复所有Google Test标志的状态。
+重复上诉步骤，直到所有测试完成。
+
+
+
+创建一个类继承自testing::Test
+
+```
+#include "stdio.h"  
+#include <gtest/gtest.h>  
+using testing::Test;  
+class Test_mytest : public Test  
+{  
+	void SetUp()  
+	{  
+	}  
+
+	void TearDown()  
+	{  
+	}  
+};  
+
+```
+
+需要被测试的函数或者类:
+
+```
+#include <stdio.h>
+
+class Test_class 
+{
+public:
+    Test_class(){};
+    ~Test_class(){};
+    
+    int testfunc(int n) { if (n > 10) return 0; else return -1;};   
+}
+```
+
+修改gtest1.cpp
+
+```
+#include <gtest/gtest.h>  
+#include "gtest1.h"  
+
+TEST_F (Test_mytest, ThirdTest)
+{
+	EXPECT_EQ(0, tc->testfunc(11));
+}
+
+int main(int argc, char* argv[])  
+{  
+testing::InitGoogleTest(&argc,argv); //用来处理Test相关的命令行开关，如果不关注也可不加  
+RUN_ALL_TESTS();  //看函数名就知道干啥了  
+  std::cin.get();   //只是让它暂停而已，不然一闪就没了  
+  return 0;  
+}  
+```
+
+修改Android.mk
+
+```
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= \
+    gtest1.cpp
+    
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/include    \
+	$(TOP)/external/gtest/include \
+    $(call include-path-for, audio-utils)
+
+LOCAL_STATIC_LIBRARIES:= libgtest
+
+LOCAL_SHARED_LIBRARIES := \
+
+LOCAL_MODULE := gtest1
+
+LOCAL_MODULE_TAGS := optional
+include external/stlport/libstlport.mk
+include $(BUILD_EXECUTABLE)
+```
+
+执行mm命令编译后adb push到设备上，执行：
+
+```
+root@zipp_mini:/ # gtest1                                                      
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Test_mytest
+[ RUN      ] Test_mytest.ThirdTest
+[       OK ] Test_mytest.ThirdTest (0 ms)
+[----------] 1 test from Test_mytest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+```
+
+测试通过，ok.
+
+####2.4 其他宏
+
+Google提供了两种断言形式，一种以ASSERT_开头，另一种以EXPECT_开头，它们的区别是ASSERT_*一旦失败立马退出，而EXPECT_还能继续下去。
+
+ASSERT_EQ(*期望值* , *实际值* );  ----致命断言
+
+EXPECT_EQ(*期望值* , *实际值* );  ----非致命断言
+
+参考[gtest断言](http://blog.csdn.net/acaiwlj/article/details/49329477)
+
+### 参考链接
+
+[1.玩转Google开源C++单元测试框架Google Test系列(gtest)之一 - 初识gtest](http://www.cnblogs.com/coderzh/archive/2009/03/31/1426758.html)
+
+[2.玩转Google开源C++单元测试框架Google Test系列(gtest)之二 - 断言](http://www.cnblogs.com/coderzh/archive/2009/04/06/1430364.html)
+
+[3.玩转Google开源C++单元测试框架Google Test系列(gtest)之三 - 事件机制](http://www.cnblogs.com/coderzh/archive/2009/04/06/1430396.html)
+
+[4.玩转Google开源C++单元测试框架Google Test系列(gtest)之四 - 参数化](http://www.cnblogs.com/coderzh/archive/2009/04/08/1431297.html) 
+
+[5.玩转Google开源C++单元测试框架Google Test系列(gtest)之五 - 死亡测试](http://www.cnblogs.com/coderzh/archive/2009/04/08/1432043.html) 
+
+[6.玩转Google开源C++单元测试框架Google Test系列(gtest)之六 - 运行参数](http://www.cnblogs.com/coderzh/archive/2009/04/10/1432789.html) 
+
+[7.玩转Google开源C++单元测试框架Google Test系列(gtest)之七 - 深入解析gtest](http://www.cnblogs.com/coderzh/archive/2009/04/11/1433744.html)
+
+[8.玩转Google开源C++单元测试框架Google Test系列(gtest)之八 - 打造自己的单元测试框架](http://www.cnblogs.com/coderzh/archive/2009/04/12/1434155.html)
