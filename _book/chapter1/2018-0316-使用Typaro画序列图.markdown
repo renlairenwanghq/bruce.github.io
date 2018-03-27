@@ -1,0 +1,111 @@
+```
+layout:     post
+title:      "使用Typora，通过markdown语法画序列图，流程图"
+subtitle:   " \"这世界我来了\""
+date:       2018-03-15 19:00:00
+author:     "bruce"
+header-img: "img/head1.jpg"
+catalog: true
+tags:- 生活
+```
+
+
+
+## 使用Typora，通过markdown语法画序列图，流程图
+
+### 1.Typora介绍
+
+Typora是一款支持maridown的编辑器，支持通过代码画序列图，流程图，界面简洁美观。并且支持将文档导出为html，word等多种格式。之所以推荐该软件是因为该软件对markdown语法的支持度比较好。画图和添加图片，链接的方式都是使用的markdown的语法，本文只是介绍了一些很基本的用法，需要什么功能只要去查询markdown的语法即可。
+
+下载地址：
+
+链接: https://pan.baidu.com/s/1JlhwrEDaJx-acxSU0lGZ6w 密码: cn3y
+
+### 2.使用Typora画图
+
+#### 2.1序列图
+
+```
+书写```sequence敲击回车，即生成序列图的代码块，在代码块中编写，即可实时生成序列图。在代码块中书写下列代码即可生成对应图表。
+```
+
+```
+participant a
+participant b
+participant c
+a -> b :发送
+b -> a :返回
+a -> a :处理
+a -> c : 通知c
+c -> a : 返回a
+```
+
+按照上述方式编写，即可生成如下序列图。
+
+```sequence
+participant a
+participant b
+participant c
+a -> b :发送
+b -> a :返回
+a -> a :处理
+a -> c : 通知c
+c -> a : 返回a
+
+```
+
+
+
+
+
+### 2.2 流程图
+
+```
+书写```flow敲击回车，即生成序列图的代码块，在代码块中编写，即可实时生成序列图。在代码块中书写下列代码即可生成对应图表。
+```
+
+```
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+在代码块中按上述方式书写，即可生成如下流程图。
+
+
+
+```flow
+
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+### 3.导入图片
+
+```
+![]() []括号中添加图片名称或者描述，()中填写图片地址，即可显示图片
+```
+
+#### 4.导入链接
+
+```
+[]() []括号中添加描述，()括号中填写链接地址即可
+```
+
+
+
+参考文档:
+
+[makrdown语法](https://www.w3cschool.cn/lme/ckdj1sng.html)
+
+[Typora](https://www.jianshu.com/p/5256ecc06eec)
+
