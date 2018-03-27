@@ -1,0 +1,570 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>三 使用安卓测试框架gtest · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="2018-03-23-gmock编译即简单使用.html" />
+    
+    
+    <link rel="prev" href="2018-03-19-移植linux程序到安卓.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="2018-03-16-create-blog.html">
+            
+                <a href="2018-03-16-create-blog.html">
+            
+                    
+                    一 使用github pages建立博客
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="2018-03-19-移植linux程序到安卓.html">
+            
+                <a href="2018-03-19-移植linux程序到安卓.html">
+            
+                    
+                    二 移植linux程序到安卓
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.3" data-path="2018-03-20-安卓测试框架gtest.html">
+            
+                <a href="2018-03-20-安卓测试框架gtest.html">
+            
+                    
+                    三 使用安卓测试框架gtest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="2018-03-23-gmock编译即简单使用.html">
+            
+                <a href="2018-03-23-gmock编译即简单使用.html">
+            
+                    
+                    四 gmock编译及简单使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="2018-0316-使用Typaro画序列图.html">
+            
+                <a href="2018-0316-使用Typaro画序列图.html">
+            
+                    
+                    五 使用Typaro画序列图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="2018-0319-ndk制作编译工具链.html">
+            
+                <a href="2018-0319-ndk制作编译工具链.html">
+            
+                    
+                    六 ndk制作编译工具链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="2018-03-19-pcm转wav.html">
+            
+                <a href="2018-03-19-pcm转wav.html">
+            
+                    
+                    七 pcm转wav
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter2/">
+            
+                <a href="../chapter2/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >三 使用安卓测试框架gtest</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="&#x5B89;&#x5353;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;gtest">&#x5B89;&#x5353;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;gtest</h2>
+<h3 id="1&#x7B80;&#x4ECB;">1.&#x7B80;&#x4ECB;</h3>
+<p>&#x200B;    &#x6211;&#x4EEC;&#x7684;&#x5F00;&#x53D1;&#x662F;&#x5728;&#x5B89;&#x5353;&#x7684;&#x6E90;&#x7801;&#x4E0A;&#x9762;&#x88C1;&#x526A;&#x51FA;&#x6765;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x7C7B;&#x4F3C;&#x5B89;&#x5353;&#x7684;&#x539F;&#x751F;&#x5F00;&#x53D1;&#x3002;&#x5728;&#x5B89;&#x5353;&#x7684;&#x54E6;&#x539F;&#x751F;&#x4EE3;&#x7801;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;gtest&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x3002;</p>
+<h3 id="2&#x4F7F;&#x7528;gtest">2.&#x4F7F;&#x7528;gtest</h3>
+<h4 id="21-&#x7F16;&#x8BD1;gtest&#x7684;&#x5E93;">2.1 &#x7F16;&#x8BD1;gtest&#x7684;&#x5E93;</h4>
+<pre><code>$ cd external/gtest
+$ mm
+</code></pre><p>&#x6B64;&#x65F6;&#x6267;&#x884C;&#x5F88;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x9519;&#xFF0C;&#x62A5;&#x9519;&#x8BF4;&#x6709;&#x4E00;&#x4E9B;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x5728;&#x6E90;&#x7801;&#x4E2D;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x4E3A;&#x5E93;&#x3002;</p>
+<p>&#x6211;&#x7F16;&#x8BD1;&#x7684;&#x987A;&#x5E8F;&#x662F;&#xFF1A;</p>
+<pre><code>$ cd external/libunwind
+$ mm
+$ cd external/libcxxabi
+$ mm
+$ cd external/libcxx
+$ mm
+$ cd external/gtest
+$ mm
+</code></pre><p>&#x5982;&#x679C;&#x4ECD;&#x7136;&#x62A5;&#x9519;&#x8BF4;&#x6709;&#x4F9D;&#x8D56;&#x5E93;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; external/compiler-rt &#x76EE;&#x5F55;&#x4E0B;&#x6267;&#x884C;&#x4E00;&#x4E0B;&#x547D;&#x4EE4; mm&#x3002;</p>
+<h4 id="22-&#x7B80;&#x5355;&#x6D4B;&#x8BD5;-test&#x5B8F;">2.2 &#x7B80;&#x5355;&#x6D4B;&#x8BD5; TEST&#x5B8F;</h4>
+<p>TEST&#x5B8F;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6D4B;&#x8BD5;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x51FD;&#x6570;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x91CC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;C++&#x4EE3;&#x7801;&#x5E76;&#x4F7F;&#x7528;&#x4E0A;&#x9762;&#x63D0;&#x4F9B;&#x7684;&#x65AD;&#x8A00;&#x6765;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;</p>
+<p>TEST&#x7684;&#x7B2C;&#x4E00;&#x4E2A; &#x53C2;&#x6570;&#x662F;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x540D;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A; &#x53C2;&#x6570;&#x662F;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x4E2D;&#x67D0;&#x9879;&#x6D4B;&#x8BD5;&#x7684;&#x540D;&#x79F0;&#x3002;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x4EFB;&#x610F;&#x6570;&#x91CF;&#x7684;&#x72EC;&#x7ACB;&#x6D4B;&#x8BD5;&#x3002;&#x8FD9;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7EC4;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7684;&#x5168;&#x79F0;</p>
+<pre><code>$ mkdir mygtest
+$ cd mygetst
+</code></pre><p>&#x5EFA;&#x7ACB;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;gtest1.cpp,&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;:</p>
+<pre><code>#include &lt;gtest/gtest.h&gt;  
+int Factorial( int n )  
+{  
+    if(n==2) return 100; //&#x6545;&#x610F;&#x51FA;&#x4E2A;&#x9519;&#xFF0C;&#x563B;&#x563B;  
+    return n&lt;=0? 1 : n*Factorial(n - 1);  
+}  
+
+//&#x7528;TEST&#x505A;&#x7B80;&#x5355;&#x6D4B;&#x8BD5;  
+TEST(TestFactorial, ZeroInput) //&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x540D;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6D4B;&#x8BD5;&#x540D;&#xFF1A;&#x968F;&#x540E;&#x7684;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#x5C06;&#x4EE5;&quot;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x540D;.&#x6D4B;&#x8BD5;&#x540D;&quot;&#x7684;&#x5F62;&#x5F0F;&#x7ED9;&#x51FA;  
+{  
+    EXPECT_EQ(1, Factorial(0));  //EXPECT_EQ&#x7A0D;&#x5019;&#x518D;&#x8BF4;&#xFF0C;&#x73B0;&#x5728;&#x53EA;&#x8981;&#x77E5;&#x9053;&#x5B83;&#x662F;&#x6D4B;&#x8BD5;&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x7684;&#x5C31;&#x884C;&#x4E86;&#x3002;  
+}  
+
+TEST(TestFactorial, OtherInput)  
+{  
+    EXPECT_EQ(1, Factorial(1));  
+    EXPECT_EQ(2, Factorial(2));  
+    EXPECT_EQ(6, Factorial(3));  
+    EXPECT_EQ(40320, Factorial(8));  
+}       
+
+int main(int argc, char* argv[])  
+{  
+    testing::InitGoogleTest(&amp;argc,argv); //&#x7528;&#x6765;&#x5904;&#x7406;Test&#x76F8;&#x5173;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x5F00;&#x5173;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5173;&#x6CE8;&#x4E5F;&#x53EF;&#x4E0D;&#x52A0;  
+    RUN_ALL_TESTS();  //&#x770B;&#x51FD;&#x6570;&#x540D;&#x5C31;&#x77E5;&#x9053;&#x5E72;&#x5565;&#x4E86;  
+    std::cin.get();   //&#x53EA;&#x662F;&#x8BA9;&#x5B83;&#x6682;&#x505C;&#x800C;&#x5DF2;&#xFF0C;&#x4E0D;&#x7136;&#x4E00;&#x95EA;&#x5C31;&#x6CA1;&#x4E86;  
+    return 0;  
+}
+</code></pre><p>&#x7F16;&#x5199;Android.mk, &#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;:</p>
+<pre><code>LOCAL_PATH:= $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= \
+    gtest1.cpp
+
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/include               \
+    $(TOP)/external/gtest/include \
+    $(call include-path-for, audio-utils)
+
+LOCAL_STATIC_LIBRARIES:= libgtest
+
+LOCAL_SHARED_LIBRARIES := \
+
+LOCAL_MODULE := gtest1
+
+LOCAL_MODULE_TAGS := optional
+include external/stlport/libstlport.mk
+include $(BUILD_EXECUTABLE)
+</code></pre><p>&#x7F16;&#x8BD1;,&#x5E76;&#x5C06;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code>root@zipp_mini:/ # gtest1                                                      
+[==========] Running 2 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 2 tests from TestFactorial
+[ RUN      ] TestFactorial.ZeroInput
+[       OK ] TestFactorial.ZeroInput (0 ms)
+[ RUN      ] TestFactorial.OtherInput
+vendor/libratone/sdk/mygtest/gtest1.cpp:17: Failure
+Value of: Factorial(2)
+  Actual: 100
+Expected: 2
+vendor/libratone/sdk/mygtest/gtest1.cpp:18: Failure
+Value of: Factorial(3)
+  Actual: 300
+Expected: 6
+vendor/libratone/sdk/mygtest/gtest1.cpp:19: Failure
+Value of: Factorial(8)
+  Actual: 2016000
+Expected: 40320
+[  FAILED  ] TestFactorial.OtherInput (1 ms)
+[----------] 2 tests from TestFactorial (2 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test case ran. (3 ms total)
+[  PASSED  ] 1 test.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] TestFactorial.OtherInput
+
+ 1 FAILED TEST
+</code></pre><p>&#x548C;&#x9884;&#x671F;&#x76F8;&#x540C;&#xFF0C;&#x6709;&#x4E00;&#x9879;PASSED&#x3002;</p>
+<h4 id="23-testf&#x505A;&#x540C;&#x914D;&#x7F6E;&#x7684;&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;">2.3 TEST_F&#x505A;&#x540C;&#x914D;&#x7F6E;&#x7684;&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;</h4>
+<p>TEST_F&#x5B8F;&#x7528;&#x4E8E;&#x5728;&#x591A;&#x4E2A;&#x6D4B;&#x8BD5;&#x4E2D;&#x4F7F;&#x7528;&#x540C;&#x6837;&#x7684;&#x6570;&#x636E;&#x914D;&#x7F6E;,&#x6240;&#x4EE5;&#x5B83;&#x53C8;&#x53EB;&#xFF1A;&#x6D4B;&#x8BD5;&#x5939;&#x5177;&#xFF08;Test Fixtures&#xFF09;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7684;&#x591A;&#x4E2A;&#x6D4B;&#x8BD5;&#x8981;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;(&#x5982;&#x524D;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7684;Test_GFN&#x548C;Test_GP&#x90FD;&#x4F7F;&#x7528;&#x7A0B;&#x5E8F;&#x81EA;&#x8EAB;&#x7684;&#x5B8C;&#x6574;&#x6587;&#x4EF6;&#x540D;&#x6765;&#x6D4B;&#x8BD5;)&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x5939;&#x5177;&#x3002;</p>
+<p>&#x8981;&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x56FA;&#x4EF6;&#xFF0C;&#x53EA;&#x9700;&#xFF1A;</p>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#x7EE7;&#x627F;&#x81EA;testing::Test&#x3002;&#x5C06;&#x5176;&#x4E2D;&#x7684;&#x6210;&#x5458;&#x58F0;&#x660E;&#x4E3A;protected:&#x6216;&#x662F;public:&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x4ECE;&#x5B50;&#x7C7B;&#x4E2D;&#x5B58;&#x53D6;&#x5939;&#x5177;&#x6210;&#x5458;&#x3002;
+&#x5728;&#x8BE5;&#x7C7B;&#x4E2D;&#x58F0;&#x660E;&#x6D4B;&#x8BD5;&#x4E2D;&#x6240;&#x8981;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x6570;&#x636E;&#x3002;
+&#x5982;&#x679C;&#x9700;&#x8981;&#xFF0C;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6216;&#x8005;SetUp()&#x51FD;&#x6570;&#x6765;&#x4E3A;&#x6BCF;&#x4E2A;&#x6D4B;&#x8BD5;&#x51C6;&#x5907;&#x5BF9;&#x8C61;&#x3002;
+&#x5982;&#x679C;&#x9700;&#x8981;&#xFF0C;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x6790;&#x6784;&#x51FD;&#x6570;&#x6216;&#x8005;TearDown()&#x51FD;&#x6570;&#x6765;&#x91CA;&#x653E;&#x4F60;&#x5728;SetUp()&#x51FD;&#x6570;&#x4E2D;&#x7533;&#x8BF7;&#x7684;&#x8D44;&#x6E90;&#x3002;
+&#x5982;&#x679C;&#x9700;&#x8981;&#xFF0C;&#x5B9A;&#x4E49;&#x4F60;&#x7684;&#x6D4B;&#x8BD5;&#x6240;&#x9700;&#x8981;&#x5171;&#x4EAB;&#x7684;&#x5B50;&#x7A0B;&#x5E8F;&#x3002;
+&#x5F53;&#x6211;&#x4EEC;&#x8981;&#x4F7F;&#x7528;&#x56FA;&#x4EF6;&#x65F6;&#xFF0C;&#x4F7F;&#x7528;TEST_F()&#x66FF;&#x6362;&#x6389;TEST()&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x5B58;&#x53D6;&#x6D4B;&#x8BD5;&#x56FA;&#x4EF6;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x548C;&#x5B50;&#x7A0B;&#x5E8F;</p>
+<h5 id="&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;">&#x6D4B;&#x8BD5;&#x6D41;&#x7A0B;:</h5>
+<p>&#x5F53;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;RUN_ALL_TESTS()&#x5B8F;&#x4F1A;&#xFF1A;</p>
+<p>&#x4FDD;&#x5B58;&#x6240;&#x6709;&#x7684;Google Test&#x6807;&#x5FD7;&#x3002;
+&#x4E3A;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x5939;&#x5177;&#x5BF9;&#x8C61;&#x3002;
+&#x8C03;&#x7528;SetUp()&#x521D;&#x59CB;&#x5316;&#x5B83;&#x3002;
+&#x5728;&#x56FA;&#x4EF6;&#x5BF9;&#x8C61;&#x4E0A;&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;&#x3002;
+&#x8C03;&#x7528;TearDown()&#x6E05;&#x7406;&#x5939;&#x5177;&#x3002;
+&#x5220;&#x9664;&#x56FA;&#x4EF6;&#x3002;
+&#x6062;&#x590D;&#x6240;&#x6709;Google Test&#x6807;&#x5FD7;&#x7684;&#x72B6;&#x6001;&#x3002;
+&#x91CD;&#x590D;&#x4E0A;&#x8BC9;&#x6B65;&#x9AA4;&#xFF0C;&#x76F4;&#x5230;&#x6240;&#x6709;&#x6D4B;&#x8BD5;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7C7B;&#x7EE7;&#x627F;&#x81EA;testing::Test</p>
+<pre><code>#include &quot;stdio.h&quot;  
+#include &lt;gtest/gtest.h&gt;  
+using testing::Test;  
+class Test_mytest : public Test  
+{  
+    void SetUp()  
+    {  
+    }  
+
+    void TearDown()  
+    {  
+    }  
+};
+</code></pre><p>&#x9700;&#x8981;&#x88AB;&#x6D4B;&#x8BD5;&#x7684;&#x51FD;&#x6570;&#x6216;&#x8005;&#x7C7B;:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+class Test_class 
+{
+public:
+    Test_class(){};
+    ~Test_class(){};
+
+    int testfunc(int n) { if (n &gt; 10) return 0; else return -1;};   
+}
+</code></pre><p>&#x4FEE;&#x6539;gtest1.cpp</p>
+<pre><code>#include &lt;gtest/gtest.h&gt;  
+#include &quot;gtest1.h&quot;  
+
+TEST_F (Test_mytest, ThirdTest)
+{
+    EXPECT_EQ(0, tc-&gt;testfunc(11));
+}
+
+int main(int argc, char* argv[])  
+{  
+testing::InitGoogleTest(&amp;argc,argv); //&#x7528;&#x6765;&#x5904;&#x7406;Test&#x76F8;&#x5173;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x5F00;&#x5173;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5173;&#x6CE8;&#x4E5F;&#x53EF;&#x4E0D;&#x52A0;  
+RUN_ALL_TESTS();  //&#x770B;&#x51FD;&#x6570;&#x540D;&#x5C31;&#x77E5;&#x9053;&#x5E72;&#x5565;&#x4E86;  
+  std::cin.get();   //&#x53EA;&#x662F;&#x8BA9;&#x5B83;&#x6682;&#x505C;&#x800C;&#x5DF2;&#xFF0C;&#x4E0D;&#x7136;&#x4E00;&#x95EA;&#x5C31;&#x6CA1;&#x4E86;  
+  return 0;  
+}
+</code></pre><p>&#x4FEE;&#x6539;Android.mk</p>
+<pre><code>LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= \
+    gtest1.cpp
+
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/include    \
+    $(TOP)/external/gtest/include \
+    $(call include-path-for, audio-utils)
+
+LOCAL_STATIC_LIBRARIES:= libgtest
+
+LOCAL_SHARED_LIBRARIES := \
+
+LOCAL_MODULE := gtest1
+
+LOCAL_MODULE_TAGS := optional
+include external/stlport/libstlport.mk
+include $(BUILD_EXECUTABLE)
+</code></pre><p>&#x6267;&#x884C;mm&#x547D;&#x4EE4;&#x7F16;&#x8BD1;&#x540E;adb push&#x5230;&#x8BBE;&#x5907;&#x4E0A;&#xFF0C;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code>root@zipp_mini:/ # gtest1                                                      
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Test_mytest
+[ RUN      ] Test_mytest.ThirdTest
+[       OK ] Test_mytest.ThirdTest (0 ms)
+[----------] 1 test from Test_mytest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+</code></pre><p>&#x6D4B;&#x8BD5;&#x901A;&#x8FC7;&#xFF0C;ok.</p>
+<h4 id="24-&#x5176;&#x4ED6;&#x5B8F;">2.4 &#x5176;&#x4ED6;&#x5B8F;</h4>
+<p>Google&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x79CD;&#x65AD;&#x8A00;&#x5F62;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x4EE5;ASSERT<em>&#x5F00;&#x5934;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x4EE5;EXPECT</em>&#x5F00;&#x5934;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x533A;&#x522B;&#x662F;ASSERT<em>*&#x4E00;&#x65E6;&#x5931;&#x8D25;&#x7ACB;&#x9A6C;&#x9000;&#x51FA;&#xFF0C;&#x800C;EXPECT</em>&#x8FD8;&#x80FD;&#x7EE7;&#x7EED;&#x4E0B;&#x53BB;&#x3002;</p>
+<p>ASSERT_EQ(<em>&#x671F;&#x671B;&#x503C;</em> , <em>&#x5B9E;&#x9645;&#x503C;</em> );  ----&#x81F4;&#x547D;&#x65AD;&#x8A00;</p>
+<p>EXPECT_EQ(<em>&#x671F;&#x671B;&#x503C;</em> , <em>&#x5B9E;&#x9645;&#x503C;</em> );  ----&#x975E;&#x81F4;&#x547D;&#x65AD;&#x8A00;</p>
+<p>&#x53C2;&#x8003;<a href="http://blog.csdn.net/acaiwlj/article/details/49329477" target="_blank">gtest&#x65AD;&#x8A00;</a></p>
+<h3 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;">&#x53C2;&#x8003;&#x94FE;&#x63A5;</h3>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/03/31/1426758.html" target="_blank">1.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x4E00; - &#x521D;&#x8BC6;gtest</a></p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/06/1430364.html" target="_blank">2.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x4E8C; - &#x65AD;&#x8A00;</a></p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/06/1430396.html" target="_blank">3.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x4E09; - &#x4E8B;&#x4EF6;&#x673A;&#x5236;</a></p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/08/1431297.html" target="_blank">4.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x56DB; - &#x53C2;&#x6570;&#x5316;</a> </p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/08/1432043.html" target="_blank">5.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x4E94; - &#x6B7B;&#x4EA1;&#x6D4B;&#x8BD5;</a> </p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/10/1432789.html" target="_blank">6.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x516D; - &#x8FD0;&#x884C;&#x53C2;&#x6570;</a> </p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/11/1433744.html" target="_blank">7.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x4E03; - &#x6DF1;&#x5165;&#x89E3;&#x6790;gtest</a></p>
+<p><a href="http://www.cnblogs.com/coderzh/archive/2009/04/12/1434155.html" target="_blank">8.&#x73A9;&#x8F6C;Google&#x5F00;&#x6E90;C++&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;Google Test&#x7CFB;&#x5217;(gtest)&#x4E4B;&#x516B; - &#x6253;&#x9020;&#x81EA;&#x5DF1;&#x7684;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="2018-03-19-移植linux程序到安卓.html" class="navigation navigation-prev " aria-label="Previous page: 二 移植linux程序到安卓">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="2018-03-23-gmock编译即简单使用.html" class="navigation navigation-next " aria-label="Next page: 四 gmock编译及简单使用">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"三 使用安卓测试框架gtest","level":"1.2.3","depth":2,"next":{"title":"四 gmock编译及简单使用","level":"1.2.4","depth":2,"path":"chapter1/2018-03-23-gmock编译即简单使用.markdown","ref":"chapter1/2018-03-23-gmock编译即简单使用.markdown","articles":[]},"previous":{"title":"二 移植linux程序到安卓","level":"1.2.2","depth":2,"path":"chapter1/2018-03-19-移植linux程序到安卓.markdown","ref":"chapter1/2018-03-19-移植linux程序到安卓.markdown","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/2018-03-20-安卓测试框架gtest.markdown","mtime":"2018-03-27T02:01:47.713Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-27T02:23:21.798Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
