@@ -10,6 +10,7 @@
     * [六 ndk制作编译工具链](chapter1/2018-0319-ndk制作编译工具链.markdown)
     * [七 pcm转wav](chapter1/2018-03-19-pcm转wav.markdown)
     * [八 gitbook的使用](chapter1/2018-0328-使用gitbook.markdown)
+    * [九 vim安装插件](chapter1/2018-0327-安装vim插件.md)
 * [第二章](chapter2/README.md)
 
 
