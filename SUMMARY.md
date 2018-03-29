@@ -13,6 +13,6 @@
     * [九 vim安装插件](chapter1/2018-0327-安装vim插件.md)
     * [十 sublime-text2安装](chapter1/ubuntu16-安装sublime-text2.md)
 * [第二章 python学习笔记](chapter2/README.md)
-	
+    * [一 python 语法基础]()
 
 
