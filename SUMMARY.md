@@ -15,5 +15,6 @@
 * [第二章 python学习笔记](chapter2/README.md)
     * [一 python 语法基础](chapter2/python语法基础.md)
     * [二 python函数.md](chapter2/python函数.md)
+    * [三 python面向对象.md](chapter2/python面向对象.md)
 
 
