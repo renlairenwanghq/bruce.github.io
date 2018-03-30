@@ -250,3 +250,42 @@ a = A()
 haha
 ```
 
+#### 异常
+
+
+
+#### 模块
+
+每个py文件都是一个模块。
+
+一个包含多个模块的文件夹中，包含`__init__.py`文件，表示这是一个包。导入包的时候会执行该文件。
+
+**`__all__`**
+
+在模块中表示模块中可以被导出的函数或者变量
+
+在包的`__init__.py`中表示可以被导出的模块名
+
+
+
+####setup.py安装包
+
+[python 编写简单的setup.py](http://www.cnblogs.com/lyrichu/p/6818008.html)
+
+命令
+
+```
+python3 setup.py build
+python3 setup.py sdist
+python3 setup.py install
+```
+
+#### 给程序传参数
+
+```
+#!/usr/bin/python3
+import sys
+
+print(sys.argv)
+```
+
