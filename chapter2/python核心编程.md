@@ -1,0 +1,131 @@
+##python核心编程
+
+#### is 和 ==
+
+[Python中is和==的区别](http://www.cnblogs.com/CheeseZH/p/5260560.html)
+
+is判断 id是否相同
+
+== 判断是否值相同
+
+```
+# -*- coding:utf8 -*-
+a = 1
+c = 1
+if a is c :
+    print('True')
+else:
+    print('False')
+
+e = 'nihao'
+f = 'nihao'
+
+if e is f :
+    print('True')
+else:
+    print('False')
+h=10000
+m=10000
+if h is m :
+    print('True')
+else:
+    print('False')
+```
+
+结果： 注意并不是所有的数字的id都一样
+
+```
+True
+True
+False
+```
+
+
+
+#### 深拷贝、浅拷贝
+
+[Python中深拷贝与浅拷贝的区别](https://blog.csdn.net/u014745194/article/details/70271868)
+
+[Python-copy()与deepcopy()区别](https://blog.csdn.net/qq_32907349/article/details/52190796)
+
+```
+    在Python中对象的赋值其实就是对象的引用。当创建一个对象，把它赋值给另一个变量的时候，python并没有拷贝这个对象，只是拷贝了这个对象的引用而已。
+
+    浅拷贝：拷贝了最外围的对象本身，内部的元素都只是拷贝了一个引用而已。也就是，把对象复制一遍，但是该对象中引用的其他对象我不复制
+
+    深拷贝：外围和内部元素都进行了拷贝对象本身，而不是引用。也就是，把对象复制一遍，并且该对象中引用的其他对象我也复制。
+```
+
+```
+$ python
+Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = [1,2,3]
+>>> b = a
+>>> id(a)
+139971109799912
+>>> id(b)
+139971109799912
+>>> import copy #导入copy模块
+>>> c=copy.deepcopy(a)
+>>> id(c)
+139971109910576
+>>> id(a)
+139971109799912
+>>> a is c #深拷贝
+False
+>>> c.append(5)
+>>> print c
+[1, 2, 3, 5]
+>>> print a
+[1, 2, 3]
+```
+
+**对于可变对象深浅拷贝**:
+
+> =浅拷贝：值相等，地址相等 
+>   copy浅拷贝：值相等，地址不相等 
+>   deepcopy深拷贝：值相等，地址不相等
+
+**对于不可变对象的深浅拷贝**：
+
+> 不可变对象类型，没有被拷贝的说法，即便是用深拷贝，查看id的话也是一样的，如果对其重新赋值，也只是新创建一个对象，替换掉旧的而已。
+>
+> 一句话就是，不可变类型，不管是深拷贝还是浅拷贝，地址值和拷贝后的值都是一样的。
+
+
+
+**copy 和 deepcopy的区别**
+
+```
+$ python
+Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = [1,2,3]
+>>> b = [4, 5, 6]
+>>> c = [a,b]
+>>> print c
+[[1, 2, 3], [4, 5, 6]]
+>>> a.append(9)
+>>> print c
+[[1, 2, 3, 9], [4, 5, 6]]
+>>> import copy
+>>> e= copy.deepcopy(c)
+>>> print e
+[[1, 2, 3, 9], [4, 5, 6]]
+>>> a.append(7)
+>>> print e				 # a修改了，e没有被修改
+[[1, 2, 3, 9], [4, 5, 6]]
+>>> f = copy.copy(c)
+>>> print c
+[[1, 2, 3, 9, 7], [4, 5, 6]]
+>>> a.append(8)
+>>> print c
+[[1, 2, 3, 9, 7, 8], [4, 5, 6]]
+>>> print f 					# a修改了，f也修改了
+[[1, 2, 3, 9, 7, 8], [4, 5, 6]]
+>>> 
+```
+
