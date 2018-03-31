@@ -129,3 +129,109 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
 
+
+
+#### 私有化
+
+[python下划线](http://python.jobbole.com/81129/
+
+* xx : 公有变量
+* _xx: 单前置下划线，私有化属性或方法， form somemodule import * 禁止倒入，类对象和子类可以访问
+* __xx: 双前置下划线，避免与子类中的属性命名冲突，无法在外部直接访问(名字重整机制所以访问不到)
+* `__xx__`:python内置属性或者方法
+
+
+
+注意对于`_xx` 变量，from somemodule import *   禁止导入，但是导入时按照 import somemodule 的方式导入的时候可以使用。 
+
+
+
+**dir()**
+
+dir(对象名) 可以打印出该对象的成员
+
+
+
+#### property的使用
+
+1.对于私有属性，如果想修改，应该添加setter 和 getter方法
+
+```
+#!/usr/bin/python3
+
+class A(object):
+	def __init__(self):
+		self.__num = 0
+	def getNum(self):
+		return self.__num
+	def setNum(self, value):
+		self.__num = value;
+```
+
+
+
+2. 使用property升级getter和setter方法
+
+```
+#!/usr/bin/python3
+
+class A(object):
+	def __init__(self):
+		self.__num = 0
+	def getNum(self):
+		print('----getNum-----')
+		return self.__num
+	def setNum(self, value):
+	    print('----setNum-----')
+		self.__num = value;
+	
+	num = property(getNum, setNum) #此时可以通过 . 操作符来访问函数
+	
+a = A()
+a.num = 100
+print(a.num)
+```
+
+结果
+
+```
+$ python b.py 
+----setNum-----
+----getNum-----
+100
+```
+
+
+
+3.使用property的第二种方式 装饰器
+
+```
+#!/usr/bin/python3
+
+class A(object):
+	def __init__(self):
+		self.__num = 0
+	@property
+	def num(self):
+		print('----getNum-----')
+		return self.__num
+	@num.setter
+	def num(self, value):
+	    print('----setNum-----')
+	    self.__num = value;
+	
+	
+a = A()
+a.num = 100
+print(a.num)
+```
+
+结果
+
+```
+$ python b.py 
+----setNum-----
+----getNum-----
+100
+```
+
