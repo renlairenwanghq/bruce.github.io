@@ -429,3 +429,112 @@ Traceback (most recent call last):
 AttributeError: 'A' object has no attribute 'run'
 ```
 
+ #### 生成器
+
+**列表生成式**
+
+```
+>>> L = [x*2 for x in range(5)]
+>>> print L
+[0, 2, 4, 6, 8]
+```
+
+**生成器**
+
+通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。
+
+所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器（Generator）。
+
+**将列表生成式的［］改成（），即可以创建一个生成器。**
+
+generator保存的是算法，每次调用`next()`，就会计算出下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。也可以通过for循环来迭代输出。
+
+```
+>>> g = (x*2 for x in range(5))
+>>> g
+<generator object <genexpr> at 0x10ba67aa0>
+>>> g.next()
+0
+>>> g.next()
+2
+>>> g.next()
+4
+>>> g.next()
+6
+>>> g.next()
+8
+>>> g.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
+
+**如果一个函数定义中包含`yield`关键字，那么这个函数就不再是一个普通函数，而是一个generator**
+
+generator的函数，在每次调用`next()`的时候执行，遇到`yield`语句返回，再次执行时从上次返回的`yield`语句处继续执行。
+
+普通函数：
+
+```
+#!/usr/bin/python3
+
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        print b
+        a, b = b, a + b
+        n = n + 1
+
+fib(5)
+```
+
+结果
+
+```
+$ python a.py 
+1
+1
+2
+3
+5
+```
+
+修改print为yield后，该函数则变为一个生成器，而且在调用next()时，会从yield返回
+
+```
+#!/usr/bin/python3
+
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+
+m = fib(10)
+
+print(m.next()) ＃ 打印的是从yield返回的值
+print(m.next()) ＃ 再次执行时从上次返回的yield语句处继续执行，然后又从yield处返回
+print(m.next())
+print('-'*20)
+for x in m: ＃此处的m也是从上次的yield语句处继续执行。
+	print x
+```
+
+结果
+
+```
+$ python b.py 
+1
+1
+2
+--------------------
+3
+5
+8
+13
+21
+34
+55
+```
+
