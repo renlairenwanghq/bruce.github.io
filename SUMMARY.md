@@ -16,5 +16,4 @@
     * [一 python 语法基础](chapter2/python语法基础.md)
     * [二 python函数.md](chapter2/python函数.md)
     * [三 python面向对象.md](chapter2/python面向对象.md)
-
-
+    * [四 python核心编程.md](chapter2/python核心编程.md)
