@@ -445,6 +445,9 @@ AttributeError: 'A' object has no attribute 'run'
 
 所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器（Generator）。
 
+* next()
+* send()
+
 **将列表生成式的［］改成（），即可以创建一个生成器。**
 
 generator保存的是算法，每次调用`next()`，就会计算出下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。也可以通过for循环来迭代输出。
@@ -538,3 +541,76 @@ $ python b.py
 55
 ```
 
+**生成器调用send**
+
+同next()，在每次调用时候执行，遇到`yield`语句返回，再次执行时从上次返回的`yield`语句处继续执行。
+
+**注意**  在yield处阻塞，表示下面代码中 temp = yield i 这条赋值语句并没有执行，只是通过yield返回了i的值。
+
+​	   且生成器如果没有调用next就想调用send，则第一次传入的参数必须是None。
+
+```
+#!/usr/bin/python3
+
+def func():
+    i = 0
+    while i < 5:
+        print('11111')
+        temp = yield i
+        print('------', temp)
+        i+=1
+
+t = func()
+t.send(None)
+print('='*20)
+t.send('Haha')
+print('='*20)
+print(t.next())
+print('='*20)
+print(t.next())
+```
+
+结果
+
+```
+$ python c.py 
+11111                # 没有调用next，所以在 yield处阻塞
+====================
+('------', 'Haha')   # 从yield处开始执行，因为调用了send，所以temp的值为Haha
+11111				 #  经过一次循环后又阻塞在yield处
+====================
+('------', None)     # 只是调用了next，没有调用send，所以相当于传入了None
+11111				 # 所以执行一次循环后阻塞在yield处，但是yield i 语句返回了2,所以输出2
+2
+====================
+('------', None)
+11111
+3
+```
+
+**生成器的应用**
+
+```
+#!/usr/bin/python3
+
+def test1():
+    while True:
+        print('----------1')
+        yield None
+
+def test2():
+    while True:
+        print('----------2')
+        yield None
+
+t1 = test1()
+t2 = test2()
+
+while True:
+    t1.next()
+    t2.next()
+```
+
+上述代码会一直输出 1, 2。
+
+使用生成器可以做到，同时在执行 test1 和 test2 中的两个循环中代码。
