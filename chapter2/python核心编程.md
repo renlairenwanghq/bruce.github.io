@@ -614,3 +614,154 @@ while True:
 上述代码会一直输出 1, 2。
 
 使用生成器可以做到，同时在执行 test1 和 test2 中的两个循环中代码。
+
+####`类做装饰器`
+
+定义一个类的时候，添加`__call__方法`可以通过对象名调用。
+
+**`__call__方法`**
+
+```
+#!/usr/bin/python3
+
+class Test(object):
+    def __call__(self):
+        print('----------test')
+
+a = Test()
+a()
+```
+
+结果
+
+```
+----------test
+```
+
+**类做装饰器**
+
+```
+# -*- coding:utf8 -*-
+#!/usr/bin/python3
+
+class Test(object):
+    def __init__(self,func):
+        print('----------初始化')
+    def __call__(self):
+        print('----------装饰')
+        print('----------test')
+
+@Test  #此处会调用__init__方法 相对于 test=Test(test)
+def test():
+    print('in test func')
+print('-------------------------------')
+test() # 此时的test已经经过装饰，所以会调用的__call__方法
+```
+
+结果
+
+```
+$ python d.py 
+----------初始化
+-------------------------------
+----------装饰
+----------test
+```
+
+#### 元类
+
+通常，我们定义类来创建对象，但是现在我们知道类也是对象。那么是通过什么来创建类呢？答案就是元类。
+
+type可以用来创建类，所以type()即是元类。
+
+元类的主要作用是在创建类的时候自动改变类。
+
+[廖雪峰python教程 元类](https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000)
+
+[非常好的元类介绍](https://www.jianshu.com/p/cec91b9ef2a4)
+
+**类可以动态创建**
+
+**使用type可以创建类**
+
+type()既可以返回对象的类型，也可以创建类
+
+返回对象类型
+
+```
+>>> type(100)
+<type 'int'>
+```
+
+创建类
+
+type(‘类名’ (父类的集合)), {成员的字典}) 可以创建一个类
+
+```
+>>> def test(self):
+...     print('-----test')
+... 
+>>> ts = type('ts', (object,), {"test":test})
+>>> a=ts()
+>>> a.test()
+-----test
+```
+
+**`__metaclass__属性`**
+
+如果类中存在`__metaclass__`属性，则会根据该属性定义的元类在内存中创建一个类对象。
+
+
+
+#### `__getattribute__`
+
+[python3中__get__,__getattr__,__getattribute__的区别](http://www.cnblogs.com/Vito2008/p/5280216.html)
+
+__getattribute__是访问属性的方法，我们可以通过方法重写来扩展方法的功能。
+
+对于python来说，属性或者函数都可以被理解成一个属性，当获取属性或者方法时会调用到`__getattribute__`。
+
+```
+# -*-coding:utf8 -*-
+class C(object):
+    a = 'abc'
+    def __getattribute__(self, *args, **kwargs):
+        print("__getattribute__() is called")
+        if args[0] == 'a':
+            return object.__getattribute__(self, *args, **kwargs)
+        else:
+            print '调用函数foo()'
+            return object.__getattribute__(self,'foo')
+    def foo(self):
+        return "hello"
+    
+
+c=C()
+print(c.foo())
+print(c.a)
+```
+
+结果
+
+```
+$ python f.py 
+__getattribute__() is called
+调用函数foo()
+hello
+__getattribute__() is called
+abc
+```
+
+
+
+####python垃圾回收 gc
+
+* 小整数对象池 [-5 257]
+* intern机制
+* 引用计数
+* 隔代回收
+
+#### functools
+
+* 偏函数
+* wraps    去除装饰的时候可能的副作用
