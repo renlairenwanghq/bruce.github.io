@@ -166,13 +166,30 @@ alt属性：描述图片，图片获取不到时，显示在网页上
 
 **表单**
 
+注意 input的属性：type＝hidden， type＝text，type＝img等
+
+form的属性：method、action
+
+**get提交**
+
+直接将数据在地址栏上显示出来
+
+**post提交**
+
+将数据放到报文当中
+
 ```html
 <!-- action 属性表示表单数据提交的地址 -->
 <!-- input type: text password radio checkbox  -->
-<form action="http://...">
+<!-- methon属性代表提交的方式 -->
+<form action="http://..." method＝"post">
     <div>
-        <lable>用户名</lable>
-        <input type="text">
+        <!-- 
+			 input中设置id，然后lable的for属性中设置同一个id，这样点击用户名这几个文字时
+        	 也能将光标放到输入框中  
+		-->
+        <lable for="username">用户名</lable>
+        <input type="text" id="username">
     </div>
 
     <div>
@@ -183,7 +200,10 @@ alt属性：描述图片，图片获取不到时，显示在网页上
  	<div>
         <!-- name 相同，可以防止都被选择 -->
         <lable>性别</lable>
-        <input type="radio" name="gender">男
+         <!-- 下面这两个input的区别是，第一个点击男这个文字的时候也可以选中 这个就是id和for
+			  属性的作用 
+		  -->
+        <input type="radio" name="gender" id="male"><lable for="male">男</lable>
   		<input type="radio" name="gender">女
     </div>
     
@@ -195,8 +215,49 @@ alt属性：描述图片，图片获取不到时，显示在网页上
             <option>上海</option>
         </select>
     </div>
-    
+    <!-- submit是提交操作 -->
     <input type="submit" name="" value="提交">
+     <!-- reset是重置操作 -->
+    <input type="reset" name="" value="提交">
+     <!-- hidden可以帮忙存储一些值 可以传到后台 -->
+    <input type="hidden" name="hid" value="10000">
 </form>
 ```
+
+### html内嵌框架
+
+iframe标签会创建另外一个html文件的内联框架。src属性指定另一个html文件的引用地址。
+
+```html
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset="utf-8">
+	<title>n内嵌框架</title>
+</head>
+
+<body>
+    <!-- scrolling为no表示无滚动条 -->
+	<iframe src="http://www.baidu.com" width="900" height="500" frameborder="0" scrolling="no"></iframe>
+</body>
+```
+
+通过在iframe中添加属性name 和 在a标签中设置target可以将两者关联起来
+
+```html
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset="utf-8">
+	<title>n内嵌框架</title>
+</head>
+
+<body>
+	<a href="http://www.baidu.com" target="myframe">百度网</a>
+	<a href="http://www.qq.com" target="myframe">腾讯网</a>
+	<iframe src="http://www.baidu.com" width="900" height="500" frameborder="0" name="myframe" scrolling="no"></iframe>
+</body>
+```
+
+
 
