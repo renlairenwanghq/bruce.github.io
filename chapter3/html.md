@@ -71,3 +71,132 @@ eg.
 &lt;
 ```
 
+**无明确语义标签**
+
+```
+div标签
+span标签
+```
+
+**含样式和语义的标签**
+
+```
+<em> </em>
+<i> </i>
+<b></b>
+<strong> </strong>
+```
+
+**语义化的标签**
+
+可以帮助搜索引擎理解这个网页
+
+**图片**
+
+alt属性：描述图片，图片获取不到时，显示在网页上
+
+```
+<img width=0 height=0 src='' border='0' alt='' />
+```
+
+**链接**
+
+```html
+<a herf="地址" title="光标放到该链接时的提示内容"> 网站名 </a>
+
+<!--herf="#" 代表链接到页面顶部-->
+<a herf="#" title="光标放到该链接时的提示内容"> 网站名 </a> 
+
+<!--什么操作都不做-->
+<a herf="javascript:;"> 默认操作 </a> 
+
+<!--页面内跳转-->
+<a herf="#biaoti1"> 默认操作 </a> 
+<!--设置页面内跳转的锚点-->
+<h1 id="biaoti1">标题1</h1>
+```
+
+**有序列表**
+
+```html
+<ol>
+	<li></li>
+	<li></li>
+</ol>
+```
+
+**无序列表**
+
+```html
+<ul>
+	<li></li>
+	<li></li>
+</ul>
+```
+
+**定义列表**
+
+```html
+<dl>
+	<dt>定义标题</dt>
+	<dd>定义解释</dd>
+</dl>
+```
+
+**表格**
+
+```html
+<!--border 边框线粗 width 宽  height 高-->
+<table border="1"> 
+	<tr>
+		<!--表格 头部-->
+		<th></th>
+		<th></th>
+	</tr>
+	
+	<tr>
+		<!--表格 内容 align 表示水平对齐 vlign 垂直对齐-->
+        <!-- colspan 水平合并 rowspan 垂直合并-->
+		<td align="center"></td>
+		<td></td>
+	</tr>	
+	
+</table>
+```
+
+**表单**
+
+```html
+<!-- action 属性表示表单数据提交的地址 -->
+<!-- input type: text password radio checkbox  -->
+<form action="http://...">
+    <div>
+        <lable>用户名</lable>
+        <input type="text">
+    </div>
+
+    <div>
+        <lable>密码</lable>
+        <input type="password">
+    </div>
+
+ 	<div>
+        <!-- name 相同，可以防止都被选择 -->
+        <lable>性别</lable>
+        <input type="radio" name="gender">男
+  		<input type="radio" name="gender">女
+    </div>
+    
+    <div>
+        <!-- select标签 表示选择 -->
+        <lable>籍贯</lable>
+        <select>
+            <option>北京</option>
+            <option>上海</option>
+        </select>
+    </div>
+    
+    <input type="submit" name="" value="提交">
+</form>
+```
+
