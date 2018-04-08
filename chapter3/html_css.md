@@ -261,3 +261,65 @@ iframe标签会创建另外一个html文件的内联框架。src属性指定另�
 
 
 
+##CSS(样式)
+
+[css教程](http://www.runoob.com/css/css-tutorial.html)
+
+####CSS基本语法
+
+选择器{属性:值; 属性:值; 属性:值;}
+
+div{width:800;height:900;color:red}
+
+#### CSS引入页面方法
+
+[html引入css的三种方法](https://blog.csdn.net/ldz1997106/article/details/59106778)
+
+1.外联式 head中通过link标签
+
+通过外部的css文件引入
+
+2.嵌入式 通过style标签放到头部
+
+3.内联式 通过style属性设置
+
+#### CSS样式选择器
+
+[css选择器](http://www.runoob.com/cssref/css-selectors.html)
+
+1.标签选择器
+
+2.id选择器 （一般不怎么用）
+
+3.类选择器 （id选择器的权重比类选择器大）
+
+class里面可以包含多个元素
+
+4.层级选择器
+
+5.组选择器
+
+注意：标签中的id最好保持不同
+
+####CSS元素类型
+
+在CSS中，`html`中的标签元素大体被分为三种不同的类型：
+
+块状元素、内联元素(又叫行内元素)和内联块状元素。				
+[css元素类型](https://www.imooc.com/article/2031)
+
+#### 样式选择器
+
+#### 表格样式
+
+传统布局
+
+#### CSS盒子模型
+
+[css盒子模型](http://www.runoob.com/css/css-boxmodel.html)
+
+[css盒模型详解](https://www.cnblogs.com/smyhvae/p/7256371.html)
+
+浮动
+
+[CSS 浮动](http://www.w3school.com.cn/css/css_positioning_floating.asp)
