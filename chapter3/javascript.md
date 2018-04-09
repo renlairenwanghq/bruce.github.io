@@ -12,6 +12,25 @@
 
 
 
+#### javaScript组成概述
+
+1.ECMAscript的语法，变量，函数，循环语句等语法
+
+2.DOM文档对象模型 提供操作html和css的方法
+
+```html
+var x=document.getElementById("body1").title; 
+```
+
+3.BOM浏览器对象模型 提供操作浏览器的方法
+
+```html
+window.onload = function(){}
+alert();
+```
+
+
+
 #### 嵌入页面的方式
 
 1.行间事件（主要用于事件）不推荐使用
@@ -361,3 +380,269 @@ javascript解析过程分为两个阶段:先编译，后执行，在编译阶段
 </html>
 ```
 
+
+
+#### 匿名函数
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	window.onload = function(){
+		var oDiv = document.getElementById('div1');
+		oDiv.onclick = function(){
+			alert('hello');
+		}
+	}
+</script>
+</head>
+<body> 
+	<div  id="div1" >这是一个div元素</div>
+</body>
+</html>
+```
+
+#### 函数传参
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	
+
+	window.onload = function(){
+		var oInput1 = document.getElementById('input1');
+		var oInput2 = document.getElementById('input2');
+		var obtn = document.getElementById('btn1');
+
+		obtn.onclick = function(){
+			var a = oInput1.value;
+			var b = oInput2.value;
+			//alert(a);
+			var val = add(a, b);
+			//alert(val);
+		}
+
+		function add(a, b){
+			var c = parseInt(a) + parseInt(b) ;
+			alert(c);
+			return c;
+		}
+
+	}
+
+</script>
+
+</head>
+
+<body> 
+    <input type="text" name ="" id="input1">
+    <input type="text" name="" id="input2">
+    <input type="button" name="" value="add" id="btn1">
+</body>
+
+</html>
+```
+
+#### 数组
+
+```html
+var arr = new Array();
+var arr = [1,2,"abc"];
+//方法
+arr.length
+//访问元素
+arr[0]
+```
+
+#### 字符串
+
+```html
+parseInt()
+parseFloat()
+
+var f=0.1
+var g=0.2
+//相加等于0.300000000004的问题解决方法是先乘100在除以100
+alert((parseFloat(f)*100 + parseFloat(g)*100)/100)
+//将一个字符串分割成一个数组
+split()
+//获取字符串中某一个字符
+charAt()
+//查找字符串是否包含某字符
+indexOf()
+//截取字符串
+substring()
+ 
+toUpperCase()
+toLowerCase()
+```
+
+#### 程序调试方法
+
+1. alert
+
+
+2. console log
+3. document.title
+
+#### 定时器
+
+定时器在javascript中的作用
+
+1. 制作动画
+2. 异步操作
+3. 函数缓冲与节流
+
+```html
+/*
+	setTimeOut();   只执行一次的定势器
+	clearTimeout(); 关闭只执行一次的定时器
+	setInterval()    反复执行的定时器
+	clearInterval()  关闭反复执行的定时器
+*/
+
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	
+    setTimeout(function(){
+        alert('hello');
+    }, 1000);
+
+</script>
+
+</head>
+<body>    
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	
+	var timer = setTimeout(function(){
+        alert('hello');
+    }, 3000);
+
+	clearTimeout(timer);
+</script>
+</head>
+<body>  
+</body>
+</html>
+```
+
+**简单动画**
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<style type="text/css">
+	.box{
+		width:100px;
+		height: 100px;
+		background: gold;
+		position: fixed;
+		left: 20px;
+		top: 20px;
+	}
+	
+</style>
+<script type="text/javascript">
+	
+window.onload = function(){
+
+	var oBox = document.getElementById('box');
+	var left = 20;
+
+	var timer = setInterval(function(){
+		left++;
+		oBox.style.left = left + 'px';
+
+		if (left > 700){
+			clearInterval(timer);
+		}
+	}, 20);
+}
+</script>
+</head>
+<body> 
+    <div class="box" id="box"></div>
+</body>
+
+</html>
+```
+
+#### 类型转换
+
+1.直接转换
+
+```html
+parseInt()
+parseFloat()
+```
+
+2.隐式转换
+
+3.NaN 和 isNaN
+
+NaN的含义是Not a Number
+
+isNaN可以判断是否是数字
+
+```html
+var a = '123abc'
+var c = 'abc123'
+var i = 12
+var j = '12'
+
+var e= parseInt(a);  //alert弹出123
+var g = parseInt(c); //alert() 弹出NaN
+//可以用isNaN来判断
+isNaN(a) //true
+isNaN(c) //true
+isNaN(i) //false
+isNaN(j) //true
+```
+
+#### 变量作用域
+
+注意：
+
+* 函数内部如果不用var关键字定义变量，变量可能会变成全局变量
+
+#### 封闭函数
+
+实际就是匿名函数的另一种写法,目的是防止和其他的函数或者变量冲突。
+
+```html
+(function(){
+ alert('hello');
+})();
+
+//其他写法  "!" 或者 “～”
+!function(){
+ alert('hello');
+}();
+```
+
+
+
+#### 闭包
+
+什么是闭包？
+
+函数嵌套函数，内部函数可以引用外部函数的参数和变量，参数和变量不会被垃圾回收机制收回。
