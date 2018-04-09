@@ -20,5 +20,6 @@
     * [五 python_linux系统编程](chapter2/python_linux系统编程.md)
     * [六 python_网络编程](chapter2/python_网络编程.md)
 * [第三章 前端](chapter3/README.md)
-    * [一 HTML](chapter3/html.md)
+    * [一 HTML](chapter3/html_css.md)
+    * [二 javascript](chapter3/javascript.md)
 * [第四章 Djanjo](chapter4/README.md)
