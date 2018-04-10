@@ -490,6 +490,8 @@ toLowerCase()
 2. console log
 3. document.title
 
+###javascript高级
+
 #### 定时器
 
 定时器在javascript中的作用
@@ -646,3 +648,215 @@ isNaN(j) //true
 什么是闭包？
 
 函数嵌套函数，内部函数可以引用外部函数的参数和变量，参数和变量不会被垃圾回收机制收回。
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	function aa(c) {
+		var a = 12;
+		function bb() {
+			alert(a);
+			alert(c);
+		}
+		return bb;
+	}
+	cc = aa(24);
+	cc();
+    dd = aa(38);
+	dd();
+</script>
+</head>
+<body> 
+</body>
+</html>
+```
+
+**修改为封闭函数形式**
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	cc = (function aa(c) {
+		var a = 12;
+		function bb() {
+			alert(a);
+			alert(c);
+		}
+		return bb;
+	})(24);
+	cc();
+</script>
+</head>
+<body> 
+</body>
+</html>
+```
+
+
+
+**闭包的应用**
+
+* 可以保存索引值
+* 私有变量计数器
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<style type="text/css">
+	li{
+		height:30px;	
+		background-color:gold;
+		margin-bottom:20px;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		var oLi = document.getElementsByTagName('li');
+		for (var i = 0; i < oLi.length; i++)
+		{
+			oLi[i].onclick = function() {
+				alert(i);			
+			}
+		}
+
+	}
+	
+</script>
+</head>
+<body> 
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+</body>
+</html>
+```
+
+上面的代码无论点击那一行返回的都是８，所以做如下修改：
+
+**保存索引值**
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<style type="text/css">
+	li{
+		height:30px;	
+		background-color:gold;
+		margin-bottom:20px;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		var oLi = document.getElementsByTagName('li');
+		for (var i = 0; i < oLi.length; i++)
+		{
+			(function(i){
+				oLi[i].onclick = function() {
+				alert(i);			
+				}
+			})(i);
+			
+		}
+	}
+	
+</script>
+</head>
+<body> 
+	<ul>
+		<li>1</li> <!--点击弹出０-->
+		<li>2</li>　<!--点击弹出１-->
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+</body>
+</html>
+```
+
+**私有变量计数器**
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript">
+	
+	var cnt = (function aa(c) {
+		var a = 1;
+		function bb() {
+			a++;
+			return a;		
+		}
+		return bb;
+	})();
+
+	cnt();
+	alert(cnt());　//3
+	alert(cnt());  //4
+</script>
+</head>
+<body> 
+</body>
+</html>
+```
+
+####内置对象
+
+[JavaScript中本地对象、内置对象和宿主对象](http://www.cnblogs.com/luckyXcc/p/5892896.html)
+
+**document**
+
+```
+document.referrer //获取上一个跳转页面的地址
+```
+
+**location**
+
+```html
+window.location.href //获取或者重定位url地址
+window.location.search //获取地址参数部分
+window.location.hash //获取页面锚点或者叫哈希值
+```
+
+**Math**
+
+```html
+Math.rendom 获取0-1的随机数
+Math.floor 向下取整
+Math.cess 向上取整
+```
+
+
+
+#### 面向对象
+
+[JS原型与面向对象总结](http://www.cnblogs.com/wennice/p/6374492.html)
+
+#### 新选择器
+
+```html
+document.querySelector("#demo"); //获取文档中 id="demo" 的元素：
+document.querySelectorAll
+```
+

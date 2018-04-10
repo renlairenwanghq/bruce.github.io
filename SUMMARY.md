@@ -22,4 +22,5 @@
 * [第三章 前端](chapter3/README.md)
     * [一 HTML](chapter3/html_css.md)
     * [二 javascript](chapter3/javascript.md)
+    * [三 jQuery](chapter3/jQuery.md)
 * [第四章 Djanjo](chapter4/README.md)
