@@ -270,5 +270,78 @@ $('#div1').toggleClass("anotherClass"); //重复切换anotherClass样式
 </html>
 ```
 
-　
+**实现的页面选择器**
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<style type="text/css">
+	.btns{
+		width: 500px;
+		height: 50px;
+	}
+
+	.btns input{
+		width:100px;
+		height:50px;
+		background-color#ddd;
+		color:#666;
+		border:0px;
+
+	}
+
+	.btns input.cur{
+		background-color: gold;
+
+	}
+
+	.contents div{
+		width:500px;
+		height:300px;
+		display: none;
+		background-color: gold;
+		line-height:300px;
+		text-align:center;
+	}
+
+	.contents div.active{
+		display:block;
+	}
+	
+</style>
+<script type="text/javascript"  src="js/jquery.js"> </script>
+
+<script type="text/javascript"> 
+	
+$(function(){
+	$('#btns input').click(function(){
+		//this 是原生对象, $(this)指的是点击的那个对像
+		$(this).addClass('cur').siblings().removeClass('cur');
+
+		//获取当前按钮所在层级范围的索引值
+		//alert($(this).index());
+
+		$('#contents div').eq($(this).index()).addClass('active').siblings().removeClass('active');
+	})
+})
+</script>
+</head>
+<body> 
+	<div class="btns" id="btns">
+		<input type="button" value="tab01" class="cur">
+		<input type="button" value="tab02">
+		<input type="button" value="tab03">
+	</div>
+
+	<div class="contents" id="contents">
+		<div class="active">tab文字内容一</div>
+		<div>tab文字内容二</div>
+		<div>tab文字内容三</div>
+
+	</div>
+</body>
+</html>
+```
 
