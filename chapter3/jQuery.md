@@ -345,3 +345,68 @@ $(function(){
 </html>
 ```
 
+#### jQuery属性操作
+
+1.html取出或者设置html的内容
+
+```html
+//取出html内容
+var $htm = $('#div1').html();
+
+//设置html内容
+$('#div1').html('<span>添加文字</span>');
+```
+
+2.text()取出活着设置text的内容
+
+```html
+//取出文本内容
+var $htm = $('#div1').text()
+
+//设置文本内容
+$('#div1').text('<span>添加文字</span>')
+```
+
+3.attr()取出或者设置某个属性的值
+
+```html
+//取出
+var $src = $('#img1').attr('src');
+
+//设置图片地址
+$('#img1').attr({src:"test.jpg", alt:"Test image"});
+```
+
+#### jQuery特殊效果
+
+```html
+fadeIn()淡入
+fadeOUt()淡出
+fadeToggle()切换淡入淡出
+hide() 隐藏元素
+show() 显示元素
+toggle() 切换隐藏和显示
+slideDown()向下展开
+slideUp()向上卷起
+slideToggle() 切换展开和卷起
+
+//或者添加一些控制参数
+$('#div1').fadeIn(1000, 'swing', function(){
+	alert('done');
+})
+```
+
+
+
+#### jQuery链式调用
+
+```html
+$('#div1') //id为div1的元素
+.children('ul') //该元素下面的ul子元素
+.slideDown('fast') //高度从零到实际高度来显示ul元素
+.parent() //跳到ul的父元素
+.slideUp('fast') //高度从实际高度变换到零来隐藏ul元素
+```
+
+#### jQuery动画
+
