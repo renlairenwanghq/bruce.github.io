@@ -409,4 +409,209 @@ $('#div1') //id为div1的元素
 ```
 
 #### jQuery动画
+jQuery animate() 方法允许您创建自定义的动画。
+####jQuery尺寸
 
+```
+Query 提供多个处理尺寸的重要方法：
+    width()
+    height()
+    innerWidth()
+    innerHeight()
+    outerWidth()
+    outerHeight()
+```
+
+####jQuery事件
+[jQuery 参考手册 - 事件](http://www.w3school.com.cn/jquery/jquery_ref_events.asp)
+
+#### jQuery主动触发与自定义事件
+
+主动触发
+
+可以使用jquery对象上的trigger方法来触发对象上绑定的事件。
+
+自定义事件
+除了系统事件外，可以通过bind方法自定义事件，然后用triggle方法触发这些事件。
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+	/*
+	$(function(){
+		$('#btn').bind('click mouseover', function(){
+			alert('hello');
+
+			$(this).unbind('mouseover');
+		});
+		
+	})
+
+	*/
+	$(function(){
+		$('#btn').bind('hello', function(){
+			alert('hello');
+
+		});
+
+		$('#btn').trigger('hello');
+	})
+	
+</script>
+
+<style type="text/css">
+</style>
+</head>
+<body> 
+	<input type="button" name="" value="切换" id="btn"></input>
+</body>
+</html>
+```
+
+####事件冒泡
+[事件冒泡、阻止事件冒泡以及阻止默认行为(https://www.cnblogs.com/jsanntq/p/7681942.html)
+
+事件冒泡 ：当一个元素接收到事件的时候 会把他接收到的事件传给自己的父级，一直到window 。
+（注意这里传递的仅仅是事件 \并不传递所绑定的事件函数。所以如果父级没有绑定事件函数，就算传递了事件 也不会有什么表现 但事件确实传递了。）
+
+有时需要阻止事件冒泡，来避免一些问题。
+
+####事件委托（事件代理）
+
+事件委托就是利用冒泡的原理，把事件加到父级上，通过判断事件来源的子集执行相应的操作，事件委托首先
+
+可以极大减少事件绑定次数，提高性能，其次可以让新加入的子元素也可以拥有相同的事件。
+
+```html
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>事件委托</title>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){	
+/*
+		$('.list li').click(function(){
+			alert($(this).html());
+		})	
+*/
+		$('.list').delegate('li', 'click', function(){
+			alert($(this).html());
+
+			$('.list').undelegate();
+		})
+	})
+
+</script>
+
+<style type="text/css">
+	.list{
+		list-style:none;
+	}
+
+	.list li{
+		height:30px;
+		background-color:gold;
+		margin-bottom:10px;
+		color:#fff;
+	}
+</style>
+</head>
+
+<body> 
+<ul class="list">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>7</li>
+	<li>8</li>
+	<li>9</li>
+</ul>
+</body>
+</html>
+```
+
+####节点操作
+
+[总结一下jQuery操作元素节点的方法（创建、选择、插入节点）](https://blog.csdn.net/xinghuo0007/article/details/71437066)
+
+#### 滚轮事件与函数节流
+
+jquery.mousewheel插件使用
+
+jquery中没有鼠标滚轮事件，原生js中的鼠标滚轮事件不兼容，可以使用jquery的滚轮事件插件jquery.mousewheel.js
+
+函数节流
+
+[JavaScript 函数节流](https://blog.csdn.net/XIAOZHUXMEN/article/details/51555842)
+
+javascript中有些事件的触发频率非常高，比如滚轮事件，对于在短时间内多次触发执行绑定的函数，可以巧妙地使用定时器来减少触发的次数，实现函数节流。
+
+## Ajax
+ajax技术的目的是让javascript发送http请求，与后台通信，获取数据和信息。ajax技术的实现原理是xmlhttp对象，使用此对象与后台通信，ajax通信的过程不会影响后续javascript的执行，从而实现异步。
+
+**局部刷新和无刷新**
+
+ajax可以实现局部刷新也叫无刷新，无刷新是指整个页面不刷新，而是局部刷新，ajax可以自己实现http请求，不用通过浏览器的刷新操作，ajax获取到后台数据后，更新页面上显示对应数据的部分，实现局部刷新。
+
+**同源策略**
+ajax请求的页面资源只能是同一个域下面的资源，不能是其他域的资源，这是ajax处于安全的考虑作出的设计。
+[jQuery ajax的基本使用](https://blog.csdn.net/q547550831/article/details/52904922)
+
+```html
+function checkUsername(username) {
+    var value = username.value;
+    $.ajax({
+        type : "POST",  //请求方式
+        url : "${pageContext.request.contextPath}/RegisterServlet",  //请求路径
+        data : {  //请求参数
+            username : value
+        },
+        success : function(msg) {  //异步请求成功执行的回调函数
+            alert("成功了: " + msg);
+            $("#usernameinfo").html(msg);
+        },//ajax引擎一般用不到；状态信息；抛出的异常信息
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(textStatus);
+            alert("失败了"+errorThrown)
+        }
+    });
+}
+```
+
+## jsonP
+
+[ajax和jsonp使用总结](https://www.cnblogs.com/cwp-bg/p/7668840.html)
+
+[jsonP　跨域请求](https://www.cnblogs.com/chiangchou/p/jsonp.html)
+
+[jQuery版本的jsonp](http://www.cnblogs.com/xiaozhumaopao/p/7093144.html)
+
+##本地存储
+
+[Javascript本地存储小结](https://segmentfault.com/a/1190000007506189)
+
+##jQueryUI
+jQuery UI 是建立在 jQuery JavaScript 库上的一组用户界面交互、特效、小部件及主题。
+[jQueryUI](http://www.runoob.com/jqueryui/jqueryui-tutorial.html)
+
+##swiper
+[swiper教程以及文档](http://www.swiper.com.cn/usage/index.html)
+
+Swiper是纯javascript打造的滑动特效插件，面向手机、平板电脑等移动终端.
+Swiper能实现触屏焦点图、触屏Tab切换、触屏多图切换等常用效果。
+Swiper开源、免费、稳定、使用简单、功能强大，是架构移动终端网站的重要选择
+
+##BootStrap
+Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。
+[Bootstrap菜鸟教程](http://www.runoob.com/bootstrap/bootstrap-tutorial.html)
