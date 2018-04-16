@@ -40,7 +40,7 @@ root@zipp_mini:/ # aserver
 1|root@zipp_mini:/ #  
 ```
 
-* 修改LDFLAGS(交叉编译为arm-linux的环境的话，不需要此步骤)
+* 修改LDFLAGS
 
 ```
 sudo ./configure --host=arm-linux-gnueabihf --prefix=/home/milo/Downloads/alsaout --enable-shared --disable-python --with-configdir=/system/lib/gnulib/alsa --with-plugindir=/system/lib/gnulib CC=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc  LD=/home/milo/Downloads/toolchains/linux_toolchain/gcc-linaro-5.4.1-2017.05-i686_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-ld CFLAGS="-Wl,-rpath,/system/lib/gnulib" LDFLAGS="-Wl,-dynamic-linker=/system/lib/gnulib/ld-linux-armhf.so.3"
@@ -77,6 +77,15 @@ sudo ./configure --prefix=/home/milo/Downloads/alsaoutpc --enable-shared --disab
 ./configure  --prefix=/home/milo/Downloads/alsautiloutpc --disable-alsamixer --disable-xmlto --with-alsa-inc-prefix=/home/milo/Downloads/alsaoutpc/include --with-alsa-prefix=/home/milo/Downloads/alsaoutpc/lib
 ```
 
+
+
+###alsa 工具使用
+
+```
+播放： $ aplay  musicdemo.wmv
+录音： $ arecord -c 2 -r 44100 -f S16_LE musicdemo.wmv
+调节音量大小: $ alsamixer 
+```
 
 
 
