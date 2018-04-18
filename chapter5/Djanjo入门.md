@@ -1,3 +1,5 @@
+##1.概述
+
 Django是一个开放源代码的Web应用框架，由Python写成。采用了MTV的框架模式，即模型M，模板T和视图V。
 
 [Django中MVC与MVT设计模式的区别系列之一](https://blog.csdn.net/u014745194/article/details/73718041)
@@ -16,7 +18,9 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MT
 - V全拼为View，与MVC中的C功能相同，接收请求，进行业务处理，返回应答。
 - T全拼为Template，与MVC中的V功能相同，负责封装构造要返回的html。
 
-###安装虚拟环境
+##2.入门
+
+###2.1 安装虚拟环境
 
 [virtualenv](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
 
@@ -69,7 +73,7 @@ $ pip freeze
 Django==1.8.2
 ```
 
-###创建项目
+###2.2 创建项目
 
 * 命令django-admin startproject test1
 * 进入test1目录，目录结构如下
@@ -116,6 +120,46 @@ Django url() 可以接收四个参数，分别是两个必选参数：regex、vi
 
 
 
+
+### 2.3 模型
+
+* 配置数据库
+* 创建应用
+* 创建模型类
+
+#### 2.3.1 数据库的配置
+
+在`settings.py`文件中，通过DATABASE项进行数据库设置。默认使用的是sqlite数据库。
+
+#### 2.3.2 创建应用
+
+```
+$ python manager.py startapp booktest
+```
+
+
+
+```
+form django.db import models
+class BookInfo(models.Model):
+	btitle = models.CharFileds(max_length=20)
+	bpub_date=models.DattetimeFileds()
+	
+class HeroInfo(models.Model):
+	hname=models.CharFileds(max_length=30)
+	hbook=models.ForeignKey(BookInfo)
+```
+
+
+
+#### 2.3.3 运行应用
+
+```
+$ python manager.py runserver
+```
+
+
+
 ### 设计模型
 
 #### 设置数据库
@@ -147,6 +191,8 @@ $ tree
 3 directories, 14 files
 
 ```
+
+
 
 #### 注册
 
