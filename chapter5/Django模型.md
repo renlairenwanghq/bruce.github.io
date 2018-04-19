@@ -169,4 +169,37 @@ ordering = ['-order_date']
 $ python manage.py makemigrations
 $ python manage.py migrate
 ```
+```
+mysql> show tables;
++----------------------------+
+| Tables_in_test3            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| bookinfo                   |
+| booktest_heroinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+12 rows in set (0.00 sec)
 
+mysql> desc bookinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| btitle   | varchar(20) | NO   |     | NULL    |                |
+| pub_date | datetime(6) | NO   |     | NULL    |                |
+| bread    | int(11)     | NO   |     | NULL    |                |
+| bcommet  | int(11)     | NO   |     | NULL    |                |
+| idDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+```
