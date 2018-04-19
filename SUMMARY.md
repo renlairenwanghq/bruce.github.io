@@ -29,6 +29,6 @@
 * [第四章 数据库](chapter4/README.md)
 * [第五章 Djanjo](chapter5/README.md)
     * [一 入门](chapter5/Djanjo入门.md)
-    * [二 模型](chapter5/Djanjo模型.md)
+    * [二 模型](chapter5/Django模型.md)
 * [第六章 python 爬虫](chapter6/README.md)
 * [第七章 c/c++](chapter7/README.md)
