@@ -203,3 +203,80 @@ mysql> desc bookinfo;
 6 rows in set (0.00 sec)
 
 ```
+
+##类的属性
+
+* object: 是Manager类型的对象，用于与数据库进行交互
+* 当定义模型类时没有指定管理器，则Django会为模型类提供一个名为object的管理器
+* 支持明确指定模型类的管理器
+
+```
+class BookInfo(models.Model):
+	...
+	books = models.Manager();
+```
+当为模型类制定管理器之后，django就不再为模型类生成objects的默认管理器。
+
+### 管理器Manager
+* 管理器Django的模型进行数据库的查询操作的接口，Django应用的每个模型都拥有至少一个管理器
+* 自定义管理器主要用于两种情况
+* 情况一：向管理器类中添加额外的方法
+* 情况二：修改管理器返回的原始查询集：重写get_queryset()方法
+
+```
+class BookInfoManager(models.Manager):
+	def get_query(self):
+		return super(BookInfoManager, self).get_queryset().filter(isDelete=False)
+
+class BookInfo(models.Model):
+	...
+	books = BookInfoManager();
+```
+
+### 创建模型类对象的新方式
+* 可以使用类方法来创建新对象
+* 使用管理Manager来创建新对象，在管理Manager添加一个创建模型类的方法即可。
+
+##查询数据
+* 查询集
+* 字段查询：比较运算符，F对象，Q对象
+
+###查询集
+
+* 在管理器上调用过滤器方法会返回查询集
+* 查询集景观过滤器筛选后返回的新的查询集，因此可以写成链式过滤
+* **惰性执行** 创建查询集不会带来任何数据库的访问，直到调用数据时才会访问数据库
+* 何时对查询集求值：迭代，序列化，与if合并
+* 返回查询集的方法，称之为过滤器
+
+```
+all()
+filter()
+exclude()
+order_by()
+values() # 一个对象构成一个字典，然后构成一个列表返回｀
+
+#返回单个值的方法
+get()
+count()
+first()
+last()
+exist()
+```
+
+####限制查询集
+ 按照列表操作来获取部分结果，但是不支持负索引。
+####查询集缓存
+
+###字段查询
+* 语法 属性名称__比较运算符＝值
+* 对于外键，使用属性名__id表示外键的原始值。
+####比较运算符
+#### 跨关联关系的查询
+* 语法： 模型类名__<属性名>__<比较>
+```
+
+###聚合函数
+* 使用aggregate()函数返回聚合函数的值
+filter(heroinfo__hcontent__contains='八')
+```
