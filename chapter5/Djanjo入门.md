@@ -29,7 +29,7 @@ Django是一个开放源代码的Web应用框架，由Python写成。采用了MT
 
 *  删除　rmvirtualenv [虚拟环境名称]
 * 进入　workon  [虚拟环境名称]
-* 退出　deavtive
+* 退出　deactivate
 
 所有的虚拟环境都位于~/.virtualenvs
 
@@ -134,39 +134,6 @@ Django url() 可以接收四个参数，分别是两个必选参数：regex、vi
 #### 2.3.2 创建应用
 
 ```
-$ python manager.py startapp booktest
-```
-
-
-
-```
-form django.db import models
-class BookInfo(models.Model):
-	btitle = models.CharFileds(max_length=20)
-	bpub_date=models.DattetimeFileds()
-	
-class HeroInfo(models.Model):
-	hname=models.CharFileds(max_length=30)
-	hbook=models.ForeignKey(BookInfo)
-```
-
-
-
-#### 2.3.3 运行应用
-
-```
-$ python manager.py runserver
-```
-
-
-
-### 设计模型
-
-#### 设置数据库
-
-#### 添加应用
-
-```
 $ python manage.py startapp booktest
 $ tree
 .
@@ -189,12 +156,36 @@ $ tree
 └── manage.py
 
 3 directories, 14 files
-
 ```
 
+#### 2.3.3 运行应用
 
+```
+$ python manage.py runserver
+```
 
-#### 注册
+#### 2.3.4 创建模型
+
+修改`booktest/models.py`文件
+
+[Django中model的字段类型 ](https://blog.csdn.net/gavinking0110/article/details/54412590)
+
+```
+from django.db import models
+
+# Create your models here.
+class BookInfo(models.Model):
+	btitle = models.CharField(max_length=20)
+	bpub_date=models.DateTimeField()
+    def __str__(self):
+    	return self.btitle.encode('utf-8')
+	
+class HeroInfo(models.Model):
+	hname=models.CharField(max_length=30)
+	hbook=models.ForeignKey(BookInfo)
+```
+
+#### 2.3.5 注册APP
 
 修改settings.py文件
 
@@ -211,11 +202,9 @@ INSTALLED_APPS = [
 
 ```
 
+#### 2.3.6 生成迁移
 
-
-#### 生成迁移
-
-执行命令`python manage.py makemigrations`生成迁移，会在migrations生成新文件。
+执行命令`python manage.py makemigrations`生成迁移，会在migrations生成新文件`0001_initial.py`。
 
 ```
 $ python manage.py makemigrations
@@ -225,7 +214,7 @@ Migrations for 'booktest':
     - Create model Hero
 ```
 
-#### 执行迁移
+#### 2.3.7 执行迁移
 
 执行`python manage.py migrate`命令执行迁移
 
@@ -251,7 +240,7 @@ Running migrations:
 
 ```
 
-#### 进入shell
+#### 2.3.8 进入shell
 
 执行`python manager shell`进入shell
 
@@ -288,39 +277,225 @@ AttributeError: type object 'BookInfo' has no attribute 'object'
 <QuerySet [<BookInfo: BookInfo object>]>
 ```
 
-**get**
-
-pk是主键
+**注意:**
 
 ```
-b=BookInfo.objects.get(pk=1)
+b=BookInfo.objects.get(pk=1)　//pk是主键
 ```
 
+###2.4 管理操作
 
-
-#### 管理站点
+####2.4.1 创建管理员
 
 ```
 python manage.py createsuperuser
 ```
 
-**注册模型**
+执行`python manage.py runserver`后通过网址http://127.0.0.1:8000/admin访问。
+
+#### 2.4.2 开启后台服务
+
+修改`urls.py`文件
+
+```
+urlpatterns = [
+    #url(r'^$', view.hello),
+    url(r'^admin/', include(admin.site.urls)),
+]
+```
+
+
+
+#### 2.4.3 管理界面本地化
+
+修改`setting.py`文件
+
+```
+LANGUAGE_CODE = 'en-hans' #'en-us'
+TIME_ZONE = 'Asia/Shanghai' #'UTC'
+```
+
+####2.4.4 向admin注册模型
 
 修改booktest/admin.py文件，添加代码
 
 ```
-from .models import *
+from django.contrib import admin
+
+# Register your models here.
+from models import *
+
 admin.site.register(BookInfo)
+admin.site.register(HeroInfo)
 ```
 
-执行
+重新执行执行`python manage.py runserver`访问http://127.0.0.1:8000/admin。
 
-python manage.py createsuperuser
+**注意:** 修改模型中encode: self.btitle.encode('utf-8')
 
-访问http://127.0.0.1:8000/admin就可以登录
+####2.4.5 自定义管理界面
 
-注意修改模型中encode('utf-8')
+[Django之model admin自定义后台管理](http://www.cnblogs.com/ccorz/p/Django-zhimodel-admin-zi-ding-yi-hou-tai-guan-li.html)
+
+* Djanjo提供了admin.ModelAdmin对象。
+* 通过定义admin.ModelAdmin对象的子类，可以实现自定义管理界面。
+* admin.site.register(类名,　admin.ModelAdmin对象的子类)
+
+**ModelAdmin选项**
 
 
 
-####自定义管理界面
+#### 2.4.6 关联注册　
+
+对于HeroInfo既可以像BookInfo那样注册，也可以关联注册。StackInline的意思是停靠，指的是HeroInfo停靠在
+
+BookInfo上注册。model表明那个类，extra表明停靠的个数。
+
+```
+from django.contrib import admin
+
+# Register your models here.
+from models import *
+
+class HeroInfoInline(admin.StackedInline):
+    model = HeroInfo
+    extra = 2
+
+class BookInfoAdmin(admin.ModelAdmin):
+    inline = [HeroInfoInline]
+
+admin.site.register(BookInfo, BookInfoAdmin)
+```
+
+### 2.5 视图
+
+#### 2.5.1 在views.py文件中添加函数
+
+修改`booktest/views.py`文件
+
+```
+from django.shortcuts import render
+from django.http import *
+
+# Create your views here.
+def index(request):
+    return HttpResponse('hello world!!!')
+```
+
+#### 2.5.2 修改urls.py文件
+
+修改`mytest/urls.py`
+
+```
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('booktest.urls')),　　#新增
+]
+```
+
+在`booktest`目录下创建urls.py文件
+
+```
+from django.conf.urls import include, url
+from . import views
+  
+urlpatterns = [
+    url(r'^$', views.index),
+]
+```
+
+这样就可以访问到views.py文件下的index函数。
+
+#### 2.6 模板
+
+* 在项目目录下创建templates目录
+* 在templates目录下新建一个和app同名的文件夹
+
+#### 2.6.1 修改views.py文件 
+
+```
+#from django.shortcuts import render
+from django.http import *
+from django.template import RequestContext,loader
+
+# Create your views here.
+def index(request):
+    temp = loader.get_template("booktest/hello.html");
+    return HttpResponse(temp.render())
+```
+
+也可以按如下方式书写：
+
+```
+from django.shortcuts import render
+from django.http import *
+#from django.template import RequestContext,loader
+
+# Create your views here.
+def index(request):
+    #temp = loader.get_template("booktest/hello.html");
+    #return HttpResponse(temp.render())
+    return render(request, 'booktest/hello.html')
+```
+
+#### 2.6.2 修改setting.py文件
+
+修改`mytest/setting.py`TEMPLATES中DIRS项。
+
+```
+TEMPLATES = [ 
+    {   
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },  
+]
+```
+
+这样访问时就可以获取到`booktest/hello.html`文件。
+
+#### 2.6.3 使用模型中的数据
+
+修改`booktest/view.py`
+
+```
+from django.shortcuts import render
+from django.http import *
+#from django.template import RequestContext,loader
+
+# Create your views here.
+def index(request):
+    booklist = BookInfo.object.all() 
+    Context = {'list':booklist}
+    return render(request, 'booktest/hello.html', Context)
+```
+
+对应的`hello.html`,注意在html中使用python的语法。
+
+```
+<!DOCTYPE html> 
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>test</title>
+</head>
+<body> 
+<ul>
+	{%for book in list%}
+	<li>{{book.btitle}}</li>
+	{%endfor%}
+</ul>
+</body>
+</html
+```
+
+
+
