@@ -69,8 +69,11 @@ example.o:example.c:function test_inflate: error: undefined reference to 'stderr
 
 * 生成Makefile
 
+后面使用 curl 的 ./configure --with-ssl 时，会报错“找不到 ssl”。因为 curl在 
+/usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared 生成 动态连接库
+
 ```
-./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm no-shared zlib
+./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm enable-shared zlib
 ```
 
 * 对生成的Makefile文件做修改
@@ -281,7 +284,7 @@ milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name 
 ./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local　--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
 ```
 
-查看结果：　发现nghttp2是enable状态，但是ssl这一项仍然是no
+查看结果：　如果编译openssl时，加了参数　`no-shared`,结果发现nghttp2是enable状态，但是ssl这一项仍然是no
 
 ```
 configure: Configured to build curl/libcurl:
@@ -321,25 +324,47 @@ configure: Configured to build curl/libcurl:
                    See lib/README.curl_off_t for details on this.
 
 ```
-重新执行，然后grep筛选相关信息, 发现checking for ssl_version in -laxtls这一项check失败
+使用 curl 的 ./configure --with-ssl 时，报错“找不到 ssl”。因为 curl在 
+/usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared 生成 动态连接库
+
+重新编译openssl之后， enabled (OpenSSL)。
+
 ```
-$ ./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local　--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local |grep ssl
-configure: WARNING: using cross tools not prefixed with host triplet
-checking for ldapssl.h... no
-checking for ldap_ssl.h... no
-configure: WARNING: Cannot find libraries for LDAP support: LDAP disabled
-configure: WARNING: the previous check could not be made default was used
-checking for openssl options with pkg-config... found
-configure: pkg-config: SSL_LIBS: "-lssl -lcrypto"
-checking for ssl_version in -laxtls... no
-configure: WARNING: SSL disabled, you will not be able to use HTTPS, FTPS, NTLM and more.
-configure: WARNING: Use --with-ssl, --with-gnutls, --with-polarssl, --with-cyassl, --with-nss, --with-axtls, --with-winssl, or --with-darwinssl to address this.
-configure: WARNING: skipped the ca-cert path detection when cross-compiling
-configure: WARNING: libpsl was not found
-configure: WARNING: Cannot find libraries for IDN support: IDN disabled
-configure: WARNING: This libcurl built is probably not ABI compatible with previous
-configure: WARNING: builds! You MUST read lib/README.curl_off_t to figure it out.
-config.status: creating packages/Linux/RPM/curl-ssl.spec
-  SSL support:      no      (--with-{ssl,gnutls,nss,polarssl,mbedtls,cyassl,axtls,winssl,darwinssl} )
+configure: Configured to build curl/libcurl:
+
+  curl version:     7.54.0
+  Host setup:       arm-unknown-linux-androideabi
+  Install prefix:   /workspace/avsdir3/android_home/usr/local　--with-nghttp2=/workspace/avsdir3/android_home/usr/local
+  Compiler:         arm-linux-androideabi-gcc
+  SSL support:      enabled (OpenSSL)
+  SSH support:      no      (--with-libssh2)
+  zlib support:     enabled
+  GSS-API support:  no      (--with-gssapi)
+  TLS-SRP support:  enabled
+  resolver:         default (--enable-ares / --enable-threaded-resolver)
+  IPv6 support:     enabled
+  Unix sockets support: enabled
+  IDN support:      no      (--with-{libidn2,winidn})
+  Build libcurl:    Shared=yes, Static=yes
+  Built-in manual:  enabled
+  --libcurl option: enabled (--disable-libcurl-option)
+  Verbose errors:   enabled (--disable-verbose)
+  SSPI support:     no      (--enable-sspi)
+  ca cert bundle:   no
+  ca cert path:     no
+  ca fallback:      no
+  LDAP support:     no      (--enable-ldap / --with-ldap-lib / --with-lber-lib)
+  LDAPS support:    no      (--enable-ldaps)
+  RTSP support:     enabled
+  RTMP support:     no      (--with-librtmp)
+  metalink support: no      (--with-libmetalink)
+  PSL support:      no      (libpsl not found)
+  HTTP2 support:    enabled (nghttp2)
+  Protocols:        DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP
+
+  SONAME bump:     yes - WARNING: this library will be built with the SONAME
+                   number bumped due to (a detected) ABI breakage.
+                   See lib/README.curl_off_t for details on this.
+
 ```
 
