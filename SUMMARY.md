@@ -15,6 +15,7 @@
     * [十一 网址记录](chapter1/网址记录.md)
     * [十二 cmake](chapter1/CMAKE.md)
     * [十三 alsa交叉编译](chapter1/ALSA.md)
+    * [十四 avs-device-sdk移植到安卓.md](chapter1/avs-device-sdk移植到安卓.md)
 * [第二章 python学习笔记](chapter2/README.md)
     * [一 python 语法基础](chapter2/python语法基础.md)
     * [二 python函数](chapter2/python函数.md)

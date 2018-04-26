@@ -38,7 +38,7 @@ make
 
 [CMake常用语法总结](https://www.jianshu.com/p/8909efe13308)
 
-**project**
+####project
 
 ```
 project(THFsamples)
@@ -47,14 +47,14 @@ project(THFsamples)
 cmake系统也帮助我们预定义了PROJECT_BINARY_DIR和PROJECT_SOURCE_DIR其值与上述对应相等
 ```
 
-**set(变量名 变量值)**
+####set(变量名 变量值)
 
 ```
 set(THF_ROOT ${CMAKE_SOURCE_DIR}/../..)
 set(THF_INCLUDE ${THF_ROOT}/include)
 ```
 
-**add_library**
+####add_library
 
 ```
 add_library(libname [SHARED|STATIC|MODULE] [EXCLUDE_FROM_ALL] source1 source2 ... sourceN)
@@ -63,7 +63,7 @@ eg.
 add_library(snsr STATIC IMPORTED)
 ```
 
-**ADD_EXECUTABLE**
+####ADD_EXECUTABLE
 
 ```
 ADD_EXECUTABLE(可执行文件名  生成该可执行文件的源文件)
@@ -73,7 +73,7 @@ ADD_EXECUTABLE(hello ${SRC_LIST})
 说明SRC_LIST变量中的源文件需要编译出名为hello的可执行文件
 ```
 
-**ADD_EXECUTABLE**
+####ADD_EXECUTABLE
 
 ```
 ADD_EXECUTABLE(可执行文件名  生成该可执行文件的源文件)
@@ -83,7 +83,7 @@ ADD_EXECUTABLE(hello ${SRC_LIST})
 说明SRC_LIST变量中的源文件需要编译出名为hello的可执行文件
 ```
 
-**SET_TARGET_PROPERTIES**
+####SET_TARGET_PROPERTIES
 
 ```
 设置目标的一些属性来改变它们构建的方式。
@@ -96,7 +96,7 @@ set_target_properties(snsr PROPERTIES IMPORTED_LOCATION
      ${THF_LIBRARIES}/${CMAKE_STATIC_LIBRARY_PREFIX}snsr${CMAKE_STATIC_LIBRARY_SUFFIX})
 ```
 
-**set_property**
+####set_property
 
 在给定的作用域内设置一个命名的属性
 
@@ -121,7 +121,7 @@ set_property(<GLOBAL |
 - TEST 测试作用域, 可以是0个或多个已有的测试
 - CACHE 必须指定0个或多个cache中已有的条目
 
-**add_subdirectory**
+####add_subdirectory
 
 如果当前目录下还有子目录时可以使用`add_subdirectory`，子目录中也需要包含有`CMakeLists.txt`
 
@@ -129,6 +129,31 @@ set_property(<GLOBAL |
 # sub_dir指定包含CMakeLists.txt和源码文件的子目录位置
 # binary_dir是输出路径， 一般可以不指定
 add_subdirecroty(sub_dir [binary_dir])
+```
+
+####link_directories
+
+https://www.cnblogs.com/binbinjx/p/5626916.html
+
+```
+link_directories(directory1 directory2 ...)
+它相当于g++命令的-L选项的作用，也相当于环境变量中增加LD_LIBRARY_PATH的路径的作用。
+link_directories("/home/server/third/lib")
+```
+
+####**LINK_LIBRARIES**
+
+```
+link_libraries(library1 <debug | optimized> library2 ...)
+# 直接是全路径
+link_libraries(“/home/server/third/lib/libcommon.a”)
+# 下面的例子，只有库名，cmake会自动去所包含的目录搜索
+link_libraries(iconv)
+
+# 传入变量
+link_libraries(${RUNTIME_LIB})
+# 也可以链接多个
+link_libraries("/opt/MATLAB/R2012a/bin/glnxa64/libeng.so"　"/opt/MATLAB/R2012a/bin/glnxa64/libmx.so")
 ```
 
 ### CMake常用变量和环境变量

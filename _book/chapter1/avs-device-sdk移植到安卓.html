@@ -1,0 +1,1117 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>十四 avs-device-sdk移植到安卓.md · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../chapter2/" />
+    
+    
+    <link rel="prev" href="ALSA.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第一章 程序安装、编译、配置、使用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="2018-03-16-create-blog.html">
+            
+                <a href="2018-03-16-create-blog.html">
+            
+                    
+                    一 使用github pages建立博客
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="2018-03-19-移植linux程序到安卓.html">
+            
+                <a href="2018-03-19-移植linux程序到安卓.html">
+            
+                    
+                    二 移植linux程序到安卓
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="2018-03-20-安卓测试框架gtest.html">
+            
+                <a href="2018-03-20-安卓测试框架gtest.html">
+            
+                    
+                    三 使用安卓测试框架gtest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="2018-03-23-gmock编译即简单使用.html">
+            
+                <a href="2018-03-23-gmock编译即简单使用.html">
+            
+                    
+                    四 gmock编译及简单使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="2018-0316-使用Typaro画序列图.html">
+            
+                <a href="2018-0316-使用Typaro画序列图.html">
+            
+                    
+                    五 使用Typaro画序列图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="2018-0319-ndk制作编译工具链.html">
+            
+                <a href="2018-0319-ndk制作编译工具链.html">
+            
+                    
+                    六 ndk制作编译工具链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="2018-03-19-pcm转wav.html">
+            
+                <a href="2018-03-19-pcm转wav.html">
+            
+                    
+                    七 pcm转wav
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="2018-0328-使用gitbook.html">
+            
+                <a href="2018-0328-使用gitbook.html">
+            
+                    
+                    八 gitbook的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="2018-0327-安装vim插件.html">
+            
+                <a href="2018-0327-安装vim插件.html">
+            
+                    
+                    九 vim安装插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="ubuntu16-安装sublime-text2.html">
+            
+                <a href="ubuntu16-安装sublime-text2.html">
+            
+                    
+                    十 sublime-text2安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="网址记录.html">
+            
+                <a href="网址记录.html">
+            
+                    
+                    十一 网址记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="CMAKE.html">
+            
+                <a href="CMAKE.html">
+            
+                    
+                    十二 cmake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="ALSA.html">
+            
+                <a href="ALSA.html">
+            
+                    
+                    十三 alsa交叉编译
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.14" data-path="avs-device-sdk移植到安卓.html">
+            
+                <a href="avs-device-sdk移植到安卓.html">
+            
+                    
+                    十四 avs-device-sdk移植到安卓.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter2/">
+            
+                <a href="../chapter2/">
+            
+                    
+                    第二章 python学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../chapter2/python语法基础.html">
+            
+                <a href="../chapter2/python语法基础.html">
+            
+                    
+                    一 python 语法基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../chapter2/python函数.html">
+            
+                <a href="../chapter2/python函数.html">
+            
+                    
+                    二 python函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../chapter2/python面向对象.html">
+            
+                <a href="../chapter2/python面向对象.html">
+            
+                    
+                    三 python面向对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../chapter2/python核心编程.html">
+            
+                <a href="../chapter2/python核心编程.html">
+            
+                    
+                    四 python核心编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../chapter2/python_linux系统编程.html">
+            
+                <a href="../chapter2/python_linux系统编程.html">
+            
+                    
+                    五 python_linux系统编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../chapter2/python_网络编程.html">
+            
+                <a href="../chapter2/python_网络编程.html">
+            
+                    
+                    六 python_网络编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../chapter3/">
+            
+                <a href="../chapter3/">
+            
+                    
+                    第三章 前端
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../chapter3/html_css.html">
+            
+                <a href="../chapter3/html_css.html">
+            
+                    
+                    一 HTML
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../chapter3/javascript.html">
+            
+                <a href="../chapter3/javascript.html">
+            
+                    
+                    二 javascript
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../chapter3/jQuery.html">
+            
+                <a href="../chapter3/jQuery.html">
+            
+                    
+                    三 jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../chapter4/">
+            
+                <a href="../chapter4/">
+            
+                    
+                    第四章 数据库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../chapter4/MySql.html">
+            
+                <a href="../chapter4/MySql.html">
+            
+                    
+                    一 MySql
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../chapter5/">
+            
+                <a href="../chapter5/">
+            
+                    
+                    第五章 Djanjo
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../chapter5/Djanjo入门.html">
+            
+                <a href="../chapter5/Djanjo入门.html">
+            
+                    
+                    一 入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../chapter5/Django模型.html">
+            
+                <a href="../chapter5/Django模型.html">
+            
+                    
+                    二 模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../chapter5/Django视图.html">
+            
+                <a href="../chapter5/Django视图.html">
+            
+                    
+                    三 视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../chapter5/Django模板.html">
+            
+                <a href="../chapter5/Django模板.html">
+            
+                    
+                    四 模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../chapter5/Django高级.html">
+            
+                <a href="../chapter5/Django高级.html">
+            
+                    
+                    五 高级
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../chapter5/Django扩展.html">
+            
+                <a href="../chapter5/Django扩展.html">
+            
+                    
+                    六 扩展
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../chapter6/">
+            
+                <a href="../chapter6/">
+            
+                    
+                    第六章 python 爬虫
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../chapter7/">
+            
+                <a href="../chapter7/">
+            
+                    
+                    第七章 c/c++
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >十四 avs-device-sdk移植到安卓.md</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="avs-device-sdk&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;">avs-device-sdk&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;</h1>
+<h2 id="1-&#x7B80;&#x4ECB;">1. &#x7B80;&#x4ECB;</h2>
+<p>&#x4E3A;&#x4E86;&#x5C06;avs&#x7684;sdk&#x79FB;&#x690D;&#x5230;&#x57FA;&#x4E8E;android&#x88C1;&#x526A;&#x51FA;&#x6765;&#x7684;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x7F16;&#x8BD1;curl&#xFF0C;nghttp&#x7B49;&#x4F9D;&#x8D56;&#x5E93;&#x3002;</p>
+<h4 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;">&#x53C2;&#x8003;&#x94FE;&#x63A5;</h4>
+<p>Generic Linux&#x73AF;&#x5883;&#x7F16;&#x8BD1;avs-device-sdk</p>
+<p><a href="https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide" target="_blank">https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide</a></p>
+<p>&#x5728;&#x7F16;&#x8BD1;avs-device-sdk&#x65F6;&#xFF0C;&#x6700;&#x597D;&#x5B89;&#x5353;&#x4E0A;&#x8FF0;&#x94FE;&#x63A5;&#x4E2D;&#x63CF;&#x8FF0;&#xFF0C;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x3002;</p>
+<pre><code>$ mkdir sdk-folder &amp;&amp; cd sdk-folder &amp;&amp; mkdir sdk-build sdk-source third-party application-necessities
+</code></pre><p>nghttp2&#x5B98;&#x7F51;&#x63CF;&#x8FF0;&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;
+<a href="http://www.nghttp2.org/documentation/building-android-binary.html" target="_blank">http://www.nghttp2.org/documentation/building-android-binary.html</a></p>
+<p>&#x6839;&#x636E;&#x4E0A;&#x8FF0;&#x94FE;&#x63A5;&#x63CF;&#x8FF0;&#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x7ED3;&#x6784;,&#x540E;&#x9762;&#x4F1A;&#x6839;&#x636E;&#x8BE5;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</p>
+<pre><code>avsdir3
+----android_home
+    ----toolchain
+----usr
+    ----local
+</code></pre><h2 id="2-pkg-config">2. pkg-config</h2>
+<p>curl,nghttp&#x8FD9;&#x4E9B;&#x7684;&#x7F16;&#x8BD1;&#x5982;&#x679C;&#x60F3;&#x901A;&#x8FC7;--with-xxx&#x6765;&#x5305;&#x542B;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#xFF0C;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x4F7F;&#x7528;pk-config&#x53BB;&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x53CA;&#x5934;&#x6587;&#x4EF6;&#x3002;&#x6240;&#x4EE5;&#x5728;&#x751F;&#x6210;Makefile&#x65F6;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6765;&#x786E;&#x4FDD;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x80FD;&#x591F;&#x627E;&#x5230;&#x8FD9;&#x4E9B;&#x5E93;&#x548C;&#x5934;&#x6587;&#x4EF6;&#x3002;&#x81F3;&#x4E8E;pkg-config&#x5982;&#x4F55;&#x4F7F;&#x7528;&#xFF0C;&#x53C2;&#x8003;&#x94FE;&#x63A5;<a href="https://blog.csdn.net/mantis_1984/article/details/52847435" target="_blank">&#x5E72;&#x8D27;:pkg-config&#x5DE5;&#x5177;&#x5728;&#x5B9E;&#x9645;&#x5DE5;&#x7A0B;&#x4E2D;&#x7684;&#x7528;&#x6CD5;</a></p>
+<h2 id="3-&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;">3. &#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h2>
+<pre><code>PATH=$PATH:/workspace/avsdir2/android_home/toolchain/bin
+</code></pre><h2 id="4-zlib">4. zlib</h2>
+<p>&#x5E38;&#x7528;&#x5E93;&#x4E4B;&#x56DB;&#xFF1A;zlib&#x7684;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;
+<a href="https://blog.csdn.net/npy_lp/article/details/6991704" target="_blank">https://blog.csdn.net/npy_lp/article/details/6991704</a></p>
+<ul>
+<li>&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</li>
+</ul>
+<pre><code>export CC=arm-linux-androideabi-gcc
+</code></pre><ul>
+<li>&#x751F;&#x6210;Makefile</li>
+</ul>
+<pre><code>./configure --prefix=/workspace/avsdir3/android_home/usr/local
+</code></pre><ul>
+<li>&#x7F16;&#x8BD1;&#x6267;&#x884C;make</li>
+</ul>
+<p><strong>&#x4F7F;&#x7528;ndk16&#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x66F4;&#x6539;&#x4E3A;&#x4F4E;&#x4E00;&#x70B9;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;</strong></p>
+<hr>
+<p>error:
+arm-linux-androideabi-gcc -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -o example example.o -L. libz.a
+example.o:example.c:function test_compress: error: undefined reference to &apos;stderr&apos;
+example.o:example.c:function test_gzio: error: undefined reference to &apos;stderr&apos;
+example.o:example.c:function test_deflate: error: undefined reference to &apos;stderr&apos;
+example.o:example.c:function test_inflate: error: undefined reference to &apos;stderr&apos;</p>
+<hr>
+<p>&#x9519;&#x8BEF;&#x53C2;&#x8003;&#xFF1A;</p>
+<p><a href="https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr" target="_blank">Android NDK: undefined reference to &apos;stderr&apos;</a></p>
+<ul>
+<li>&#x6267;&#x884C;make install</li>
+</ul>
+<h2 id="5-openssl">5. openssl</h2>
+<ul>
+<li>&#x751F;&#x6210;Makefile</li>
+</ul>
+<p>&#x540E;&#x9762;&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
+/usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared &#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;</p>
+<pre><code>./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm enable-shared zlib
+</code></pre><ul>
+<li><p>&#x5BF9;&#x751F;&#x6210;&#x7684;Makefile&#x6587;&#x4EF6;&#x505A;&#x4FEE;&#x6539;</p>
+<p>&#x5220;&#x9664;&#x3000;-m64&#x3000;&#x53C2;&#x6570;&#xFF0C;&#x5171;&#x4E24;&#x5904;</p>
+</li>
+<li><p>make</p>
+</li>
+</ul>
+<p><strong>&#x51FA;&#x73B0;&#x9519;&#x8BEF;</strong></p>
+<pre><code>${LDCMD:-arm-linux-androideabi-gcc} -pthread  -Wall -O3 --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot -L.   \
+        -o apps/openssl apps/asn1pars.o apps/ca.o apps/ciphers.o apps/cms.o apps/crl.o apps/crl2p7.o apps/dgst.o apps/dhparam.o apps/dsa.o apps/dsaparam.o apps/ec.o apps/ecparam.o apps/enc.o apps/engine.o apps/errstr.o apps/gendsa.o apps/genpkey.o apps/genrsa.o apps/nseq.o apps/ocsp.o apps/openssl.o apps/passwd.o apps/pkcs12.o apps/pkcs7.o apps/pkcs8.o apps/pkey.o apps/pkeyparam.o apps/pkeyutl.o apps/prime.o apps/rand.o apps/rehash.o apps/req.o apps/rsa.o apps/rsautl.o apps/s_client.o apps/s_server.o apps/s_time.o apps/sess_id.o apps/smime.o apps/speed.o apps/spkac.o apps/srp.o apps/storeutl.o apps/ts.o apps/verify.o apps/version.o apps/x509.o \
+         apps/libapps.a -lssl -lcrypto -lz -ldl -pthread 
+./libcrypto.a(threads_pthread.o):threads_pthread.c:function fork_once_func: error: undefined reference to &apos;pthread_atfork&apos;
+collect2: error: ld returned 1 exit status
+make[1]: *** [apps/openssl] Error 1
+make[1]: Leaving directory `/workspace/avsdir3/openssl/openssl&apos;
+make: *** [all] Error 2
+</code></pre><p>&#x7B2C;&#x4E00;&#x6B21;make&#x8BBE;&#x7F6E;&#x7684;toolchain&#x662F;ndk10,&#x4FEE;&#x6539;&#x4E3A;ndk11&#x4E4B;&#x540E;&#xFF0C;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;</p>
+<ul>
+<li>&#x5B89;&#x88C5; (&#x53BB;&#x9664;&#x6587;&#x6863;&#x5B89;&#x88C5;)</li>
+</ul>
+<pre><code>make install_sw
+</code></pre><p>&#x67E5;&#x770B;&#xFF0C;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x5230;&#x5BF9;&#x5E94;&#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x641C;&#x7D22;&#x5230;pkg-config&#x9700;&#x8981;&#x7684;<code>.pc</code>&#x6587;&#x4EF6;&#x3002;</p>
+<pre><code>/workspace/avsdir3/android_home/usr/local$ ls
+bin  include  lib
+
+/workspace/avsdir3/android_home/usr/local$ find . -name *.pc
+./lib/pkgconfig/openssl.pc
+./lib/pkgconfig/libssl.pc
+./lib/pkgconfig/libcrypto.pc
+</code></pre><h2 id="6-nghttp2">6. nghttp2</h2>
+<ul>
+<li>&#x67E5;&#x770B;android-config&#x6587;&#x4EF6;</li>
+</ul>
+<p><strong>&#x7531;&#x4E8E;&#x5176;&#x4E2D;&#x5305;&#x542B;ANDROID_HOME&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</strong></p>
+<pre><code>export ANDROID_HOME=/workspace/avsdir3/android_home/
+</code></pre><p><strong>&#x8BBE;&#x7F6E;&#x5B89;&#x88C5;&#x7684;&#x8DEF;&#x5F84;--prefix</strong></p>
+<p>&#x4FEE;&#x6539;&#x597D;&#x7684;android-config&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;:</p>
+<pre><code>$ cat android-config
+#!/bin/sh
+#
+# nghttp2 - HTTP/2 C Library
+#
+# Copyright (c) 2013 Tatsuhiro Tsujikawa
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# &quot;Software&quot;), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+if [ -z &quot;$ANDROID_HOME&quot; ]; then
+    echo &apos;No $ANDROID_HOME specified.&apos;
+    exit 1
+fi
+PREFIX=&quot;$ANDROID_HOME&quot;/usr/local
+TOOLCHAIN=&quot;$ANDROID_HOME&quot;/toolchain
+PATH=&quot;$TOOLCHAIN&quot;/bin:&quot;$PATH&quot;
+
+./configure \
+    --disable-shared \
+    --host=arm-linux-androideabi \
+    --build=`dpkg-architecture -qDEB_BUILD_GNU_TYPE` \
+    --with-xml-prefix=&quot;$PREFIX&quot; \
+    --with-openssl=&quot;$PREFIX&quot; \
+    --without-libxml2 \
+    --disable-python-bindings \
+    --disable-examples \
+    --disable-threads \
+    --prefix=$PREFIX \
+    CC=&quot;$TOOLCHAIN&quot;/bin/arm-linux-androideabi-gcc \
+    CXX=&quot;$TOOLCHAIN&quot;/bin/arm-linux-androideabi-g++ \
+    CPPFLAGS=&quot;-fPIE -I$PREFIX/include&quot; \
+    PKG_CONFIG_LIBDIR=&quot;$PREFIX/lib/pkgconfig&quot; \
+    LDFLAGS=&quot;-fPIE -pie -L$PREFIX/lib&quot;
+</code></pre><p><strong>&#x6CE8;&#x610F;:</strong>
+&#x4E4B;&#x6240;&#x4EE5;&#x901A;&#x8FC7;&#x8FD9;&#x4E24;&#x9879;&#x914D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x627E;&#x7684;openssl&#xFF0C;&#x662F;&#x56E0;&#x4E3A;openssl&#x5B89;&#x88C5;&#x5230;&#x4E86;$PREFIX&#x8DEF;&#x5F84;&#x4E0B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B89;&#x88C5;&#x7684;&#x65F6;&#x5019;&#x5B58;&#x5728;<code>.pc</code>&#x6587;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;
+pkg-config&#x53EF;&#x4EE5;&#x67E5;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x5934;&#x6587;&#x4EF6;&#x3002;&#x3000;
+--with-openssl=&quot;$PREFIX&quot;
+PKG_CONFIG_LIBDIR=&quot;$PREFIX/lib/pkgconfig&quot;</p>
+<ul>
+<li>&#x6267;&#x884C;./android-config</li>
+</ul>
+<p>&#x67E5;&#x770B;&#x7ED3;&#x679C;: OpenSSL&#x8FD9;&#x4E00;&#x9879;&#x662F;yes&#xFF0C;&#x8BF4;&#x660E;&#x7F16;&#x8BD1;&#x65F6;&#x5019;&#x627E;&#x5230;&#x4E86;openssl&#x5BF9;&#x5E94;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x548C;&#x5934;&#x6587;&#x4EF6;&#x3002;</p>
+<pre><code>configure: summary of build options:
+
+    Package version: 1.32.0-DEV
+    Library version: 30:1:16
+    Install prefix:  /workspace/avsdir3/android_home//usr/local
+    System types:
+      Build:         x86_64-pc-linux-gnu
+      Host:          arm-unknown-linux-androideabi
+      Target:        arm-unknown-linux-androideabi
+    Compiler:
+      C compiler:     /workspace/avsdir3/android_home//toolchain/bin/arm-linux-androideabi-gcc
+      CFLAGS:         -g -O2
+      LDFLAGS:        -fPIE -pie -L/workspace/avsdir3/android_home//usr/local/lib
+      C++ compiler:   /workspace/avsdir3/android_home//toolchain/bin/arm-linux-androideabi-g++
+      CXXFLAGS:       -g -O2
+      CXXCPP:         /workspace/avsdir3/android_home//toolchain/bin/arm-linux-androideabi-g++ -E
+      C preprocessor: /workspace/avsdir3/android_home//toolchain/bin/arm-linux-androideabi-gcc -E
+      CPPFLAGS:       -fPIE -I/workspace/avsdir3/android_home//usr/local/include
+      WARNCFLAGS:     
+      WARNCXXFLAGS:   
+      CXX1XCXXFLAGS:   -std=c++11
+      EXTRACFLAG:     -fvisibility=hidden
+      LIBS:           
+    Library:
+      Shared:         no
+      Static:         yes
+    Python:
+      Python:         /workspace/avsdir3/android_home//toolchain/bin/python
+      PYTHON_VERSION: 2.7
+      pyexecdir:      ${exec_prefix}/lib/python2.7/site-packages
+      Python-dev:     
+      PYTHON_CPPFLAGS:
+      PYTHON_LDFLAGS: 
+      Cython:         cython
+    Test:
+      CUnit:          no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Failmalloc:     yes
+    Libs:
+      OpenSSL:        yes (CFLAGS=&apos;-I/workspace/avsdir3/android_home/usr/local/include&apos; LIBS=&apos;-L/workspace/avsdir3/android_home/usr/local/lib -lssl -lcrypto&apos;)
+      Libxml2:        no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Libev:          no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Libc-ares       no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Libevent(SSL):  no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Jansson:        no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Jemalloc:       no (LIBS=&apos;&apos;)
+      Zlib:           no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Systemd:        no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Boost CPPFLAGS: 
+      Boost LDFLAGS:  
+      Boost::ASIO:    
+      Boost::System:  
+      Boost::Thread:  
+    Third-party:
+      http-parser:    no
+      MRuby:          no (CFLAGS=&apos;&apos; LIBS=&apos;&apos;)
+      Neverbleed:     no
+    Features:
+      Applications:   no
+      HPACK tools:    no
+      Libnghttp2_asio:no
+      Examples:       no
+      Python bindings:no
+      Threading:      no
+</code></pre><ul>
+<li>&#x6267;&#x884C;<code>./android-make</code></li>
+<li>&#x6267;&#x884C;<code>./android-make install</code></li>
+</ul>
+<p>&#x67E5;&#x770B;&#x7ED3;&#x679C;&#xFF1A; nghttp2&#x5BF9;&#x5E94;&#x7684;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x5E93;&#x6587;&#x4EF6;&#xFF0C;&#x53CA;pkg-config&#x9700;&#x8981;&#x7684;<code>.pc</code>&#x6587;&#x4EF6;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x8BE5;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x4E0B;</p>
+<pre><code>$ cd include/
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local/include$ ls
+nghttp2  openssl
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local/include$ cd ..
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ cd lib/
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local/lib$ ls
+engines-1.1  libcrypto.a  libnghttp2.a  libnghttp2.la  libssl.a  pkgconfig
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local/lib$ cd ..
+milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name *.pc
+./lib/pkgconfig/openssl.pc
+./lib/pkgconfig/libssl.pc
+./lib/pkgconfig/libcrypto.pc
+./lib/pkgconfig/libnghttp2.pc./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
+</code></pre><h2 id="7-libcurl">7. libcurl</h2>
+<ul>
+<li>&#x53C2;&#x8003;nghttp2&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#xFF0C;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x751F;&#x6210;Makefile&#x6587;&#x4EF6;</li>
+</ul>
+<pre><code>./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
+</code></pre><p>&#x67E5;&#x770B;&#x7ED3;&#x679C;&#xFF1A;&#x3000;&#x5982;&#x679C;&#x7F16;&#x8BD1;openssl&#x65F6;&#xFF0C;&#x52A0;&#x4E86;&#x53C2;&#x6570;&#x3000;<code>no-shared</code>,&#x7ED3;&#x679C;&#x53D1;&#x73B0;nghttp2&#x662F;enable&#x72B6;&#x6001;&#xFF0C;&#x4F46;&#x662F;ssl&#x8FD9;&#x4E00;&#x9879;&#x4ECD;&#x7136;&#x662F;no</p>
+<pre><code>configure: Configured to build curl/libcurl:
+
+  curl version:     7.54.0
+  Host setup:       arm-unknown-linux-androideabi
+  Install prefix:   /workspace/avsdir3/android_home/usr/local&#x3000;--with-ssl=/workspace/avsdir3/android_home/usr/local
+  Compiler:         arm-linux-androideabi-gcc
+  SSL support:      no      (--with-{ssl,gnutls,nss,polarssl,mbedtls,cyassl,axtls,winssl,darwinssl} )
+  SSH support:      no      (--with-libssh2)
+  zlib support:     enabled
+  GSS-API support:  no      (--with-gssapi)
+  TLS-SRP support:  no      (--enable-tls-srp)
+  resolver:         default (--enable-ares / --enable-threaded-resolver)
+  IPv6 support:     enabled
+  Unix sockets support: enabled
+  IDN support:      no      (--with-{libidn2,winidn})
+  Build libcurl:    Shared=yes, Static=yes
+  Built-in manual:  enabled
+  --libcurl option: enabled (--disable-libcurl-option)
+  Verbose errors:   enabled (--disable-verbose)
+  SSPI support:     no      (--enable-sspi)
+  ca cert bundle:   no
+  ca cert path:     no
+  ca fallback:      no
+  LDAP support:     no      (--enable-ldap / --with-ldap-lib / --with-lber-lib)
+  LDAPS support:    no      (--enable-ldaps)
+  RTSP support:     enabled
+  RTMP support:     no      (--with-librtmp)
+  metalink support: no      (--with-libmetalink)
+  PSL support:      no      (libpsl not found)
+  HTTP2 support:    enabled (nghttp2)
+  Protocols:        DICT FILE FTP GOPHER HTTP IMAP POP3 RTSP SMTP TELNET TFTP
+
+  SONAME bump:     yes - WARNING: this library will be built with the SONAME
+                   number bumped due to (a detected) ABI breakage.
+                   See lib/README.curl_off_t for details on this.
+</code></pre><p>&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
+/usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared &#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;</p>
+<p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1;openssl&#x4E4B;&#x540E;&#xFF0C; enabled (OpenSSL)&#x3002;</p>
+<pre><code>configure: Configured to build curl/libcurl:
+
+  curl version:     7.54.0
+  Host setup:       arm-unknown-linux-androideabi
+  Install prefix:   /workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local
+  Compiler:         arm-linux-androideabi-gcc
+  SSL support:      enabled (OpenSSL)
+  SSH support:      no      (--with-libssh2)
+  zlib support:     enabled
+  GSS-API support:  no      (--with-gssapi)
+  TLS-SRP support:  enabled
+  resolver:         default (--enable-ares / --enable-threaded-resolver)
+  IPv6 support:     enabled
+  Unix sockets support: enabled
+  IDN support:      no      (--with-{libidn2,winidn})
+  Build libcurl:    Shared=yes, Static=yes
+  Built-in manual:  enabled
+  --libcurl option: enabled (--disable-libcurl-option)
+  Verbose errors:   enabled (--disable-verbose)
+  SSPI support:     no      (--enable-sspi)
+  ca cert bundle:   no
+  ca cert path:     no
+  ca fallback:      no
+  LDAP support:     no      (--enable-ldap / --with-ldap-lib / --with-lber-lib)
+  LDAPS support:    no      (--enable-ldaps)
+  RTSP support:     enabled
+  RTMP support:     no      (--with-librtmp)
+  metalink support: no      (--with-libmetalink)
+  PSL support:      no      (libpsl not found)
+  HTTP2 support:    enabled (nghttp2)
+  Protocols:        DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP
+
+  SONAME bump:     yes - WARNING: this library will be built with the SONAME
+                   number bumped due to (a detected) ABI breakage.
+                   See lib/README.curl_off_t for details on this.
+</code></pre><h2 id="8-sqlite3">8. sqlite3</h2>
+<pre><code>$ export CC=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-gcc
+$ export CXX=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-g++
+$ ./configure --host=arm-linux-androideabi   --prefix=/workspace/avsdir3/android_home/usr/local --with-sysroot=/workspace/avsdir3/android_home/toolchain_12b/sysroot 
+make
+make install
+</code></pre><h2 id="9-&#x4FEE;&#x6539;cmakelisttxt&#x6587;&#x4EF6;">9. &#x4FEE;&#x6539;CMakeList.txt&#x6587;&#x4EF6;</h2>
+<p>&#x6267;&#x884C;&#x811A;&#x672C;:</p>
+<pre><code>$ cat build-avs.sh 
+#!/bin/bash
+
+PLATFORM_VERSION=21
+
+#CROSS_COMPILE=/bws/avs/curl2/curl-android-build/ndk-standalone-toolchain/bin/arm-linux-androideabi-
+CROSS_COMPILE=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-
+
+#export NDK_HOME=/bws/avs/ndk/android-ndk-r15b-linux-x86_64/android-ndk-r15b
+#export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r12b
+export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r15c
+export AR=&quot;$CROSS_COMPILE&quot;ar
+export CC=&quot;$CROSS_COMPILE&quot;clang
+export CXX=&quot;$CROSS_COMPILE&quot;clang++
+export LD=&quot;$CROSS_COMPILE&quot;ld
+export LINK=$CXX
+export RANLIB=&quot;$CROSS_COMPILE&quot;ranlib
+export STRIP=&quot;$CROSS_COMPILE&quot;strip
+
+
+export ARCH_FLAGS=&quot; -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 &quot;
+export ARCH_LINK=&quot; -Wl,--fix-cortex-a8 -lnb* -lz&quot;
+
+
+export CPPFLAGS=&quot; ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -fpermissive &quot;
+export CXXFLAGS=&quot; ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -frtti -fexceptions &quot;
+export CFLAGS=&quot; ${ARCH_FLAGS} -D__ANDROID_API__=$PLATFORM_VERSION -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 &quot;
+export LDFLAGS=&quot; ${ARCH_LINK} -L/workspace/avsdir3/android_home/usr/local/lib&quot;
+
+
+cmake ../sdk-source/avs-device-sdk/  \
+  -DANDROID_PLATFORM=android-15  \
+  -DANDROID_ABI=armeabi-v7a  \
+  -DANDROID_STL=c++_shared  \
+  -DCMAKE_INSTALL_PREFIX:PATH=./AVSD/out/armv7  \
+  -DCMAKE_TOOLCHAIN_FILE=$NDK_HOME/build/cmake/android.toolchain.cmake  \
+  -DCMAKE_BUILD_TYPE=Debug  \
+  -DPORTAUDIO=OFF  \
+  -DGSTREAMER_MEDIA_PLAYER=OFF  \
+  -DAMAZON_KEY_WORD_DETECTOR=OFF  \
+  -DKITTAI_KEY_WORD_DETECTOR=OFF  \
+  -DSENSORY_KEY_WORD_DETECTOR=OFF  \
+  -DACSDK_EMIT_SENSITIVE_LOGS=OFF ../sdk-source/avs-device-sdk  \
+  -DCURL_LIBRARY=/workspace/avsdir3/android_home/usr/local/lib/libcurl.so \
+  -DCURL_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
+  -DSQLITE_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/ \
+  -DSQLITE_LIBRARY=libsqlite3.so \
+  -DSQLITE_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
+
+make
+</code></pre><p>&#x6267;&#x884C;&#x65F6;&#x603B;&#x662F;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;sqlite3&#xFF0C;&#x6240;&#x4EE5;&#x4FEE;&#x6539;<code>sdk-folder/sdk-source/avs-device-sdk</code>&#x4E0B;&#x9762;&#x7684;<code>CMakeList.txt</code>,</p>
+<p>&#x6DFB;&#x52A0;&#x4E00;&#x884C;:</p>
+<pre><code>link_directories(/workspace/avsdir3/android_home/usr/local/lib)
+</code></pre><p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ALSA.html" class="navigation navigation-prev " aria-label="Previous page: 十三 alsa交叉编译">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../chapter2/" class="navigation navigation-next " aria-label="Next page: 第二章 python学习笔记">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"十四 avs-device-sdk移植到安卓.md","level":"1.2.14","depth":2,"next":{"title":"第二章 python学习笔记","level":"1.3","depth":1,"path":"chapter2/README.md","ref":"chapter2/README.md","articles":[{"title":"一 python 语法基础","level":"1.3.1","depth":2,"path":"chapter2/python语法基础.md","ref":"chapter2/python语法基础.md","articles":[]},{"title":"二 python函数","level":"1.3.2","depth":2,"path":"chapter2/python函数.md","ref":"chapter2/python函数.md","articles":[]},{"title":"三 python面向对象","level":"1.3.3","depth":2,"path":"chapter2/python面向对象.md","ref":"chapter2/python面向对象.md","articles":[]},{"title":"四 python核心编程","level":"1.3.4","depth":2,"path":"chapter2/python核心编程.md","ref":"chapter2/python核心编程.md","articles":[]},{"title":"五 python_linux系统编程","level":"1.3.5","depth":2,"path":"chapter2/python_linux系统编程.md","ref":"chapter2/python_linux系统编程.md","articles":[]},{"title":"六 python_网络编程","level":"1.3.6","depth":2,"path":"chapter2/python_网络编程.md","ref":"chapter2/python_网络编程.md","articles":[]}]},"previous":{"title":"十三 alsa交叉编译","level":"1.2.13","depth":2,"path":"chapter1/ALSA.md","ref":"chapter1/ALSA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/avs-device-sdk移植到安卓.md","mtime":"2018-04-25T07:34:33.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-25T07:45:06.526Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
