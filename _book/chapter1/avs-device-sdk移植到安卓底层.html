@@ -285,9 +285,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.14" data-path="avs-device-sdk移植到安卓.html">
+        <li class="chapter active" data-level="1.2.14" data-path="avs-device-sdk移植到安卓底层.html">
             
-                <a href="avs-device-sdk移植到安卓.html">
+                <a href="avs-device-sdk移植到安卓底层.html">
             
                     
                     十四 avs-device-sdk移植到安卓.md
@@ -658,15 +658,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="avs-device-sdk&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;">avs-device-sdk&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;</h1>
+                                <h1 id="curl-&#x3001;nghttp&#x3001;openssl&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;">curl &#x3001;nghttp&#x3001;openssl&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5230;&#x5B89;&#x5353;&#x5E73;&#x53F0;</h1>
 <h2 id="1-&#x7B80;&#x4ECB;">1. &#x7B80;&#x4ECB;</h2>
 <p>&#x4E3A;&#x4E86;&#x5C06;avs&#x7684;sdk&#x79FB;&#x690D;&#x5230;&#x57FA;&#x4E8E;android&#x88C1;&#x526A;&#x51FA;&#x6765;&#x7684;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x7F16;&#x8BD1;curl&#xFF0C;nghttp&#x7B49;&#x4F9D;&#x8D56;&#x5E93;&#x3002;</p>
 <h4 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;">&#x53C2;&#x8003;&#x94FE;&#x63A5;</h4>
-<p>Generic Linux&#x73AF;&#x5883;&#x7F16;&#x8BD1;avs-device-sdk</p>
-<p><a href="https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide" target="_blank">https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide</a></p>
-<p>&#x5728;&#x7F16;&#x8BD1;avs-device-sdk&#x65F6;&#xFF0C;&#x6700;&#x597D;&#x5B89;&#x5353;&#x4E0A;&#x8FF0;&#x94FE;&#x63A5;&#x4E2D;&#x63CF;&#x8FF0;&#xFF0C;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x3002;</p>
-<pre><code>$ mkdir sdk-folder &amp;&amp; cd sdk-folder &amp;&amp; mkdir sdk-build sdk-source third-party application-necessities
-</code></pre><p>nghttp2&#x5B98;&#x7F51;&#x63CF;&#x8FF0;&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;
+<p><a href="https://github.com/alexa/avs-device-sdk/wiki" target="_blank">https://github.com/alexa/avs-device-sdk/wiki</a></p>
+<p>nghttp2&#x5B98;&#x7F51;&#x63CF;&#x8FF0;&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;
 <a href="http://www.nghttp2.org/documentation/building-android-binary.html" target="_blank">http://www.nghttp2.org/documentation/building-android-binary.html</a></p>
 <p>&#x6839;&#x636E;&#x4E0A;&#x8FF0;&#x94FE;&#x63A5;&#x63CF;&#x8FF0;&#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x7ED3;&#x6784;,&#x540E;&#x9762;&#x4F1A;&#x6839;&#x636E;&#x8BE5;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</p>
 <pre><code>avsdir3
@@ -692,7 +689,8 @@
 </code></pre><ul>
 <li>&#x7F16;&#x8BD1;&#x6267;&#x884C;make</li>
 </ul>
-<p><strong>&#x4F7F;&#x7528;ndk16&#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x66F4;&#x6539;&#x4E3A;&#x4F4E;&#x4E00;&#x70B9;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;</strong></p>
+<p><strong>&#x4F7F;&#x7528;ndk16&#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x66F4;&#x6539;&#x4E3A;&#x4F4E;&#x4E00;&#x70B9;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x6700;&#x7EC8;&#x4FEE;&#x6539;&#x4E3A;ndk12b&#x624D;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;</strong>
+&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6700;&#x597D;&#x901A;&#x8FC7;type arm-linux-androideabi-gcc &#x6765;&#x786E;&#x8BA4;&#x4E00;&#x4E0B;&#x662F;&#x5426;&#x5F53;&#x671F;&#x7684;gcc&#x5DF2;&#x7ECF;&#x4FEE;&#x6539;&#x5230;&#x6B63;&#x786E;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x4E4B;&#x524D;&#x7684;&#x8BBE;&#x7F6E;&#x6CA1;&#x6709;&#x88AB;&#x6E05;&#x7A7A;</p>
 <hr>
 <p>error:
 arm-linux-androideabi-gcc -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -o example example.o -L. libz.a
@@ -702,7 +700,8 @@ example.o:example.c:function test_deflate: error: undefined reference to &apos;s
 example.o:example.c:function test_inflate: error: undefined reference to &apos;stderr&apos;</p>
 <hr>
 <p>&#x9519;&#x8BEF;&#x53C2;&#x8003;&#xFF1A;</p>
-<p><a href="https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr" target="_blank">Android NDK: undefined reference to &apos;stderr&apos;</a></p>
+<p><a href="https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr" target="_blank">Android NDK: undefined reference to &apos;stderr&apos;</a>
+<a href="https://blog.csdn.net/crazyquhezheng/article/details/79034765" target="_blank">&#x5B89;&#x5353;&#x7F16;&#x8BD1;caffe&#x9519;&#x8BEF; &#x2018;undefined reference to `stderr&apos;&#x2019;</a></p>
 <ul>
 <li>&#x6267;&#x884C;make install</li>
 </ul>
@@ -710,9 +709,7 @@ example.o:example.c:function test_inflate: error: undefined reference to &apos;s
 <ul>
 <li>&#x751F;&#x6210;Makefile</li>
 </ul>
-<p>&#x540E;&#x9762;&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
-/usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared &#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;</p>
-<pre><code>./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm enable-shared zlib
+<pre><code>./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm no-shared zlib
 </code></pre><ul>
 <li><p>&#x5BF9;&#x751F;&#x6210;&#x7684;Makefile&#x6587;&#x4EF6;&#x505A;&#x4FEE;&#x6539;</p>
 <p>&#x5220;&#x9664;&#x3000;-m64&#x3000;&#x53C2;&#x6570;&#xFF0C;&#x5171;&#x4E24;&#x5904;</p>
@@ -742,7 +739,14 @@ bin  include  lib
 ./lib/pkgconfig/openssl.pc
 ./lib/pkgconfig/libssl.pc
 ./lib/pkgconfig/libcrypto.pc
-</code></pre><h2 id="6-nghttp2">6. nghttp2</h2>
+</code></pre><h2 id="6-mbedtls">6. mbedtls</h2>
+<p>&#x4E0B;&#x8F7D;mbedtls
+<a href="https://tls.mbed.org/download" target="_blank">https://tls.mbed.org/download</a></p>
+<p>&#x7F16;&#x8BD1;:
+&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF; CC CXX</p>
+<p>&#x4FEE;&#x6539;Makefile&#xFF0C;intsll&#x8DEF;&#x5F84;</p>
+<p>make SHARED=1</p>
+<h2 id="7-nghttp2">7. nghttp2</h2>
 <ul>
 <li>&#x67E5;&#x770B;android-config&#x6587;&#x4EF6;</li>
 </ul>
@@ -890,12 +894,12 @@ milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name 
 ./lib/pkgconfig/libssl.pc
 ./lib/pkgconfig/libcrypto.pc
 ./lib/pkgconfig/libnghttp2.pc./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
-</code></pre><h2 id="7-libcurl">7. libcurl</h2>
+</code></pre><h2 id="8-libcurl&#x3000;&#xFF08;&#x6CE8;&#x610F;&#x4FEE;&#x6539;makefile&#x6DFB;&#x52A0;-pie--fpie&#x53C2;&#x6570;&#xFF09;">8. libcurl&#x3000;&#xFF08;&#x6CE8;&#x610F;&#x4FEE;&#x6539;Makefile&#x6DFB;&#x52A0;-pie -fPIE&#x53C2;&#x6570;&#xFF09;</h2>
 <ul>
 <li>&#x53C2;&#x8003;nghttp2&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#xFF0C;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x751F;&#x6210;Makefile&#x6587;&#x4EF6;</li>
 </ul>
 <pre><code>./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
-</code></pre><p>&#x67E5;&#x770B;&#x7ED3;&#x679C;&#xFF1A;&#x3000;&#x5982;&#x679C;&#x7F16;&#x8BD1;openssl&#x65F6;&#xFF0C;&#x52A0;&#x4E86;&#x53C2;&#x6570;&#x3000;<code>no-shared</code>,&#x7ED3;&#x679C;&#x53D1;&#x73B0;nghttp2&#x662F;enable&#x72B6;&#x6001;&#xFF0C;&#x4F46;&#x662F;ssl&#x8FD9;&#x4E00;&#x9879;&#x4ECD;&#x7136;&#x662F;no</p>
+</code></pre><p>&#x67E5;&#x770B;&#x7ED3;&#x679C;&#xFF1A;&#x3000;&#x53D1;&#x73B0;nghttp2&#x662F;enable&#x72B6;&#x6001;&#xFF0C;&#x4F46;&#x662F;ssl&#x8FD9;&#x4E00;&#x9879;&#x4ECD;&#x7136;&#x662F;no</p>
 <pre><code>configure: Configured to build curl/libcurl:
 
   curl version:     7.54.0
@@ -931,12 +935,12 @@ milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name 
   SONAME bump:     yes - WARNING: this library will be built with the SONAME
                    number bumped due to (a detected) ABI breakage.
                    See lib/README.curl_off_t for details on this.
-</code></pre><p>&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
-/usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared &#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;</p>
-<p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1;openssl&#x4E4B;&#x540E;&#xFF0C; enabled (OpenSSL)&#x3002;</p>
-<pre><code>configure: Configured to build curl/libcurl:
 
-  curl version:     7.54.0
+&#x5B89;&#x88C5; openssh&#x540E;&#xFF0C;&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
+/usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared 
+&#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;
+</code></pre><p>configure: Configured to build curl/libcurl:</p>
+<p>  curl version:     7.54.0
   Host setup:       arm-unknown-linux-androideabi
   Install prefix:   /workspace/avsdir3/android_home/usr/local&#x3000;--with-nghttp2=/workspace/avsdir3/android_home/usr/local
   Compiler:         arm-linux-androideabi-gcc
@@ -964,73 +968,122 @@ milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name 
   metalink support: no      (--with-libmetalink)
   PSL support:      no      (libpsl not found)
   HTTP2 support:    enabled (nghttp2)
-  Protocols:        DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP
-
-  SONAME bump:     yes - WARNING: this library will be built with the SONAME
+  Protocols:        DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP</p>
+<p>  SONAME bump:     yes - WARNING: this library will be built with the SONAME
                    number bumped due to (a detected) ABI breakage.
-                   See lib/README.curl_off_t for details on this.
-</code></pre><h2 id="8-sqlite3">8. sqlite3</h2>
-<pre><code>$ export CC=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-gcc
+                   See lib/README.curl_off_t for details on this.</p>
+<pre><code>
+
+
+sqlite3
+
+$ export CC=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-gcc
 $ export CXX=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-g++
 $ ./configure --host=arm-linux-androideabi   --prefix=/workspace/avsdir3/android_home/usr/local --with-sysroot=/workspace/avsdir3/android_home/toolchain_12b/sysroot 
 make
 make install
-</code></pre><h2 id="9-&#x4FEE;&#x6539;cmakelisttxt&#x6587;&#x4EF6;">9. &#x4FEE;&#x6539;CMakeList.txt&#x6587;&#x4EF6;</h2>
-<p>&#x6267;&#x884C;&#x811A;&#x672C;:</p>
-<pre><code>$ cat build-avs.sh 
-#!/bin/bash
+</code></pre><h2 id="9&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;samppleapp">9.&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;SamppleApp</h2>
+<p>&#x67E5;&#x770B;SamppleApp&#x4E2D;&#x7684;CMakeList.txt,&#x53D1;&#x73B0;&#x5FC5;&#x987B;&#x6253;&#x5F00;PORTAUDIO&#x3000;&#x548C;&#x3000;GSTREAMER_MEDIA_PLAYER&#x624D;&#x80FD;&#x7F16;&#x8BD1;src&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x7528;&#x4F7F;&#x7528;cmake&#x751F;&#x6210;Makefile&#xFF0C;&#x6240;&#x4EE5;&#x6CE8;&#x91CA;&#x6389;&#x8FD9;&#x4E00;&#x9879;&#x68C0;&#x67E5;,&#x8FD9;&#x6837;&#x8BBE;&#x7F6E;&#x4E0B;&#x9762;&#x4E24;&#x9879;&#x65F6;&#xFF0C;&#x4ECD;&#x7136;&#x80FD;&#x591F;&#x751F;&#x6210;&#x7F16;&#x8BD1;SamppleApp&#x7684;Makefile&#x6587;&#x4EF6;&#x3002;</p>
+<p>-DGSTREAMER_MEDIA_PLAYER=OFF </p>
+<p>-DPORTAUDIO=OFF</p>
+<pre><code>cmake $(sdkpath) -DSENSORY_KEY_WORD_DETECTOR=OFF -DCMAKE_BUILD_TYPE=DEBUG -DGSTREAMER_MEDIA_PLAYER=OFF -DPORTAUDIO=OFF -DPORTAUDIO_LIB_PATH=/workspace/avssdk/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/workspace/avssdk/sdk-folder/third-party/portaudio/include &amp;&amp; make
+11
+</code></pre><pre><code>cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+project(SampleApp LANGUAGES CXX)
+include(../build/BuildDefaults.cmake)
+#if(PORTAUDIO AND GSTREAMER_MEDIA_PLAYER)
+add_subdirectory(&quot;src&quot;)
+#endif()
+</code></pre><p>&#x9996;&#x5148;&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;SamppleApp&#xFF0C;&#x53EA;&#x5305;&#x542B;main.cpp&#xFF0C;&#x91CC;&#x9762;&#x53EA;&#x6709;&#x4E00;&#x53E5;&#x6253;&#x5370;&#xFF0C;&#x6240;&#x4EE5;&#x4FEE;&#x6539;&#x3000;SamppleApp/src/CmakeList.txt&#x6587;&#x4EF6;,&#x53BB;&#x9664;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x548C;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x3002;</p>
+<pre><code>set(SampleApp_SOURCES)
+#if(0)
+list(APPEND SampleApp_SOURCES 
+    ConnectionObserver.cpp
+    ConsolePrinter.cpp
+    GuiRenderer.cpp
+    InteractionManager.cpp
+    KeywordObserver.cpp
+    PortAudioMicrophoneWrapper.cpp
+    UIManager.cpp
+    UserInputManager.cpp
+    SampleApplication.cpp
+    main.cpp)
+#endif()
 
-PLATFORM_VERSION=21
+list(APPEND SampleApp_SOURCES
+    main.cpp)
 
-#CROSS_COMPILE=/bws/avs/curl2/curl-android-build/ndk-standalone-toolchain/bin/arm-linux-androideabi-
-CROSS_COMPILE=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-
+IF (HAS_EXTERNAL_MEDIA_PLAYER_ADAPTERS)
+    file(GLOB_RECURSE SRC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/ExternalMediaAdapterRegistration/*.cpp)
+    foreach(myfile ${SRC_FILE})
+       list(APPEND SampleApp_SOURCES ${myfile})
+    endforeach(myfile)
+ENDIF()
 
-#export NDK_HOME=/bws/avs/ndk/android-ndk-r15b-linux-x86_64/android-ndk-r15b
-#export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r12b
-export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r15c
-export AR=&quot;$CROSS_COMPILE&quot;ar
-export CC=&quot;$CROSS_COMPILE&quot;clang
-export CXX=&quot;$CROSS_COMPILE&quot;clang++
-export LD=&quot;$CROSS_COMPILE&quot;ld
-export LINK=$CXX
-export RANLIB=&quot;$CROSS_COMPILE&quot;ranlib
-export STRIP=&quot;$CROSS_COMPILE&quot;strip
+add_executable(SampleApp ${SampleApp_SOURCES})
 
+#if(0)
+target_include_directories(SampleApp PUBLIC 
+    &quot;${SampleApp_SOURCE_DIR}/include&quot;
+    &quot;${MediaPlayer_SOURCE_DIR}/include&quot;
+    &quot;${AudioResources_SOURCE_DIR}/include&quot;
+    &quot;${RegistrationManager_SOURCE_DIR}/include&quot;
+    &quot;${ESP_SOURCE_DIR}/include&quot;
+    &quot;${PORTAUDIO_INCLUDE_DIR}&quot;)
+#endif()
 
-export ARCH_FLAGS=&quot; -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 &quot;
-export ARCH_LINK=&quot; -Wl,--fix-cortex-a8 -lnb* -lz&quot;
+target_link_libraries(SampleApp 
+    DefaultClient
+    DCFDelegate
+    CBLAuthDelegate
+    MediaPlayer
+    SQLiteStorage
+    ESP
+    &quot;${PORTAUDIO_LIB_PATH}&quot;)
 
+if(KWD)
+    target_link_libraries(SampleApp KeywordDetectorProvider)
+endif()
 
-export CPPFLAGS=&quot; ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -fpermissive &quot;
-export CXXFLAGS=&quot; ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -frtti -fexceptions &quot;
-export CFLAGS=&quot; ${ARCH_FLAGS} -D__ANDROID_API__=$PLATFORM_VERSION -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 &quot;
-export LDFLAGS=&quot; ${ARCH_LINK} -L/workspace/avsdir3/android_home/usr/local/lib&quot;
-
-
-cmake ../sdk-source/avs-device-sdk/  \
-  -DANDROID_PLATFORM=android-15  \
-  -DANDROID_ABI=armeabi-v7a  \
-  -DANDROID_STL=c++_shared  \
-  -DCMAKE_INSTALL_PREFIX:PATH=./AVSD/out/armv7  \
-  -DCMAKE_TOOLCHAIN_FILE=$NDK_HOME/build/cmake/android.toolchain.cmake  \
-  -DCMAKE_BUILD_TYPE=Debug  \
-  -DPORTAUDIO=OFF  \
-  -DGSTREAMER_MEDIA_PLAYER=OFF  \
-  -DAMAZON_KEY_WORD_DETECTOR=OFF  \
-  -DKITTAI_KEY_WORD_DETECTOR=OFF  \
-  -DSENSORY_KEY_WORD_DETECTOR=OFF  \
-  -DACSDK_EMIT_SENSITIVE_LOGS=OFF ../sdk-source/avs-device-sdk  \
-  -DCURL_LIBRARY=/workspace/avsdir3/android_home/usr/local/lib/libcurl.so \
-  -DCURL_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
-  -DSQLITE_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/ \
-  -DSQLITE_LIBRARY=libsqlite3.so \
-  -DSQLITE_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
-
-make
-</code></pre><p>&#x6267;&#x884C;&#x65F6;&#x603B;&#x662F;&#x62A5;&#x9519;&#x627E;&#x4E0D;&#x5230;sqlite3&#xFF0C;&#x6240;&#x4EE5;&#x4FEE;&#x6539;<code>sdk-folder/sdk-source/avs-device-sdk</code>&#x4E0B;&#x9762;&#x7684;<code>CMakeList.txt</code>,</p>
-<p>&#x6DFB;&#x52A0;&#x4E00;&#x884C;:</p>
-<pre><code>link_directories(/workspace/avsdir3/android_home/usr/local/lib)
-</code></pre><p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;</p>
+if (${CMAKE_SYSTEM_NAME} MATCHES &quot;Darwin&quot;)
+    target_link_libraries(SampleApp
+        &quot;-framework CoreAudio&quot; 
+        &quot;-framework AudioToolbox&quot; 
+        &quot;-framework AudioUnit&quot; 
+        &quot;-framework CoreServices&quot; 
+        &quot;-framework Carbon&quot;)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES &quot;Linux&quot;)
+    target_link_libraries(SampleApp
+      rt m pthread asound)
+endif()
+</code></pre><p>&#x7F16;&#x8BD1;&#x80FD;&#x591F;&#x6210;&#x529F;&#xFF0C;&#x4F46;&#x662F;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;</p>
+<pre><code>error: only position independent executables (PIE) are supported.
+</code></pre><p>&#x4E4B;&#x524D;&#x9047;&#x89C1;&#x8FC7;&#x7C7B;&#x4F3C;&#x95EE;&#x9898;&#xFF0C;&#x7F16;&#x8BD1;&#x65F6;&#x6DFB;&#x52A0;&#x3000;-pie -fPIE &#x53C2;&#x6570;
+&#x4FEE;&#x6539;&#x3000;avs-device-sdk/build/cmake/BuildOptions.cmake,</p>
+<pre><code>51 set(CXX_PLATFORM_DEPENDENT_FLAGS_DEBUG      &quot;-DDEBUG -DACSDK_DEBUG_LOG_ENABLED -Wall -Werror -Wsign-compare -g&quot;)
+&#x4FEE;&#x6539;&#x4E3A;
+51 set(CXX_PLATFORM_DEPENDENT_FLAGS_DEBUG      &quot;-DDEBUG -DACSDK_DEBUG_LOG_ENABLED -Wall -Wsign-compare -g -pie -fPIE&quot;)
+</code></pre><p>&#x6CE8;&#x610F;&#x8981;&#x5220;&#x9664;&#x5176;&#x4E2D;&#x7684;-Werror&#x53C2;&#x6570;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x62A5;&#x544A;&#x5982;&#x4E0B;&#x9519;&#x8BEF;&#x3002;</p>
+<pre><code>clang++: error: argument unused during compilation: &apos;-pie&apos; [-Werror,-Wunused-command-line-argument]
+make[2]: *** [AVSCommon/CMakeFiles/AVSCommon.dir/AVS/src/AVSDirective.cpp.o] Error 1
+make[1]: *** [AVSCommon/CMakeFiles/AVSCommon.dir/all] Error 2
+make: *** [all] Error 2
+</code></pre><p>&#x4E4B;&#x540E;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#xFF0C;&#x6267;&#x884C;&#x65F6;&#x9700;&#x8981;libc++_shared.so</p>
+<pre><code>WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x770
+WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x3
+CANNOT LINK EXECUTABLE DEPENDENCIES: library &quot;libc++_shared.so&quot; not found
+</code></pre><p>NDK&#x6216;&#x8005;&#x4F7F;&#x7528;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x94FE;&#x4E2D;&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x8BE5;&#x52A8;&#x6001;&#x5E93;&#xFF0C;push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;&#xFF0C;&#x7ED3;&#x679C;&#x6B63;&#x786E;,&#x81F3;&#x4E8E;unused DT entry&#x95EE;&#x9898;&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x786E;&#x8BA4;&#x662F;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF0C;&#x4E0D;&#x8FC7;&#xFF0C;&#x76EE;&#x524D;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4E86;&#x3002;</p>
+<pre><code>WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x770
+WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x3
+WARNING: linker: libc++_shared.so: unused DT entry: type 0x6ffffffe arg 0x2ab10
+WARNING: linker: libc++_shared.so: unused DT entry: type 0x6fffffff arg 0x3
+-----------------start!
+</code></pre><h2 id="10-&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x4E0D;&#x4F9D;&#x8D56;gstreamer&#x548C;portaudio&#x7684;samppleapp">10. &#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x4E0D;&#x4F9D;&#x8D56;gstreamer&#x548C;portAudio&#x7684;SamppleApp</h2>
+<ul>
+<li>&#x4FEE;&#x6539;DefaultClient&#x4EE3;&#x7801;,&#x4FEE;&#x6539;&#x7ED3;&#x675F;&#x4E4B;&#x540E;&#xFF0C;&#x6267;&#x884C;make&#xFF0C;&#x7F16;&#x8BD1;libDefaultClient.so</li>
+<li>&#x4FEE;&#x6539;&#x6E90;&#x7801;&#x4E2D;SamppleApp&#x4E2D;&#x4EE3;&#x7801;,&#x6267;&#x884C;make,&#x7F16;&#x8BD1;SamppleApp.</li>
+</ul>
+<h2 id="11-&#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x6267;&#x884C;">11. &#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x6267;&#x884C;</h2>
 
                                 
                                 </section>
@@ -1074,7 +1127,7 @@ make
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"十四 avs-device-sdk移植到安卓.md","level":"1.2.14","depth":2,"next":{"title":"第二章 python学习笔记","level":"1.3","depth":1,"path":"chapter2/README.md","ref":"chapter2/README.md","articles":[{"title":"一 python 语法基础","level":"1.3.1","depth":2,"path":"chapter2/python语法基础.md","ref":"chapter2/python语法基础.md","articles":[]},{"title":"二 python函数","level":"1.3.2","depth":2,"path":"chapter2/python函数.md","ref":"chapter2/python函数.md","articles":[]},{"title":"三 python面向对象","level":"1.3.3","depth":2,"path":"chapter2/python面向对象.md","ref":"chapter2/python面向对象.md","articles":[]},{"title":"四 python核心编程","level":"1.3.4","depth":2,"path":"chapter2/python核心编程.md","ref":"chapter2/python核心编程.md","articles":[]},{"title":"五 python_linux系统编程","level":"1.3.5","depth":2,"path":"chapter2/python_linux系统编程.md","ref":"chapter2/python_linux系统编程.md","articles":[]},{"title":"六 python_网络编程","level":"1.3.6","depth":2,"path":"chapter2/python_网络编程.md","ref":"chapter2/python_网络编程.md","articles":[]}]},"previous":{"title":"十三 alsa交叉编译","level":"1.2.13","depth":2,"path":"chapter1/ALSA.md","ref":"chapter1/ALSA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/avs-device-sdk移植到安卓.md","mtime":"2018-04-25T07:34:33.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-25T07:45:06.526Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"十四 avs-device-sdk移植到安卓.md","level":"1.2.14","depth":2,"next":{"title":"第二章 python学习笔记","level":"1.3","depth":1,"path":"chapter2/README.md","ref":"chapter2/README.md","articles":[{"title":"一 python 语法基础","level":"1.3.1","depth":2,"path":"chapter2/python语法基础.md","ref":"chapter2/python语法基础.md","articles":[]},{"title":"二 python函数","level":"1.3.2","depth":2,"path":"chapter2/python函数.md","ref":"chapter2/python函数.md","articles":[]},{"title":"三 python面向对象","level":"1.3.3","depth":2,"path":"chapter2/python面向对象.md","ref":"chapter2/python面向对象.md","articles":[]},{"title":"四 python核心编程","level":"1.3.4","depth":2,"path":"chapter2/python核心编程.md","ref":"chapter2/python核心编程.md","articles":[]},{"title":"五 python_linux系统编程","level":"1.3.5","depth":2,"path":"chapter2/python_linux系统编程.md","ref":"chapter2/python_linux系统编程.md","articles":[]},{"title":"六 python_网络编程","level":"1.3.6","depth":2,"path":"chapter2/python_网络编程.md","ref":"chapter2/python_网络编程.md","articles":[]}]},"previous":{"title":"十三 alsa交叉编译","level":"1.2.13","depth":2,"path":"chapter1/ALSA.md","ref":"chapter1/ALSA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/avs-device-sdk移植到安卓底层.md","mtime":"2018-05-04T10:12:28.702Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-04T10:16:00.455Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

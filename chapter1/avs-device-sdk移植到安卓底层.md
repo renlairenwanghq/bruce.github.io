@@ -1,4 +1,4 @@
-#avs-device-sdk交叉编译到安卓平台
+#curl 、nghttp、openssl交叉编译到安卓平台
 
 ##1. 简介
 
@@ -6,15 +6,7 @@
 
 ####参考链接
 
-Generic Linux环境编译avs-device-sdk
-
-https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide
-
-在编译avs-device-sdk时，最好安卓上述链接中描述，生成对应的目录结构。
-
-```
-$ mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities
-```
+https://github.com/alexa/avs-device-sdk/wiki
 
 nghttp2官网描述的编译过程
 http://www.nghttp2.org/documentation/building-android-binary.html
@@ -59,7 +51,8 @@ export CC=arm-linux-androideabi-gcc
 
 * 编译执行make
 
-**使用ndk16时，会报错，更改为低一点的版本，可以编译通过**
+**使用ndk16时，会报错，更改为低一点的版本，可以编译通过，最终修改为ndk12b才编译通过**
+设置环境变量的时候，最好通过type arm-linux-androideabi-gcc 来确认一下是否当期的gcc已经修改到正确的路径，否则，有可能之前的设置没有被清空
 
 ***********************************************************************************************************
 error:
@@ -72,6 +65,8 @@ example.o:example.c:function test_inflate: error: undefined reference to 'stderr
 错误参考：
 
 [Android NDK: undefined reference to 'stderr'](https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr)
+[安卓编译caffe错误 ‘undefined reference to `stderr'’](https://blog.csdn.net/crazyquhezheng/article/details/79034765)
+
 
 * 执行make install
 
@@ -79,11 +74,8 @@ example.o:example.c:function test_inflate: error: undefined reference to 'stderr
 
 * 生成Makefile
 
-后面使用 curl 的 ./configure --with-ssl 时，会报错“找不到 ssl”。因为 curl在 
-/usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared 生成 动态连接库
-
 ```
-./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm enable-shared zlib
+./config CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ --openssldir=/workspace/avsdir3/android_home/usr/local  --prefix=/workspace/avsdir3/android_home/usr/local --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot  no-asm no-shared zlib
 ```
 
 * 对生成的Makefile文件做修改
@@ -124,8 +116,20 @@ bin  include  lib
 
 ```
 
+## 6. mbedtls
 
-##6. nghttp2
+下载mbedtls
+https://tls.mbed.org/download
+
+编译:
+设置环境变量 CC CXX
+
+修改Makefile，intsll路径
+
+make SHARED=1
+
+##7. nghttp2
+
 * 查看android-config文件
 
 **由于其中包含ANDROID_HOME，所以需要设置环境变量**
@@ -287,14 +291,14 @@ milo@milo-OptiPlex-7040:/workspace/avsdir3/android_home/usr/local$ find . -name 
 ./lib/pkgconfig/libnghttp2.pc./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local　--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
 ```
 
-##7. libcurl
+##8. libcurl　（注意修改Makefile添加-pie -fPIE参数）
 * 参考nghttp2的编译过程，设置参数，生成Makefile文件
 
 ```
 ./configure --host=arm-linux-androideabi CC=arm-linux-androideabi-gcc CXX=arm-linux-androideabi-g++ PKG_CONFIG_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/pkgconfig --prefix=/workspace/avsdir3/android_home/usr/local　--with-nghttp2=/workspace/avsdir3/android_home/usr/local --with-ssl=/workspace/avsdir3/android_home/usr/local
 ```
 
-查看结果：　如果编译openssl时，加了参数　`no-shared`,结果发现nghttp2是enable状态，但是ssl这一项仍然是no
+查看结果：　发现nghttp2是enable状态，但是ssl这一项仍然是no
 
 ```
 configure: Configured to build curl/libcurl:
@@ -333,11 +337,9 @@ configure: Configured to build curl/libcurl:
                    number bumped due to (a detected) ABI breakage.
                    See lib/README.curl_off_t for details on this.
 
-```
-使用 curl 的 ./configure --with-ssl 时，报错“找不到 ssl”。因为 curl在 
-/usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared 生成 动态连接库
-
-重新编译openssl之后， enabled (OpenSSL)。
+安装 openssh后，使用 curl 的 ./configure --with-ssl 时，报错“找不到 ssl”。因为 curl在 
+/usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared 
+生成 动态连接库
 
 ```
 configure: Configured to build curl/libcurl:
@@ -378,80 +380,156 @@ configure: Configured to build curl/libcurl:
 
 ```
 
-##8. sqlite3
 
-```
+
+sqlite3
+
 $ export CC=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-gcc
 $ export CXX=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-g++
 $ ./configure --host=arm-linux-androideabi   --prefix=/workspace/avsdir3/android_home/usr/local --with-sysroot=/workspace/avsdir3/android_home/toolchain_12b/sysroot 
 make
 make install
-```
 
-##9. 修改CMakeList.txt文件
 
-执行脚本:
 
 ```
-$ cat build-avs.sh 
-#!/bin/bash
+##9.编译一个最简单的SamppleApp
+查看SamppleApp中的CMakeList.txt,发现必须打开PORTAUDIO　和　GSTREAMER_MEDIA_PLAYER才能编译src，为了使用使用cmake生成Makefile，所以注释掉这一项检查,这样设置下面两项时，仍然能够生成编译SamppleApp的Makefile文件。
 
-PLATFORM_VERSION=21
+-DGSTREAMER_MEDIA_PLAYER=OFF 
 
-#CROSS_COMPILE=/bws/avs/curl2/curl-android-build/ndk-standalone-toolchain/bin/arm-linux-androideabi-
-CROSS_COMPILE=/workspace/avsdir3/android_home/toolchain_12b/bin/arm-linux-androideabi-
-
-#export NDK_HOME=/bws/avs/ndk/android-ndk-r15b-linux-x86_64/android-ndk-r15b
-#export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r12b
-export NDK_HOME=/home/milo/Downloads/toolchains/ndk/android-ndk-r15c
-export AR="$CROSS_COMPILE"ar
-export CC="$CROSS_COMPILE"clang
-export CXX="$CROSS_COMPILE"clang++
-export LD="$CROSS_COMPILE"ld
-export LINK=$CXX
-export RANLIB="$CROSS_COMPILE"ranlib
-export STRIP="$CROSS_COMPILE"strip
-
-
-export ARCH_FLAGS=" -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 "
-export ARCH_LINK=" -Wl,--fix-cortex-a8 -lnb* -lz"
-
-
-export CPPFLAGS=" ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -fpermissive "
-export CXXFLAGS=" ${ARCH_FLAGS} -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 -frtti -fexceptions "
-export CFLAGS=" ${ARCH_FLAGS} -D__ANDROID_API__=$PLATFORM_VERSION -fpic -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64 "
-export LDFLAGS=" ${ARCH_LINK} -L/workspace/avsdir3/android_home/usr/local/lib"
-
-
-cmake ../sdk-source/avs-device-sdk/  \
-  -DANDROID_PLATFORM=android-15  \
-  -DANDROID_ABI=armeabi-v7a  \
-  -DANDROID_STL=c++_shared  \
-  -DCMAKE_INSTALL_PREFIX:PATH=./AVSD/out/armv7  \
-  -DCMAKE_TOOLCHAIN_FILE=$NDK_HOME/build/cmake/android.toolchain.cmake  \
-  -DCMAKE_BUILD_TYPE=Debug  \
-  -DPORTAUDIO=OFF  \
-  -DGSTREAMER_MEDIA_PLAYER=OFF  \
-  -DAMAZON_KEY_WORD_DETECTOR=OFF  \
-  -DKITTAI_KEY_WORD_DETECTOR=OFF  \
-  -DSENSORY_KEY_WORD_DETECTOR=OFF  \
-  -DACSDK_EMIT_SENSITIVE_LOGS=OFF ../sdk-source/avs-device-sdk  \
-  -DCURL_LIBRARY=/workspace/avsdir3/android_home/usr/local/lib/libcurl.so \
-  -DCURL_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
-  -DSQLITE_LIBDIR=/workspace/avsdir3/android_home/usr/local/lib/ \
-  -DSQLITE_LIBRARY=libsqlite3.so \
-  -DSQLITE_INCLUDE_DIR=/workspace/avsdir3/android_home/usr/local/include
-  
-make 
+-DPORTAUDIO=OFF
 
 ```
-
-执行时总是报错找不到sqlite3，所以修改`sdk-folder/sdk-source/avs-device-sdk`下面的`CMakeList.txt`,
-
-添加一行:
-
-```
-link_directories(/workspace/avsdir3/android_home/usr/local/lib)
+cmake $(sdkpath) -DSENSORY_KEY_WORD_DETECTOR=OFF -DCMAKE_BUILD_TYPE=DEBUG -DGSTREAMER_MEDIA_PLAYER=OFF -DPORTAUDIO=OFF -DPORTAUDIO_LIB_PATH=/workspace/avssdk/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/workspace/avssdk/sdk-folder/third-party/portaudio/include && make
+11
 ```
 
-重新编译通过。
+
+
+```
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+project(SampleApp LANGUAGES CXX)
+include(../build/BuildDefaults.cmake)
+#if(PORTAUDIO AND GSTREAMER_MEDIA_PLAYER)
+add_subdirectory("src")
+#endif()
+```
+
+首先编译一个最简单的SamppleApp，只包含main.cpp，里面只有一句打印，所以修改　SamppleApp/src/CmakeList.txt文件,去除依赖的库和其他文件。
+
+```
+set(SampleApp_SOURCES)
+#if(0)
+list(APPEND SampleApp_SOURCES 
+    ConnectionObserver.cpp
+    ConsolePrinter.cpp
+    GuiRenderer.cpp
+    InteractionManager.cpp
+    KeywordObserver.cpp
+    PortAudioMicrophoneWrapper.cpp
+    UIManager.cpp
+    UserInputManager.cpp
+    SampleApplication.cpp
+    main.cpp)
+#endif()
+
+list(APPEND SampleApp_SOURCES
+    main.cpp)
+
+IF (HAS_EXTERNAL_MEDIA_PLAYER_ADAPTERS)
+    file(GLOB_RECURSE SRC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/ExternalMediaAdapterRegistration/*.cpp)
+    foreach(myfile ${SRC_FILE})
+       list(APPEND SampleApp_SOURCES ${myfile})
+    endforeach(myfile)
+ENDIF()
+
+add_executable(SampleApp ${SampleApp_SOURCES})
+
+#if(0)
+target_include_directories(SampleApp PUBLIC 
+    "${SampleApp_SOURCE_DIR}/include"
+    "${MediaPlayer_SOURCE_DIR}/include"
+    "${AudioResources_SOURCE_DIR}/include"
+    "${RegistrationManager_SOURCE_DIR}/include"
+    "${ESP_SOURCE_DIR}/include"
+    "${PORTAUDIO_INCLUDE_DIR}")
+#endif()
+
+target_link_libraries(SampleApp 
+    DefaultClient
+    DCFDelegate
+    CBLAuthDelegate
+    MediaPlayer
+    SQLiteStorage
+    ESP
+    "${PORTAUDIO_LIB_PATH}")
+
+if(KWD)
+    target_link_libraries(SampleApp KeywordDetectorProvider)
+endif()
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    target_link_libraries(SampleApp
+        "-framework CoreAudio" 
+        "-framework AudioToolbox" 
+        "-framework AudioUnit" 
+        "-framework CoreServices" 
+        "-framework Carbon")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    target_link_libraries(SampleApp
+      rt m pthread asound)
+endif()
+```
+
+编译能够成功，但是执行的时候，会报错
+
+```
+error: only position independent executables (PIE) are supported.
+```
+
+之前遇见过类似问题，编译时添加　-pie -fPIE 参数
+修改　avs-device-sdk/build/cmake/BuildOptions.cmake,
+
+```
+51 set(CXX_PLATFORM_DEPENDENT_FLAGS_DEBUG      "-DDEBUG -DACSDK_DEBUG_LOG_ENABLED -Wall -Werror -Wsign-compare -g")
+修改为
+51 set(CXX_PLATFORM_DEPENDENT_FLAGS_DEBUG      "-DDEBUG -DACSDK_DEBUG_LOG_ENABLED -Wall -Wsign-compare -g -pie -fPIE")
+```
+
+注意要删除其中的-Werror参数，否则会报告如下错误。
+
+```
+clang++: error: argument unused during compilation: '-pie' [-Werror,-Wunused-command-line-argument]
+make[2]: *** [AVSCommon/CMakeFiles/AVSCommon.dir/AVS/src/AVSDirective.cpp.o] Error 1
+make[1]: *** [AVSCommon/CMakeFiles/AVSCommon.dir/all] Error 2
+make: *** [all] Error 2
+```
+
+之后编译成功，执行时需要libc++_shared.so
+
+```
+WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x770
+WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x3
+CANNOT LINK EXECUTABLE DEPENDENCIES: library "libc++_shared.so" not found
+```
+
+NDK或者使用编译工具链中可以找到该动态库，push到板子上执行，结果正确,至于unused DT entry问题，还没有确认是什么问题，不过，目前已经可以执行了。
+
+```
+WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x770
+WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x3
+WARNING: linker: libc++_shared.so: unused DT entry: type 0x6ffffffe arg 0x2ab10
+WARNING: linker: libc++_shared.so: unused DT entry: type 0x6fffffff arg 0x3
+-----------------start!
+```
+
+## 10. 编译一个不依赖gstreamer和portAudio的SamppleApp
+
+* 修改DefaultClient代码,修改结束之后，执行make，编译libDefaultClient.so
+* 修改源码中SamppleApp中代码,执行make,编译SamppleApp.
+
+## 11. 导入依赖的库文件执行
+
+
+
