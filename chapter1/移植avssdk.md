@@ -19,9 +19,7 @@
 
 [Ubuntu Linux Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 
-按照上述链接即可以很容易的在ubuntu环境上安装avs-device-sdk,出于方便考虑，下面移植的过程中，最好参考
-
-该链接中描述，生成一个类似的目录结构。
+按照上述链接即可以很容易的在ubuntu环境上安装avs-device-sdk,出于方便考虑，下面移植的过程中，最好参考该链接中描述，生成一个类似的目录结构。
 
 ##3. 移植avs-device-sdk 
 
@@ -51,10 +49,10 @@ avs_sdk_dir_arm$ tree
 
 目录介绍:
 
-* android_home 
-* android_home/usr/local
-* dependencies
-* sdk-folder
+* android_home : 编译工具链路径
+* android_home/usr/local : 依赖库安装路径
+* dependencies : 依赖库的源码
+* sdk-folder : avs-device-sdk源码
 
 修改`.bashrc`,设置环境变量,添加如下设置
 
@@ -71,7 +69,7 @@ arm-linux-androideabi-gcc is /workspace/avs_sdk_dir_arm/android_home/toolchain_1
 
 **注意:**
 
-
+编译curl、nghttp2等第三方库一定要执行make install 安装到　`android_home/usr/local`路径下，因为编译时会通过`pk-config`来查找对应的头文件等。
 
 ###3.1 编译zlib
 
