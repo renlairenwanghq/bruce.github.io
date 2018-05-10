@@ -789,19 +789,8 @@ WARNING: linker: libc++_shared.so: unused DT entry: type 0x6fffffff arg 0x3
 
 [openssl官方文档](https://wiki.openssl.org/index.php/Compilation_and_Installation)
 
-Android NDK: undefined reference to 'stderr'
-
-https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr
-
-安卓编译caffe错误 ‘undefined reference to `stderr'’
-
-https://blog.csdn.net/crazyquhezheng/article/details/79034765
-
 openssl、x509、crt、cer、key、csr、ssl、tls 这些都是什么鬼? 
 https://www.cnblogs.com/lan1x/p/5872915.html
-
-基于OpenSSL自建CA和颁发SSL证书 
-https://segmentfault.com/a/1190000002569859
 
 公钥，私钥，数字签名，数字证书详解
 https://blog.csdn.net/sum_rain/article/details/36896239
@@ -812,45 +801,4 @@ https://blog.csdn.net/xiaofei0859/article/details/70747034
 Linux系统中如何维护自己的openssl ca-bundle
 https://www.cnblogs.com/wanggan9/articles/5479386.html
 
-Add Amazon root certificates
-https://bugzilla.mozilla.org/show_bug.cgi?id=1172401
-
-SSL Certificate Verification
-https://curl.haxx.se/docs/sslcerts.html
-
-mbed-TLS、 SSL、 OpenSSL、TLS的区别
-https://blog.csdn.net/crjmail/article/details/79097348
-
-connect error
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=685402
-
-curl error code
-https://blog.csdn.net/xinguan1267/article/details/7054250
-
-openssl介绍、使用及交叉编译(CURLE_SSL_CONNECT_ERROR)
-https://www.jianshu.com/p/b084efd94d84
-
-用openssl命令行取得服务器证书
-https://blog.csdn.net/idisposable/article/details/46453613
-
-使用OpenSSL生成私钥(Private Key)以及根据Private Key创建证书
-https://blog.csdn.net/fenglibing/article/details/8610280\
-
-如何使用openssl生成RSA公钥和私钥对
-https://blog.csdn.net/scape1989/article/details/18959657
-
-OpenSSL命令---s_client
-https://blog.csdn.net/as3luyuan123/article/details/16812071
-
-openssl用法详解
-https://www.cnblogs.com/yangxiaolan/p/6256838.html
-​	
-openssl for android使用
-https://blog.csdn.net/ming54864/article/details/48599261
-
-openssl库android版的编译
-https://blog.csdn.net/king457757706/article/details/52415404
-
-Compilation and Installation
-https://wiki.openssl.org/index.php/Compilation_and_Installation
 
