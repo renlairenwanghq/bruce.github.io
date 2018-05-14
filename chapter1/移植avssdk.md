@@ -584,7 +584,22 @@ adb push $SO_PATH /system/lib
 SamppleApp ./AlexaClientSDKConfig.json
 ```
 
+### 3.10 去除unused DT entry: xxx
 
+上面的程序执行的时候会打印很多警告：
+
+```
+WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x14568
+WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x2
+WARNING: linker: libDCFDelegate.so: unused DT entry: type 0x6ffffffe arg 0x148f8
+WARNING: linker: libDCFDelegate.so: unused DT entry: type 0x6fffffff arg 0x2
+WARNING: linker: libESP.so: unused DT entry: type 0x6ffffffe arg 0x14d8
+WARNING: linker: libESP.so: unused DT entry: type 0x6fffffff arg 0x1
+```
+
+参考链接http://www.dllhook.com/post/211.html，可以去除这些警告的打印。
+
+[为什么会输出这些打印？](https://stackoverflow.com/questions/33206409/unused-dt-entry-type-0x1d-arg)
 
 
 
