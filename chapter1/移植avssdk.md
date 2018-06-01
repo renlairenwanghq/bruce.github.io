@@ -23,6 +23,19 @@
 
 ##3. 移植avs-device-sdk 
 
+依赖工具:
+
+* 编译工具链使用的是根据android-ndk-r12b生成的编译工具链
+
+  下述的编译目录中`avs_sdk_dir_arm/android_home`目录下保存有该工具链
+
+
+* 需要android-ndk-r15c
+
+  因为编译sdk的过程中会设置NDK_HOME环境变量，根据该环境变量访问
+
+  `android-ndk-r15c/build/cmake/android.toolchain.cmake`文件而在ndk12中不存在该文件，所以还依赖ndk15.
+
 参考在ubuntu linux环境安装avs-device-sdk的步骤，设置一个如下的目录结构。
 
 执行
@@ -292,7 +305,7 @@ engines-1.1  libcrypto.so      libcurl.a   libcurl.so    libnghttp2.la  libsqlit
 libcrypto.a  libcrypto.so.1.1  libcurl.la  libnghttp2.a  libsqlite3.a   libsqlite3.so  libssl.so  libz.a         libz.so.1  pkgconfig
 ```
 
-###3.6 mbedtls
+###3.6 编译mbedtls
 
 下载mbedtls
 https://tls.mbed.org/download
@@ -317,7 +330,7 @@ link_directories(/workspace/avs_sdk_dir_arm/android_home/usr/local/lib)
 ```
 
 * `cd /workspace/avs_sdk_dir_arm/sdk-folder/sdk-build`
-* 执行`./build_avs.sh`
+* 将`build_avs.sh`拷贝到`sdk-build`目录执行`./build_avs.sh`
 
 ```
 #!/bin/bash
@@ -356,7 +369,7 @@ cmake ../sdk-source/avs-device-sdk/  \
   -DANDROID_PLATFORM=android-21  \
   -DANDROID_ABI=armeabi-v7a  \
   -DANDROID_STL=c++_shared  \
-  -DCMAKE_INSTALL_PREFIX:PATH=./AVSD/out/armv7  \
+  -DCMAKE_INSTALL_PREFIX:PATH=./build_out  \
   -DCMAKE_TOOLCHAIN_FILE=$NDK_HOME/build/cmake/android.toolchain.cmake  \
   -DCMAKE_BUILD_TYPE=Debug  \
   -DPORTAUDIO=OFF  \
@@ -382,40 +395,13 @@ make
 
 ### 3.8 导入依赖的库文件
 
+执行`make install`,会将生成的库文件拷贝到当前路径下的`build_out`目录。
+
 导入时注意板子上已经存在`libcurl.so`,注意修改名称，不要将原来的文件覆盖。
 
 `cd sdk-build`后打开对应项的注释执行下面的脚本
 
 ```
-if false; then
-./Authorization/CBLAuthDelegate/src/libCBLAuthDelegate.so
-./PlaylistParser/src/libPlaylistParser.so
-./DCFDelegate/src/libDCFDelegate.so
-./CertifiedSender/src/libCertifiedSender.so
-./AVSCommon/libAVSCommon.so
-./RegistrationManager/src/libRegistrationManager.so
-./AFML/src/libAFML.so
-./CapabilityAgents/AIP/src/libAIP.so
-./CapabilityAgents/SpeakerManager/src/libSpeakerManager.so
-./CapabilityAgents/Alerts/src/libAlerts.so
-./CapabilityAgents/System/src/libAVSSystem.so
-./CapabilityAgents/ExternalMediaPlayer/src/libExternalMediaPlayer.so
-./CapabilityAgents/PlaybackController/src/libPlaybackController.so
-./CapabilityAgents/Notifications/src/libNotifications.so
-./CapabilityAgents/Settings/src/libSettings.so
-./CapabilityAgents/SpeechSynthesizer/src/libSpeechSynthesizer.so
-./CapabilityAgents/AudioPlayer/src/libAudioPlayer.so
-./CapabilityAgents/TemplateRuntime/src/libTemplateRuntime.so
-./ContextManager/src/libContextManager.so
-./ADSL/src/libADSL.so
-./ACL/src/libACL.so
-./Storage/SQLiteStorage/src/libSQLiteStorage.so
-./KWD/src/libKWD.so
-./ESP/src/libESP.so
-./ApplicationUtilities/Resources/Audio/src/libAudioResources.so
-./ApplicationUtilities/DefaultClient/src/libDefaultClient.so
-fi
-
 #SO_PATH="./ApplicationUtilities/Resources/Audio/src/libAudioResources.so"
 #arm-linux-androideabi-strip 
 #adb push   /system/lib
@@ -543,6 +529,7 @@ adb push $SO_PATH /system/lib
 ### 3.9 push到板子上执行
 
 * 将AlexaClientSDKConfig.json放到板子上
+* 按照AlexaClientSDKConfig.json中配置在板子上生成avsdbfile目录用来存储db文件
 
 ```
 # cat AlexaClientSDKConfig.json                           
@@ -574,14 +561,13 @@ adb push $SO_PATH /system/lib
        "databaseFilePath":"/data/avsdbfile/notifications.db"
    }
 }
-
 ```
 
 * 将`ca-certificates.crt`放到板子上
 * 在包含`ca-certificates.crt`文件的目录下执行SamppleApp
 
 ```
-SamppleApp ./AlexaClientSDKConfig.json
+SamppleApp ./AlexaClientSDKConfig.json　[DEBUG9]
 ```
 
 ### 3.10 去除unused DT entry: xxx
@@ -601,13 +587,11 @@ WARNING: linker: libESP.so: unused DT entry: type 0x6fffffff arg 0x1
 
 [为什么会输出这些打印？](https://stackoverflow.com/questions/33206409/unused-dt-entry-type-0x1d-arg)
 
-
-
 ## 4.编译过程中出现的错误及注意事项
 
 ###4.1 error: undefined reference to 'stderr' 
 
-编译zlib时出现了该错误，最终发现是NDK版本的问题。使用ndk16时，会报错，更改为低一点的版本，可以编译通过，最终修改为ndk12b才编译通过。
+编译zlib时出现了该错误，最终发现是NDK版本的问题。使用ndk16、ndk15c时，会报错，更改为低一点的版本，可以编译通过，最终修改为ndk12b才编译通过。
 
 ```
 error:
@@ -633,7 +617,7 @@ make[1]: Leaving directory `/workspace/avsdir3/openssl/openssl'
 make: *** [all] Error 2
 ```
 
-### 4.3 CURLE_SSL_CACERT
+### 4.3 CURLE_SSL_CACERT(error 60)
 
 https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/
 
@@ -643,7 +627,19 @@ https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/
 
 编译curl时，可以设置`--with-ca-bundle=ca-certificates.crt`来确定ca根证书的路径。上面编译的时候已经设置好了，所以只要导入到对应的位置即可。
 
-### 4.4 CURLE_SSL_CONNECT_ERROR 
+
+
+**还有一种情况也会报这种错**
+
+之前环境是测试成功的，但是后来不知道做了什么操作，导致移植打印下面的错误，但是使用curl命令去执行发现是好使的，找个各种原有，还用libcurl的api重新写了一个测试程序仍然失败，直到看到一个同样的错误，改正的方式是**修改系统时间**,执行命令`date -s "20180531 17:51:00"`之后，果然好使了。
+
+```
+E HttpPost:doPostFailed:reason=curl_easy_performFailed,result=60,error=Peer certificate cannot be authenticated with given CA certificates
+```
+
+
+
+### 4.4 CURLE_SSL_CONNECT_ERROR(error 35) 
 
 在SamppleApp编译出来执行时一直报错CURLE_SSL_CONNECT_ERROR,后来用`curl https://example.com`来测试，打印出了更详细一些的error内容如下：
 
@@ -804,6 +800,14 @@ WARNING: linker: libc++_shared.so: unused DT entry: type 0x6fffffff arg 0x3
 
 [openssl官方文档](https://wiki.openssl.org/index.php/Compilation_and_Installation)
 
+Android NDK: undefined reference to 'stderr'
+
+https://stackoverflow.com/questions/39322852/android-ndk-undefined-reference-to-stderr
+
+安卓编译caffe错误 ‘undefined reference to `stderr'’
+
+https://blog.csdn.net/crazyquhezheng/article/details/79034765
+
 openssl、x509、crt、cer、key、csr、ssl、tls 这些都是什么鬼? 
 https://www.cnblogs.com/lan1x/p/5872915.html
 
@@ -816,4 +820,18 @@ https://blog.csdn.net/xiaofei0859/article/details/70747034
 Linux系统中如何维护自己的openssl ca-bundle
 https://www.cnblogs.com/wanggan9/articles/5479386.html
 
+SSL Certificate Verification
+https://curl.haxx.se/docs/sslcerts.html
+
+mbed-TLS、 SSL、 OpenSSL、TLS的区别
+https://blog.csdn.net/crjmail/article/details/79097348
+
+openssl介绍、使用及交叉编译(CURLE_SSL_CONNECT_ERROR)
+https://www.jianshu.com/p/b084efd94d84
+
+openssl用法详解
+https://www.cnblogs.com/yangxiaolan/p/6256838.html
+
+Compilation and Installation
+https://wiki.openssl.org/index.php/Compilation_and_Installation
 
