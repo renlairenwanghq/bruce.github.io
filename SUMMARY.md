@@ -41,5 +41,4 @@
     * [六 扩展](chapter5/Django扩展.md)
 * [第六章 python 爬虫](chapter6/README.md)
 * [第七章 c/c++](chapter7/README.md)
-* [第八章 英语](chapter8/README.md)
-    * [一 简单句](chapter8/简单句.md)
+* [第八章 安卓](chapter9/README.md)
