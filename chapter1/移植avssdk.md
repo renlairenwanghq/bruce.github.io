@@ -317,7 +317,37 @@ https://tls.mbed.org/download
 
 make SHARED=1
 
-### 3.7 修改avs-device-sdk代码
+## 4. 编译动态库
+
+修改`avs_sdk_dir_arm/sdk-folder/sdk-source/avs-device-sdk/CMakeLists.txt`,添加如下一行，用于添加搜索库的路径
+
+```
+link_directories(/{your path}/avs_sdk_dir_arm/android_home/usr/local/lib)
+```
+
+执行对应脚本
+
+```
+cp {your path}/avs_sdk_dir_arm/readme/build-avs.sh sdk-build
+./build-avs.sh
+```
+
+## 5. 编译带有kwd的动态库
+
+在上面编译动态库的基础上，继续修改`avs_sdk_dir_arm/sdk-folder/sdk-source/avs-device-sdk/KWD/Sensory/src/CMakeLists.txt`,添加如下一行:
+
+```
+target_link_libraries(SENSORY KWD AVSCommon "${SENSORY_KEY_WORD_DETECTOR_LIB_PATH}" "/workspace/avs_sdk_dir_arm/android_home/toolchain_12b/sysroot/usr/lib/liblog.so" "/workspace/avs_sdk_dir_arm/android_home/toolchain_12b/sysroot/usr/lib/libandroid.so")
+```
+
+执行对应的脚本:
+
+```
+cp {your path}/avs_sdk_dir_arm/readme/build-avs_keyword.sh sdk-build
+./build-avs_keyword.sh
+```
+
+##6. 编译SampleApp
 
 因为avs-device-sdk中的SamppleApp的代码依赖gstreamer和portaudio，所以必须修改SamppleApp的相关代码去除对这些库的依赖。
 
@@ -393,7 +423,7 @@ cmake ../sdk-source/avs-device-sdk/  \
 make 
 ```
 
-### 3.8 导入依赖的库文件
+### 6.1 导入依赖的库文件
 
 执行`make install`,会将生成的库文件拷贝到当前路径下的`build_out`目录。
 
@@ -526,7 +556,7 @@ adb push $SO_PATH /system/lib
 
 
 
-### 3.9 push到板子上执行
+### 6.2 push到板子上执行
 
 * 将AlexaClientSDKConfig.json放到板子上
 * 按照AlexaClientSDKConfig.json中配置在板子上生成avsdbfile目录用来存储db文件
@@ -570,7 +600,7 @@ adb push $SO_PATH /system/lib
 SamppleApp ./AlexaClientSDKConfig.json　[DEBUG9]
 ```
 
-### 3.10 去除unused DT entry: xxx
+### 6.3 去除unused DT entry: xxx
 
 上面的程序执行的时候会打印很多警告：
 
@@ -587,9 +617,9 @@ WARNING: linker: libESP.so: unused DT entry: type 0x6fffffff arg 0x1
 
 [为什么会输出这些打印？](https://stackoverflow.com/questions/33206409/unused-dt-entry-type-0x1d-arg)
 
-## 4.编译过程中出现的错误及注意事项
+## 7.编译过程中出现的错误及注意事项
 
-###4.1 error: undefined reference to 'stderr' 
+###7.1 error: undefined reference to 'stderr' 
 
 编译zlib时出现了该错误，最终发现是NDK版本的问题。使用ndk16、ndk15c时，会报错，更改为低一点的版本，可以编译通过，最终修改为ndk12b才编译通过。
 
@@ -602,7 +632,7 @@ example.o:example.c:function test_deflate: error: undefined reference to 'stderr
 example.o:example.c:function test_inflate: error: undefined reference to 'stderr'
 ```
 
-### 4.2 error: undefined reference to 'pthread_atfork' 
+### 7.2 error: undefined reference to 'pthread_atfork' 
 
 编译openssl时,开始toolchain是ndk10,出现下面的错误，修改为ndk12之后，编译通过
 
@@ -617,7 +647,7 @@ make[1]: Leaving directory `/workspace/avsdir3/openssl/openssl'
 make: *** [all] Error 2
 ```
 
-### 4.3 CURLE_SSL_CACERT(error 60)
+### 7.3 CURLE_SSL_CACERT
 
 https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/
 
@@ -627,19 +657,7 @@ https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/
 
 编译curl时，可以设置`--with-ca-bundle=ca-certificates.crt`来确定ca根证书的路径。上面编译的时候已经设置好了，所以只要导入到对应的位置即可。
 
-
-
-**还有一种情况也会报这种错**
-
-之前环境是测试成功的，但是后来不知道做了什么操作，导致移植打印下面的错误，但是使用curl命令去执行发现是好使的，找个各种原有，还用libcurl的api重新写了一个测试程序仍然失败，直到看到一个同样的错误，改正的方式是**修改系统时间**,执行命令`date -s "20180531 17:51:00"`之后，果然好使了。
-
-```
-E HttpPost:doPostFailed:reason=curl_easy_performFailed,result=60,error=Peer certificate cannot be authenticated with given CA certificates
-```
-
-
-
-### 4.4 CURLE_SSL_CONNECT_ERROR(error 35) 
+### 7.4 CURLE_SSL_CONNECT_ERROR 
 
 在SamppleApp编译出来执行时一直报错CURLE_SSL_CONNECT_ERROR,后来用`curl https://example.com`来测试，打印出了更详细一些的error内容如下：
 
@@ -649,18 +667,18 @@ curl: (35) error:04091077:rsa routines:int_rsa_verify:wrong signature length
 
 这个问题导致的原有是openssl编译过程存在问题，之前使用的是openssl目录下的config命令来生成Makefile，但是生成的Makefile的PLATFORM一直是x86,后来使用Configure命令生成Makefile,问题解决。参考[openssl官方文档](https://wiki.openssl.org/index.php/Compilation_and_Installation)
 
-### 4.5 编译libcurl时，openssl支持的这项一直是no
+### 7.5 编译libcurl时，openssl支持的这项一直是no
 
 安装 openssh后，使用 curl 的 ./configure --with-ssl 时，报错“找不到 ssl”。因为 curl在 
 /usr/local/ssl的安装目录下找动态连接库。而ssl默认不生成动态连接库。解决办法是编译 ssl时使用 enable-shared  生成 动态连接库
 
 
 
-###4.6 curl可执行程序报错`error: only position independent executables (PIE) are supported.`
+###7.6 curl可执行程序报错`error: only position independent executables (PIE) are supported.`
 
 之前遇见此问题，直接修改Makefile添加-pie -fPIE参数之后重新编译即可，但是对于curl的工程，仍然报错，后来使用configure 生成Makefile时即设置CFLAGS="-pie -fPIE" LDFLAGS="-pie -fPIE"，即可避免该问题。
 
-###4.7 编译一个最简单的SamppleApp时如何修改CMakeList.txt 
+###7.7 编译一个最简单的SamppleApp时如何修改CMakeList.txt 
 
 查看SamppleApp中的CMakeList.txt,发现必须打开PORTAUDIO　和　GSTREAMER_MEDIA_PLAYER才能编译src，为了使用使用cmake生成Makefile，所以注释掉这一项检查,这样设置下面两项时，仍然能够生成编译SamppleApp的Makefile文件。
 
