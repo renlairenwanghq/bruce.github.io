@@ -92,6 +92,8 @@ a.func()
 
 #### 多继承
 
+[Python中多继承与super()用法](https://blog.csdn.net/qingzhou4122/article/details/53502635)
+
 Python同样有限的支持多继承形式。多继承的类定义形如下例:
 
 ```
@@ -109,7 +111,7 @@ class A(object):
         print '    <- Leave A'
 
 class B(A):
-    def __init(self):
+    def __init__(self):
         print '    -> Enter B'
         # A.__init__(self)
         super(B, self).__init__()
@@ -139,12 +141,14 @@ if __name__ == "__main__":
 结果
 
 ```
--> Enter D
--> Enter C
--> Enter A
-<- Leave A
-<- Leave C
-<- Leave D
+    -> Enter D
+    -> Enter B
+    -> Enter C
+    -> Enter A
+    <- Leave A
+    <- Leave C
+    <- Leave B
+    <- Leave D
 MRO: ['D', 'B', 'C', 'A', 'object']
 <type 'tuple'>
 ```
@@ -210,7 +214,7 @@ class Tst:
 
     data = 'this is data'
 
-    # 普通方法
+    # 普通方法(实例方法)
     def normalMethod(self, name):
         print(self.data)
         print(self.name)
@@ -237,7 +241,7 @@ class Tst:
 
 ####`__new__方法` 
 
-使用该方法创建的对象
+创建对象的方法，使用该方法创建的对象
 
 ```
 # -*- conding:utf8 -*-
@@ -264,6 +268,33 @@ haha
 ```
 
 #### 异常
+
+[异常](https://www.runoob.com/python/python-exceptions.html)
+
+**try-except**
+
+```
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+try:
+    fh = open("testfile", "w")
+    fh.write("这是一个测试文件，用于测试异常!!")
+except IOError:
+    print "Error: 没有找到文件或读取文件失败"
+else:
+    print "内容写入文件成功"
+    fh.close()
+```
+
+**try-finally**
+
+```
+try:
+<语句>
+finally:
+<语句>    #退出try时总会执行
+```
 
 
 

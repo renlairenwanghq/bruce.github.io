@@ -978,7 +978,19 @@ libcrypto.a  libcrypto.so.1.1  libcurl.la  libnghttp2.a  libsqlite3.a   libsqlit
 &#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF; CC CXX</p>
 <p>&#x4FEE;&#x6539;Makefile&#xFF0C;intsll&#x8DEF;&#x5F84;</p>
 <p>make SHARED=1</p>
-<h3 id="37-&#x4FEE;&#x6539;avs-device-sdk&#x4EE3;&#x7801;">3.7 &#x4FEE;&#x6539;avs-device-sdk&#x4EE3;&#x7801;</h3>
+<h2 id="4-&#x7F16;&#x8BD1;&#x52A8;&#x6001;&#x5E93;">4. &#x7F16;&#x8BD1;&#x52A8;&#x6001;&#x5E93;</h2>
+<p>&#x4FEE;&#x6539;<code>avs_sdk_dir_arm/sdk-folder/sdk-source/avs-device-sdk/CMakeLists.txt</code>,&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4E00;&#x884C;&#xFF0C;&#x7528;&#x4E8E;&#x6DFB;&#x52A0;&#x641C;&#x7D22;&#x5E93;&#x7684;&#x8DEF;&#x5F84;</p>
+<pre><code>link_directories(/{your path}/avs_sdk_dir_arm/android_home/usr/local/lib)
+</code></pre><p>&#x6267;&#x884C;&#x5BF9;&#x5E94;&#x811A;&#x672C;</p>
+<pre><code>cp {your path}/avs_sdk_dir_arm/readme/build-avs.sh sdk-build
+./build-avs.sh
+</code></pre><h2 id="5-&#x7F16;&#x8BD1;&#x5E26;&#x6709;kwd&#x7684;&#x52A8;&#x6001;&#x5E93;">5. &#x7F16;&#x8BD1;&#x5E26;&#x6709;kwd&#x7684;&#x52A8;&#x6001;&#x5E93;</h2>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7F16;&#x8BD1;&#x52A8;&#x6001;&#x5E93;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x7EE7;&#x7EED;&#x4FEE;&#x6539;<code>avs_sdk_dir_arm/sdk-folder/sdk-source/avs-device-sdk/KWD/Sensory/src/CMakeLists.txt</code>,&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4E00;&#x884C;:</p>
+<pre><code>target_link_libraries(SENSORY KWD AVSCommon &quot;${SENSORY_KEY_WORD_DETECTOR_LIB_PATH}&quot; &quot;/workspace/avs_sdk_dir_arm/android_home/toolchain_12b/sysroot/usr/lib/liblog.so&quot; &quot;/workspace/avs_sdk_dir_arm/android_home/toolchain_12b/sysroot/usr/lib/libandroid.so&quot;)
+</code></pre><p>&#x6267;&#x884C;&#x5BF9;&#x5E94;&#x7684;&#x811A;&#x672C;:</p>
+<pre><code>cp {your path}/avs_sdk_dir_arm/readme/build-avs_keyword.sh sdk-build
+./build-avs_keyword.sh
+</code></pre><h2 id="6-&#x7F16;&#x8BD1;sampleapp">6. &#x7F16;&#x8BD1;SampleApp</h2>
 <p>&#x56E0;&#x4E3A;avs-device-sdk&#x4E2D;&#x7684;SamppleApp&#x7684;&#x4EE3;&#x7801;&#x4F9D;&#x8D56;gstreamer&#x548C;portaudio&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x4FEE;&#x6539;SamppleApp&#x7684;&#x76F8;&#x5173;&#x4EE3;&#x7801;&#x53BB;&#x9664;&#x5BF9;&#x8FD9;&#x4E9B;&#x5E93;&#x7684;&#x4F9D;&#x8D56;&#x3002;</p>
 <p>&#x53E6;&#x5916;avs-device-sdk&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x5173;&#x6389;&#x5BF9;gstreamer&#x548C;portaudio&#x7684;&#x4F9D;&#x8D56;&#x662F;&#x4E0D;&#x751F;&#x6210;&#x7F16;&#x8BD1;SamppleApp&#x7684;Makefile&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8FD8;&#x9700;&#x8981;&#x4FEE;&#x6539;cmakelist.txt.</p>
 <ul>
@@ -1047,7 +1059,7 @@ cmake ../sdk-source/avs-device-sdk/  \
   # 
   # 
 make
-</code></pre><h3 id="38-&#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;">3.8 &#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;</h3>
+</code></pre><h3 id="61-&#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;">6.1 &#x5BFC;&#x5165;&#x4F9D;&#x8D56;&#x7684;&#x5E93;&#x6587;&#x4EF6;</h3>
 <p>&#x6267;&#x884C;<code>make install</code>,&#x4F1A;&#x5C06;&#x751F;&#x6210;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x5F53;&#x524D;&#x8DEF;&#x5F84;&#x4E0B;&#x7684;<code>build_out</code>&#x76EE;&#x5F55;&#x3002;</p>
 <p>&#x5BFC;&#x5165;&#x65F6;&#x6CE8;&#x610F;&#x677F;&#x5B50;&#x4E0A;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;<code>libcurl.so</code>,&#x6CE8;&#x610F;&#x4FEE;&#x6539;&#x540D;&#x79F0;&#xFF0C;&#x4E0D;&#x8981;&#x5C06;&#x539F;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x8986;&#x76D6;&#x3002;</p>
 <p><code>cd sdk-build</code>&#x540E;&#x6253;&#x5F00;&#x5BF9;&#x5E94;&#x9879;&#x7684;&#x6CE8;&#x91CA;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x811A;&#x672C;</p>
@@ -1171,7 +1183,7 @@ adb push $SO_PATH /system/lib
 SO_PATH=&quot;/workspace/avsdir3/android_home/usr/local/lib/libz.so.1.2.11&quot;
 arm-linux-androideabi-strip  $SO_PATH
 adb push $SO_PATH /system/lib
-</code></pre><h3 id="39-push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;">3.9 push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;</h3>
+</code></pre><h3 id="62-push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;">6.2 push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x6267;&#x884C;</h3>
 <ul>
 <li>&#x5C06;AlexaClientSDKConfig.json&#x653E;&#x5230;&#x677F;&#x5B50;&#x4E0A;</li>
 <li>&#x6309;&#x7167;AlexaClientSDKConfig.json&#x4E2D;&#x914D;&#x7F6E;&#x5728;&#x677F;&#x5B50;&#x4E0A;&#x751F;&#x6210;avsdbfile&#x76EE;&#x5F55;&#x7528;&#x6765;&#x5B58;&#x50A8;db&#x6587;&#x4EF6;</li>
@@ -1210,7 +1222,7 @@ adb push $SO_PATH /system/lib
 <li>&#x5728;&#x5305;&#x542B;<code>ca-certificates.crt</code>&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#x6267;&#x884C;SamppleApp</li>
 </ul>
 <pre><code>SamppleApp ./AlexaClientSDKConfig.json&#x3000;[DEBUG9]
-</code></pre><h3 id="310-&#x53BB;&#x9664;unused-dt-entry-xxx">3.10 &#x53BB;&#x9664;unused DT entry: xxx</h3>
+</code></pre><h3 id="63-&#x53BB;&#x9664;unused-dt-entry-xxx">6.3 &#x53BB;&#x9664;unused DT entry: xxx</h3>
 <p>&#x4E0A;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x6253;&#x5370;&#x5F88;&#x591A;&#x8B66;&#x544A;&#xFF1A;</p>
 <pre><code>WARNING: linker: SampleApp: unused DT entry: type 0x6ffffffe arg 0x14568
 WARNING: linker: SampleApp: unused DT entry: type 0x6fffffff arg 0x2
@@ -1220,8 +1232,8 @@ WARNING: linker: libESP.so: unused DT entry: type 0x6ffffffe arg 0x14d8
 WARNING: linker: libESP.so: unused DT entry: type 0x6fffffff arg 0x1
 </code></pre><p>&#x53C2;&#x8003;&#x94FE;&#x63A5;<a href="http://www.dllhook.com/post/211.html&#xFF0C;&#x53EF;&#x4EE5;&#x53BB;&#x9664;&#x8FD9;&#x4E9B;&#x8B66;&#x544A;&#x7684;&#x6253;&#x5370;&#x3002;" target="_blank">http://www.dllhook.com/post/211.html&#xFF0C;&#x53EF;&#x4EE5;&#x53BB;&#x9664;&#x8FD9;&#x4E9B;&#x8B66;&#x544A;&#x7684;&#x6253;&#x5370;&#x3002;</a></p>
 <p><a href="https://stackoverflow.com/questions/33206409/unused-dt-entry-type-0x1d-arg" target="_blank">&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x8F93;&#x51FA;&#x8FD9;&#x4E9B;&#x6253;&#x5370;&#xFF1F;</a></p>
-<h2 id="4&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x53CA;&#x6CE8;&#x610F;&#x4E8B;&#x9879;">4.&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x53CA;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
-<h3 id="41-error-undefined-reference-to-stderr">4.1 error: undefined reference to &apos;stderr&apos;</h3>
+<h2 id="7&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x53CA;&#x6CE8;&#x610F;&#x4E8B;&#x9879;">7.&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x53CA;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
+<h3 id="71-error-undefined-reference-to-stderr">7.1 error: undefined reference to &apos;stderr&apos;</h3>
 <p>&#x7F16;&#x8BD1;zlib&#x65F6;&#x51FA;&#x73B0;&#x4E86;&#x8BE5;&#x9519;&#x8BEF;&#xFF0C;&#x6700;&#x7EC8;&#x53D1;&#x73B0;&#x662F;NDK&#x7248;&#x672C;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4F7F;&#x7528;ndk16&#x3001;ndk15c&#x65F6;&#xFF0C;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x66F4;&#x6539;&#x4E3A;&#x4F4E;&#x4E00;&#x70B9;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#xFF0C;&#x6700;&#x7EC8;&#x4FEE;&#x6539;&#x4E3A;ndk12b&#x624D;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;&#x3002;</p>
 <pre><code>error:
 arm-linux-androideabi-gcc -O3 -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -o example example.o -L. libz.a
@@ -1229,7 +1241,7 @@ example.o:example.c:function test_compress: error: undefined reference to &apos;
 example.o:example.c:function test_gzio: error: undefined reference to &apos;stderr&apos;
 example.o:example.c:function test_deflate: error: undefined reference to &apos;stderr&apos;
 example.o:example.c:function test_inflate: error: undefined reference to &apos;stderr&apos;
-</code></pre><h3 id="42-error-undefined-reference-to-pthreadatfork">4.2 error: undefined reference to &apos;pthread_atfork&apos;</h3>
+</code></pre><h3 id="72-error-undefined-reference-to-pthreadatfork">7.2 error: undefined reference to &apos;pthread_atfork&apos;</h3>
 <p>&#x7F16;&#x8BD1;openssl&#x65F6;,&#x5F00;&#x59CB;toolchain&#x662F;ndk10,&#x51FA;&#x73B0;&#x4E0B;&#x9762;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x4FEE;&#x6539;&#x4E3A;ndk12&#x4E4B;&#x540E;&#xFF0C;&#x7F16;&#x8BD1;&#x901A;&#x8FC7;</p>
 <pre><code>${LDCMD:-arm-linux-androideabi-gcc} -pthread  -Wall -O3 --sysroot=/workspace/avsdir3/android_home/toolchain/sysroot -L.   \
         -o apps/openssl apps/asn1pars.o apps/ca.o apps/ciphers.o apps/cms.o apps/crl.o apps/crl2p7.o apps/dgst.o apps/dhparam.o apps/dsa.o apps/dsaparam.o apps/ec.o apps/ecparam.o apps/enc.o apps/engine.o apps/errstr.o apps/gendsa.o apps/genpkey.o apps/genrsa.o apps/nseq.o apps/ocsp.o apps/openssl.o apps/passwd.o apps/pkcs12.o apps/pkcs7.o apps/pkcs8.o apps/pkey.o apps/pkeyparam.o apps/pkeyutl.o apps/prime.o apps/rand.o apps/rehash.o apps/req.o apps/rsa.o apps/rsautl.o apps/s_client.o apps/s_server.o apps/s_time.o apps/sess_id.o apps/smime.o apps/speed.o apps/spkac.o apps/srp.o apps/storeutl.o apps/ts.o apps/verify.o apps/version.o apps/x509.o \
@@ -1239,24 +1251,21 @@ collect2: error: ld returned 1 exit status
 make[1]: *** [apps/openssl] Error 1
 make[1]: Leaving directory `/workspace/avsdir3/openssl/openssl&apos;
 make: *** [all] Error 2
-</code></pre><h3 id="43-curlesslcacerterror-60">4.3 CURLE_SSL_CACERT(error 60)</h3>
+</code></pre><h3 id="73-curlesslcacert">7.3 CURLE_SSL_CACERT</h3>
 <p><a href="https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/" target="_blank">https://pranavprakash.net/2014/09/27/using-libcurl-with-ssl/</a></p>
 <p><a href="https://curl.haxx.se/libcurl/c/curl_easy_perform.html" target="_blank">curl_easy_perform</a></p>
 <p>&#x52A8;&#x6001;&#x5E93;&#x5BFC;&#x5165;&#x6210;&#x529F;&#xFF0C;&#x7A0B;&#x5E8F;&#x4E5F;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x6267;&#x884C;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x6B64;&#x65F6;&#x62A5;&#x9519;<code>curl_easy_performfailed error(60)</code>,&#x5BFC;&#x81F4;&#x8BE5;error&#x7684;&#x539F;&#x56E0;&#x662F;&#x6CA1;&#x6709;&#x6839;&#x8BC1;&#x4E66;&#xFF0C;&#x5728;pc&#x4E0A;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x6B63;&#x5E38;&#x7684;&#x539F;&#x6709;&#x662F;&#x56E0;&#x4E3A;<code>/etc/ssl/certs</code>&#x4E0B;&#x4FDD;&#x5B58;&#x6709;&#x8BE5;&#x8BC1;&#x4E66;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x4ECE;pc&#x4E0A;&#x5C06;&#x8BC1;&#x4E66;<code>/etc/ssl/certs/ca-certificates.crt</code>push&#x5230;&#x677F;&#x5B50;&#x4E0A;&#x3002;&#x4F46;&#x662F;&#x5E94;&#x8BE5;&#x653E;&#x5230;&#x90A3;&#x4E2A;&#x8DEF;&#x5F84;&#x4E0B;&#x9762;&#x5462;&#xFF1F;&#x67E5;&#x770B;curl&#x3000;configure&#x5F97;&#x51FA;&#x7ED3;&#x8BBA;&#xFF1A;</p>
 <p>&#x7F16;&#x8BD1;curl&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;<code>--with-ca-bundle=ca-certificates.crt</code>&#x6765;&#x786E;&#x5B9A;ca&#x6839;&#x8BC1;&#x4E66;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x4E0A;&#x9762;&#x7F16;&#x8BD1;&#x7684;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x597D;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x8981;&#x5BFC;&#x5165;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x4F4D;&#x7F6E;&#x5373;&#x53EF;&#x3002;</p>
-<p><strong>&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x4E5F;&#x4F1A;&#x62A5;&#x8FD9;&#x79CD;&#x9519;</strong></p>
-<p>&#x4E4B;&#x524D;&#x73AF;&#x5883;&#x662F;&#x6D4B;&#x8BD5;&#x6210;&#x529F;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x6765;&#x4E0D;&#x77E5;&#x9053;&#x505A;&#x4E86;&#x4EC0;&#x4E48;&#x64CD;&#x4F5C;&#xFF0C;&#x5BFC;&#x81F4;&#x79FB;&#x690D;&#x6253;&#x5370;&#x4E0B;&#x9762;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;curl&#x547D;&#x4EE4;&#x53BB;&#x6267;&#x884C;&#x53D1;&#x73B0;&#x662F;&#x597D;&#x4F7F;&#x7684;&#xFF0C;&#x627E;&#x4E2A;&#x5404;&#x79CD;&#x539F;&#x6709;&#xFF0C;&#x8FD8;&#x7528;libcurl&#x7684;api&#x91CD;&#x65B0;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;&#x4ECD;&#x7136;&#x5931;&#x8D25;&#xFF0C;&#x76F4;&#x5230;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x540C;&#x6837;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x6539;&#x6B63;&#x7684;&#x65B9;&#x5F0F;&#x662F;<strong>&#x4FEE;&#x6539;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</strong>,&#x6267;&#x884C;&#x547D;&#x4EE4;<code>date -s &quot;20180531 17:51:00&quot;</code>&#x4E4B;&#x540E;&#xFF0C;&#x679C;&#x7136;&#x597D;&#x4F7F;&#x4E86;&#x3002;</p>
-<pre><code>E HttpPost:doPostFailed:reason=curl_easy_performFailed,result=60,error=Peer certificate cannot be authenticated with given CA certificates
-</code></pre><h3 id="44-curlesslconnecterrorerror-35">4.4 CURLE_SSL_CONNECT_ERROR(error 35)</h3>
+<h3 id="74-curlesslconnecterror">7.4 CURLE_SSL_CONNECT_ERROR</h3>
 <p>&#x5728;SamppleApp&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x6267;&#x884C;&#x65F6;&#x4E00;&#x76F4;&#x62A5;&#x9519;CURLE_SSL_CONNECT_ERROR,&#x540E;&#x6765;&#x7528;<code>curl https://example.com</code>&#x6765;&#x6D4B;&#x8BD5;&#xFF0C;&#x6253;&#x5370;&#x51FA;&#x4E86;&#x66F4;&#x8BE6;&#x7EC6;&#x4E00;&#x4E9B;&#x7684;error&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code>curl: (35) error:04091077:rsa routines:int_rsa_verify:wrong signature length
 </code></pre><p>&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x7684;&#x539F;&#x6709;&#x662F;openssl&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x5B58;&#x5728;&#x95EE;&#x9898;&#xFF0C;&#x4E4B;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x662F;openssl&#x76EE;&#x5F55;&#x4E0B;&#x7684;config&#x547D;&#x4EE4;&#x6765;&#x751F;&#x6210;Makefile&#xFF0C;&#x4F46;&#x662F;&#x751F;&#x6210;&#x7684;Makefile&#x7684;PLATFORM&#x4E00;&#x76F4;&#x662F;x86,&#x540E;&#x6765;&#x4F7F;&#x7528;Configure&#x547D;&#x4EE4;&#x751F;&#x6210;Makefile,&#x95EE;&#x9898;&#x89E3;&#x51B3;&#x3002;&#x53C2;&#x8003;<a href="https://wiki.openssl.org/index.php/Compilation_and_Installation" target="_blank">openssl&#x5B98;&#x65B9;&#x6587;&#x6863;</a></p>
-<h3 id="45-&#x7F16;&#x8BD1;libcurl&#x65F6;&#xFF0C;openssl&#x652F;&#x6301;&#x7684;&#x8FD9;&#x9879;&#x4E00;&#x76F4;&#x662F;no">4.5 &#x7F16;&#x8BD1;libcurl&#x65F6;&#xFF0C;openssl&#x652F;&#x6301;&#x7684;&#x8FD9;&#x9879;&#x4E00;&#x76F4;&#x662F;no</h3>
+<h3 id="75-&#x7F16;&#x8BD1;libcurl&#x65F6;&#xFF0C;openssl&#x652F;&#x6301;&#x7684;&#x8FD9;&#x9879;&#x4E00;&#x76F4;&#x662F;no">7.5 &#x7F16;&#x8BD1;libcurl&#x65F6;&#xFF0C;openssl&#x652F;&#x6301;&#x7684;&#x8FD9;&#x9879;&#x4E00;&#x76F4;&#x662F;no</h3>
 <p>&#x5B89;&#x88C5; openssh&#x540E;&#xFF0C;&#x4F7F;&#x7528; curl &#x7684; ./configure --with-ssl &#x65F6;&#xFF0C;&#x62A5;&#x9519;&#x201C;&#x627E;&#x4E0D;&#x5230; ssl&#x201D;&#x3002;&#x56E0;&#x4E3A; curl&#x5728; 
 /usr/local/ssl&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x800C;ssl&#x9ED8;&#x8BA4;&#x4E0D;&#x751F;&#x6210;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;&#x3002;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x7F16;&#x8BD1; ssl&#x65F6;&#x4F7F;&#x7528; enable-shared  &#x751F;&#x6210; &#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5E93;</p>
-<h3 id="46-curl&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x62A5;&#x9519;error-only-position-independent-executables-pie-are-supported">4.6 curl&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x62A5;&#x9519;<code>error: only position independent executables (PIE) are supported.</code></h3>
+<h3 id="76-curl&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x62A5;&#x9519;error-only-position-independent-executables-pie-are-supported">7.6 curl&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x62A5;&#x9519;<code>error: only position independent executables (PIE) are supported.</code></h3>
 <p>&#x4E4B;&#x524D;&#x9047;&#x89C1;&#x6B64;&#x95EE;&#x9898;&#xFF0C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;Makefile&#x6DFB;&#x52A0;-pie -fPIE&#x53C2;&#x6570;&#x4E4B;&#x540E;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x5373;&#x53EF;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;curl&#x7684;&#x5DE5;&#x7A0B;&#xFF0C;&#x4ECD;&#x7136;&#x62A5;&#x9519;&#xFF0C;&#x540E;&#x6765;&#x4F7F;&#x7528;configure &#x751F;&#x6210;Makefile&#x65F6;&#x5373;&#x8BBE;&#x7F6E;CFLAGS=&quot;-pie -fPIE&quot; LDFLAGS=&quot;-pie -fPIE&quot;&#xFF0C;&#x5373;&#x53EF;&#x907F;&#x514D;&#x8BE5;&#x95EE;&#x9898;&#x3002;</p>
-<h3 id="47-&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;samppleapp&#x65F6;&#x5982;&#x4F55;&#x4FEE;&#x6539;cmakelisttxt">4.7 &#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;SamppleApp&#x65F6;&#x5982;&#x4F55;&#x4FEE;&#x6539;CMakeList.txt</h3>
+<h3 id="77-&#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;samppleapp&#x65F6;&#x5982;&#x4F55;&#x4FEE;&#x6539;cmakelisttxt">7.7 &#x7F16;&#x8BD1;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;SamppleApp&#x65F6;&#x5982;&#x4F55;&#x4FEE;&#x6539;CMakeList.txt</h3>
 <p>&#x67E5;&#x770B;SamppleApp&#x4E2D;&#x7684;CMakeList.txt,&#x53D1;&#x73B0;&#x5FC5;&#x987B;&#x6253;&#x5F00;PORTAUDIO&#x3000;&#x548C;&#x3000;GSTREAMER_MEDIA_PLAYER&#x624D;&#x80FD;&#x7F16;&#x8BD1;src&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x7528;&#x4F7F;&#x7528;cmake&#x751F;&#x6210;Makefile&#xFF0C;&#x6240;&#x4EE5;&#x6CE8;&#x91CA;&#x6389;&#x8FD9;&#x4E00;&#x9879;&#x68C0;&#x67E5;,&#x8FD9;&#x6837;&#x8BBE;&#x7F6E;&#x4E0B;&#x9762;&#x4E24;&#x9879;&#x65F6;&#xFF0C;&#x4ECD;&#x7136;&#x80FD;&#x591F;&#x751F;&#x6210;&#x7F16;&#x8BD1;SamppleApp&#x7684;Makefile&#x6587;&#x4EF6;&#x3002;</p>
 <p>-DGSTREAMER_MEDIA_PLAYER=OFF </p>
 <p>-DPORTAUDIO=OFF</p>
@@ -1422,7 +1431,7 @@ WARNING: linker: libc++_shared.so: unused DT entry: type 0x6fffffff arg 0x3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"十四 avs-device-sdk移植到安卓","level":"1.2.14","depth":2,"next":{"title":"十五 移植avssdk","level":"1.2.15","depth":2,"path":"chapter1/移植avssdk.md","ref":"chapter1/移植avssdk.md","articles":[]},"previous":{"title":"十三 alsa交叉编译","level":"1.2.13","depth":2,"path":"chapter1/ALSA.md","ref":"chapter1/ALSA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/移植avssdk.md","mtime":"2018-05-31T09:59:12.021Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-07T08:17:27.250Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"十四 avs-device-sdk移植到安卓","level":"1.2.14","depth":2,"next":{"title":"十五 移植avssdk","level":"1.2.15","depth":2,"path":"chapter1/移植avssdk.md","ref":"chapter1/移植avssdk.md","articles":[]},"previous":{"title":"十三 alsa交叉编译","level":"1.2.13","depth":2,"path":"chapter1/ALSA.md","ref":"chapter1/ALSA.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/移植avssdk.md","mtime":"2018-06-08T02:21:55.474Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-19T02:26:18.775Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

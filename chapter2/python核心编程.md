@@ -144,7 +144,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 注意对于`_xx` 变量，from somemodule import *   禁止导入，但是导入时按照 import somemodule 的方式导入的时候可以使用。 
 
-
+“单下划线” 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；
+“双下划线” 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。
 
 **dir()**
 
@@ -238,6 +239,8 @@ $ python b.py
 #### 装饰器
 
 [廖雪峰python教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014318435599930270c0381a3b44db991cd6d858064ac0000)
+
+简言之，python装饰器就是用于**拓展原来函数功能的一种函数**，这个函数的特殊之处在于它的返回值也是一个函数，使用python装饰器的好处就是在不用更改原函数的代码前提下给函数增加新的功能。
 
 在讨论装饰器之前先明确一点，如下方式可以给函数添加打印check的功能：
 
@@ -765,3 +768,15 @@ abc
 
 * 偏函数
 * wraps    去除装饰的时候可能的副作用
+
+#### 闭包
+
+[python闭包](https://www.cnblogs.com/JohnABC/p/4076855.html)
+
+#### `__name__ == '__main__'`
+
+[如何简单地理解Python中的if __name__ == '__main__'](https://blog.csdn.net/yjk13703623757/article/details/77918633/)
+
+通俗的理解`__name__ == '__main__'`：假如你叫小明.py，在朋友眼中，你是小明`(__name__ == '小明')`；在你自己眼中，你是你自己`(__name__ == '__main__')`。
+
+`if __name__ == '__main__'`的意思是：当.py文件被直接运行时，`if __name__ == '__main__'`之下的代码块将被运行；当.py文件以模块形式被导入时，`if __name__ == '__main__'`之下的代码块不被运行。
