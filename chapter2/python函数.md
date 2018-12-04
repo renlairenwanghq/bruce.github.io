@@ -136,7 +136,15 @@ sum = lambda a1, a2, a3 : a1 + a2 + a3
 print(sum(1, 2, 3))
 ```
 
+**注意**
 
+这种语句的目的是由于性能的原因,在调用时绕过函数的栈分配。
+
+#### 偏函数
+
+[偏函数](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143184474383175eeea92a8b0439fab7b392a8a32f8fa000)
+
+当函数的参数个数太多，需要简化时，使用`functools.partial`可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
 
 ####global 和 nonlocal关键字 
 
@@ -185,7 +193,7 @@ fun1()
 2
 ```
 
-**nonlocal关键字**
+**nonlocal关键字(python3)**
 
 ```
 #!/usr/bin/python3
@@ -249,3 +257,61 @@ $ python f.py
 --------2--------
 ```
 
+#### 闭包
+
+[python闭包](https://www.cnblogs.com/JohnABC/p/4076855.html)
+
+**定义**
+
+如果在一个内部函数里，对在外部作用域（但不是在全局作用域）的变量进行引用，那么内部函数就被认为是闭包(closure).
+
+```
+>>> def ExFunc(n):
+     sum=n
+     def InsFunc():
+             return sum+1
+     return InsFunc
+
+>>> myFunc=ExFunc(10)
+>>> myFunc()
+11
+>>> myAnotherFunc=ExFunc(20)
+>>> myAnotherFunc()
+21
+>>> myFunc()
+11
+>>> myAnotherFunc()
+21
+>>>
+```
+
+在这段程序中，函数InsFunc是函数ExFunc的内嵌函数，并且是ExFunc函数的返回值。我们注意到一个问题：内嵌函数InsFunc中
+引用到外层函数中的局部变量sum，IronPython会这么处理这个问题呢？先让我们来看看这段代码的运行结果。当我们调用分别由不同的参数调用
+ExFunc函数得到的函数时（myFunc()，myAnotherFunc()），得到的结果是隔离的，也就是说每次调用ExFunc函数后都将生成并保存一个新的局部变量sum。其实这里ExFunc函数返回的就是闭包。
+
+
+
+**注意**
+
+闭包中是不能修改外部作用域的局部变量的(python3中使用nonlocal关键字是可以的)
+
+```
+>>> def foo():  
+...     m = 0  
+...     def foo1():  
+...         m = 1  
+...         print m  
+...  
+...     print m  
+...     foo1()  
+...     print m  
+...  
+>>> foo()  
+0  
+1  
+0 
+```
+
+####装饰器
+
+装饰器仅仅是用来“装饰“(或者修饰)函数的包装,返回一个修改后的函数对象,将其重新赋值原来的标识符,并永久失去对原始函数对象的访问。

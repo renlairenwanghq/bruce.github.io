@@ -44,9 +44,9 @@ a.func2()
 
 
 
-#### 类变量（属性）
+#### 类属性/实例属性
 
-类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。
+类属性在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。
 
 **注意区分类变量和实例变量**
 
@@ -64,13 +64,17 @@ a = ClassName()
 
 a.func()
 print(a.i)
-print(ClassName.i)  
+print(ClassName.i)  ＃可以通过类名访问
 a.j = 10  # j是实例变量，可以通过对象访问，但是不能通过类名访问
 print(a.j)
 #print(ClassName.j) #error
 ```
 
+* 类属性，属于对象共有的属性，可以通过类名和对象名访问
 
+* 实例属性，是对象自身的属性，只可以通过对象名访问
+
+  ​
 
 #### 私有属性和方法
 
@@ -153,11 +157,17 @@ MRO: ['D', 'B', 'C', 'A', 'object']
 <type 'tuple'>
 ```
 
+####多态
 
+面向对象的语言三要素：
+
+* 封装
+* 继承
+* 多态
 
 #### 构造函数和析构函数
 
-`__init__` :造函数，在生成对象时调用
+`__init__` :构造函数，在生成对象时调用
 
 `__del__`:析构函数，释放对象时使用  
 
@@ -251,7 +261,7 @@ class A(object):
     def __init__(self):
         print("haha")
 
-    def __new__(cls): #参数是cls
+    def __new__(cls): #参数是cls，代表的是类
         print(id(cls))
         return object.__new__(cls)
 
@@ -266,6 +276,21 @@ a = A()
 19040416
 haha
 ```
+
+#### 创建单例对象
+
+```
+Class Dog(object):
+	__instance = None;
+	def __new__(cls): #参数是cls，代表的是类
+    	if cls.__instance == None:
+        	cls.__instance = object.__new__(cls)
+        	return cls.__instance
+        else:
+        	return cls.__instance	
+```
+
+**考虑如果要求只初始化一次该如何做？**
 
 #### 异常
 
@@ -298,7 +323,7 @@ finally:
 
 
 
-#### 模块
+#### 模块/包
 
 每个py文件都是一个模块。
 

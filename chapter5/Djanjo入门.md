@@ -247,34 +247,22 @@ Running migrations:
 下面的警告是时区问题。
 
 ```
-$ python manage.py shell
+(h4) $ python manage.py shell
 Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
 [GCC 5.4.0 20160609] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 (InteractiveConsole)
->>> from booktest.modes import *
-Traceback (most recent call last):
-  File "<console>", line 1, in <module>
-ImportError: No module named modes
 >>> from booktest.models import *
 >>> b=BookInfo()
 >>> b.btitle='abc'
->>> form datetime import datetime
-  File "<console>", line 1
-    form datetime import datetime
-                ^
-SyntaxError: invalid syntax
 >>> from datetime import datetime
 >>> b.bpub_date=datetime(year=1990, month=1, day=2)
 >>> b.save()
-/home/milo/.virtualenvs/test2/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1451: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (1990-01-02 00:00:00) while time zone support is active.
+/home/milo/.virtualenvs/h4/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (1990-01-02 00:00:00) while time zone support is active.
   RuntimeWarning)
->>> BookInfo.object.all()
-Traceback (most recent call last):
-  File "<console>", line 1, in <module>
-AttributeError: type object 'BookInfo' has no attribute 'object'
+
 >>> BookInfo.objects.all()
-<QuerySet [<BookInfo: BookInfo object>]>
+[<BookInfo: abc>]
 ```
 
 **注意:**
@@ -469,11 +457,12 @@ TEMPLATES = [
 ```
 from django.shortcuts import render
 from django.http import *
+from models import *
 #from django.template import RequestContext,loader
 
 # Create your views here.
 def index(request):
-    booklist = BookInfo.object.all() 
+    booklist = BookInfo.objects.all() 
     Context = {'list':booklist}
     return render(request, 'booktest/hello.html', Context)
 ```
